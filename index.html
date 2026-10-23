@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Production & Capacity System - Jozu Auto Part Co., Ltd.</title>
+    <title>Production Control Assembly Line - Jozu Auto Part Co., Ltd.</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -11,11 +11,47 @@
         .navbar-custom { background-color: #111827; border-bottom: 1px solid #1f2937; }
         .card-custom { background-color: #161e2e; border: 1px solid #243044; border-radius: 8px; }
         .alert-custom { background-color: #3b0764; border: 1px solid #6b21a8; color: #f3e8ff; }
-        .nav-tabs .nav-link { color: #9ca3af; border: none; }
-        .nav-tabs .nav-link.active { color: #60a5fa; background-color: transparent; border-bottom: 2px solid #3b82f6; font-weight: bold; }
+        
+        /* Custom Main Navigation Bar */
+        .nav-main-bar {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .nav-main-bar .nav-item {
+            flex: 1;
+            text-align: center;
+            border-right: 1px solid #000000;
+        }
+        .nav-main-bar .nav-item:last-child {
+            border-right: none;
+        }
+        .nav-main-bar .nav-link {
+            color: #000000;
+            font-weight: bold;
+            font-size: 15px;
+            padding: 12px 8px;
+            border-radius: 0;
+            background-color: #ffffff;
+            transition: all 0.2s ease;
+        }
+        .nav-main-bar .nav-link:hover {
+            background-color: #e5e7eb;
+            color: #000000;
+        }
+        .nav-main-bar .nav-link.active {
+            background-color: #1d4ed8;
+            color: #ffffff !important;
+        }
+
         .table-dark-custom { background-color: #111827; color: #d1d5db; }
         .badge-danger { background-color: #ef4444; }
         .badge-success { background-color: #10b981; }
+        .badge-warning { background-color: #f59e0b; color: #000; }
+        .tab-content-pane { display: none; }
+        .tab-content-pane.active { display: block; }
     </style>
 </head>
 <body>
@@ -23,90 +59,229 @@
     <!-- Header / Navbar -->
     <nav class="navbar navbar-custom px-4 py-2 d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center gap-3">
-            <h4 class="m-0 text-primary fw-bold">⚙️ Production & Capacity System</h4>
-            <span class="text-muted small">Jozu Auto Part Co., Ltd. - ระบบจัดการแผนการผลิต และกำลังการผลิต</span>
+            <h4 class="m-0 text-primary fw-bold">⚙️ Production-Control-Assembly-Line</h4>
+            <span class="text-muted small">Jozu Auto Part Co., Ltd. - ระบบควบคุมกระบวนการผลิตและกำลังการผลิต</span>
         </div>
         <div class="text-warning fw-bold" id="clock"></div>
     </nav>
 
     <div class="container-fluid px-4 py-3">
-        <!-- Stock Alert Banner -->
-        <div class="alert alert-custom d-flex justify-content-between align-items-center p-2 mb-3">
+        <!-- Main Header Title -->
+        <h3 class="fw-bold text-white mb-3">Production-Control-Assembly-Line</h3>
+
+        <!-- Main Navigation Bar (9 Modules) -->
+        <ul class="nav nav-main-bar nav-pills" id="mainTab" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active w-100" onclick="switchTab('tab-dashboard', this)">Dashboard</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link w-100" onclick="switchTab('tab-capacity', this)">Capacity</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link w-100" onclick="switchTab('tab-component', this)">รับ component<br>ส่งชุบ - รับชุบ</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link w-100" onclick="switchTab('tab-plating', this)">Plating</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link w-100" onclick="switchTab('tab-stock-component', this)">Stock Component</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link w-100" onclick="switchTab('tab-report', this)">รายงานการผลิต</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link w-100" onclick="switchTab('tab-stock-fg', this)">Stock F/G</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link w-100" onclick="switchTab('tab-delivery', this)">Delivery</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link w-100" onclick="switchTab('tab-pm', this)">PM Machine /Jig</button>
+            </li>
+        </ul>
+
+        <!-- Minimum Stock Alert Banner -->
+        <div class="alert alert-custom d-flex justify-content-between align-items-center p-2 mb-4">
             <div class="d-flex align-items-center gap-2">
-                <span class="badge badge-danger">⚠️ รายชื่อ Part No. ที่มี Stock ต่ำกว่า Minimum (Line C1)</span>
-                <span class="small text-light">17535-0L060 | 55375-0D050 | 53683-0A040</span>
+                <span class="badge badge-danger">⚠️ แจ้งเตือน Part No. สต็อกต่ำกว่า Minimum</span>
+                <span class="small text-light">17535-0L060 (Line C1) | 55375-0D050 (Line C1) | 53683-0A040 (Plating)</span>
             </div>
             <div>
-                <button class="btn btn-sm btn-outline-light py-0">ดูทั้งหมด</button>
+                <button class="btn btn-sm btn-outline-light py-0">ตรวจสอบสต็อก</button>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <ul class="nav nav-tabs mb-4">
-            <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Capacity</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">รับ-จ่าย Material</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Planning</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">บันทึกยอดผลิต</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Q-Gate Inspection</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Stock WIP & FG</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Delivery</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Die Maintenance & PM</a></li>
-        </ul>
-
-        <!-- Dashboard Content -->
-        <div class="row g-3">
-            <!-- KPI Cards -->
-            <div class="col-md-4">
-                <div class="card card-custom p-3">
-                    <h6 class="text-muted">ยอดผลิตรวมทั้งหมดประจำเดือน (Total Production)</h6>
-                    <h2 class="text-info fw-bold mb-0">673,849 <small class="fs-6 text-muted">ชิ้น</small></h2>
+        <!-- TAB CONTENTS -->
+        
+        <!-- 1. Dashboard -->
+        <div id="tab-dashboard" class="tab-content-pane active">
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-muted">ยอดผลิตรวมประจำเดือน (Total Production)</h6>
+                        <h2 class="text-info fw-bold mb-0">673,849 <small class="fs-6 text-muted">ชิ้น</small></h2>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-custom p-3">
-                    <h6 class="text-muted">ยอดของเสียรวมทั้งหมด (Total NG Qty)</h6>
-                    <h2 class="text-danger fw-bold mb-0">98 <small class="fs-6 text-muted">ชิ้น</small></h2>
+                <div class="col-md-4">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-muted">ยอดของเสียรวม (Total NG Qty)</h6>
+                        <h2 class="text-danger fw-bold mb-0">98 <small class="fs-6 text-muted">ชิ้น</small></h2>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-custom p-3">
-                    <h6 class="text-muted">อัตราของเสียรวม (Actual PPM)</h6>
-                    <h2 class="text-success fw-bold mb-0">145 PPM <small class="fs-6 text-muted">(Target 250 PPM)</small></h2>
+                <div class="col-md-4">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-muted">อัตราของเสียรวม (Actual PPM)</h6>
+                        <h2 class="text-success fw-bold mb-0">145 PPM <small class="fs-6 text-muted">(Target 250 PPM)</small></h2>
+                    </div>
                 </div>
             </div>
 
-            <!-- Chart -->
-            <div class="col-md-8">
-                <div class="card card-custom p-3">
-                    <h6 class="text-light mb-3">📈 สถิติของเสียการผลิตรายเดือน (Production Defect Ratio)</h6>
-                    <canvas id="productionChart" height="130"></canvas>
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-light mb-3">📈 สถิติของเสียและการผลิตรายเดือน (Production vs Defect PPM)</h6>
+                        <canvas id="productionChart" height="130"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-light mb-3">📋 สรุปคุณภาพงานประกอบและชุบรายลูกค้า</h6>
+                        <table class="table table-dark table-striped table-borderless table-dark-custom small">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Target PPM</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>STEM-A</td><td>0.01</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
+                                <tr><td>STEM-B</td><td>0.03</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
+                                <tr><td>TMC</td><td>0.17</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
+                                <tr><td>FTS</td><td>0.00</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
+                                <tr><td>MSFT</td><td>0.08</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Summary Table -->
-            <div class="col-md-4">
-                <div class="card card-custom p-3">
-                    <h6 class="text-light mb-3">📋 สรุปผลงานคุณภาพรายลูกค้า</h6>
-                    <table class="table table-dark table-striped table-borderless table-dark-custom small">
+        <!-- 2. Capacity -->
+        <div id="tab-capacity" class="tab-content-pane">
+            <div class="card card-custom p-4">
+                <h5 class="text-primary mb-3">📊 Capacity Planning (กำลังการผลิต)</h5>
+                <p class="text-muted">ตารางคำนวณกำลังการผลิตแยกตาม Line และ Part Number</p>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover small">
                         <thead>
                             <tr>
-                                <th>Customer</th>
-                                <th>Target PPM</th>
-                                <th>Status</th>
+                                <th>Line</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>Cycle Time (sec)</th>
+                                <th>Target (Pcs/Hr)</th>
+                                <th>Max Capacity/Day</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>STEM-A</td><td>0.01</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
-                            <tr><td>STEM-B</td><td>0.03</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
-                            <tr><td>TMC</td><td>0.17</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
-                            <tr><td>FTS</td><td>0.00</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
-                            <tr><td>MSFT</td><td>0.08</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
+                            <tr><td>Line C1</td><td>17535-0L060</td><td>CAP COMP FUEL FILLER</td><td>45</td><td>80</td><td>1,600</td></tr>
+                            <tr><td>Line C2</td><td>55375-0D050</td><td>BRKT SUB-ASSY</td><td>30</td><td>120</td><td>2,400</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+        <!-- 3. รับ component ส่งชุบ - รับชุบ -->
+        <div id="tab-component" class="tab-content-pane">
+            <div class="card card-custom p-4">
+                <h5 class="text-warning mb-3">🚚 รับ Component ส่งชุบ - รับชุบ (Subcontract Tracking)</h5>
+                <p class="text-muted">ติดตามสถานะชิ้นงานส่งชุบภายนอก / รับกลับเข้าโรงงาน</p>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover small">
+                        <thead>
+                            <tr>
+                                <th>วันที่</th>
+                                <th>Subcontractor</th>
+                                <th>Part No.</th>
+                                <th>Lot No.</th>
+                                <th>จำนวนส่งชุบ</th>
+                                <th>จำนวนรับคืน</th>
+                                <th>สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>23/10/2026</td><td>Plating Factory A</td><td>53683-0A040</td><td>LOT-20261023</td><td>1,000</td><td>1,000</td><td><span class="badge badge-success">รับครบแล้ว</span></td></tr>
+                            <tr><td>23/10/2026</td><td>Plating Factory B</td><td>64181-0D030</td><td>LOT-20261024</td><td>500</td><td>0</td><td><span class="badge badge-warning">อยู่ระหว่างชุบ</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Plating -->
+        <div id="tab-plating" class="tab-content-pane">
+            <div class="card card-custom p-4">
+                <h5 class="text-info mb-3">🧪 Plating Process (กระบวนการชุบผิว)</h5>
+                <p class="text-muted">การควบคุมคุณภาพและปริมาณชิ้นงานในไลน์ชุบ</p>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3">
+                        <div class="p-3 border border-secondary rounded bg-dark">
+                            <span class="text-muted small">งานอยู่ระหว่างชุบ (In-Process)</span>
+                            <h4 class="text-warning m-0">2,500 ชิ้น</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border border-secondary rounded bg-dark">
+                            <span class="text-muted small">งานชุบเสร็จวันนี้</span>
+                            <h4 class="text-success m-0">12,400 ชิ้น</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Stock Component -->
+        <div id="tab-stock-component" class="tab-content-pane">
+            <div class="card card-custom p-4">
+                <h5 class="text-primary mb-3">📦 Stock Component (คลังชิ้นส่วนรอประกอบ)</h5>
+                <p class="text-muted">รายการชิ้นส่วนวัตถุดิบประกอบ</p>
+            </div>
+        </div>
+
+        <!-- 6. รายงานการผลิต -->
+        <div id="tab-report" class="tab-content-pane">
+            <div class="card card-custom p-4">
+                <h5 class="text-success mb-3">📝 รายงานการผลิตประจำวัน (Daily Production Report)</h5>
+                <p class="text-muted">บันทึกผลงาน ยอด OK / NG รายชิฟต์</p>
+            </div>
+        </div>
+
+        <!-- 7. Stock F/G -->
+        <div id="tab-stock-fg" class="tab-content-pane">
+            <div class="card card-custom p-4">
+                <h5 class="text-info mb-3">🏭 Stock F/G (คลังสินค้าสำเร็จรูป)</h5>
+                <p class="text-muted">ยอดคงเหลือสินค้าสำเร็จรูปพร้อมส่งมอบ</p>
+            </div>
+        </div>
+
+        <!-- 8. Delivery -->
+        <div id="tab-delivery" class="tab-content-pane">
+            <div class="card card-custom p-4">
+                <h5 class="text-warning mb-3">🚛 Delivery (ระบบการจัดส่งสินค้า)</h5>
+                <p class="text-muted">แผนการส่งมอบงานให้ลูกค้าประจำวัน</p>
+            </div>
+        </div>
+
+        <!-- 9. PM Machine /Jig -->
+        <div id="tab-pm" class="tab-content-pane">
+            <div class="card card-custom p-4">
+                <h5 class="text-danger mb-3">🛠️ PM Machine / Jig (การบำรุงรักษาเครื่องจักรและ Jig)</h5>
+                <p class="text-muted">ตารางการตรวจเช็กและซ่อมบำรุงรักษาประจำงวด</p>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -115,6 +290,21 @@
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleString('th-TH');
         }, 1000);
+
+        // Tab Switching Function
+        function switchTab(tabId, element) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content-pane');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all nav links
+            const links = document.querySelectorAll('.nav-main-bar .nav-link');
+            links.forEach(link => link.classList.remove('active'));
+
+            // Show selected tab content and set active style
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
 
         // Render Chart
         const ctx = document.getElementById('productionChart').getContext('2d');
