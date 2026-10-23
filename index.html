@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
@@ -809,24 +809,4 @@
         const ctxHourly = document.getElementById('hourlyChart');
         if(ctxHourly) {
             new Chart(ctxHourly.getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'],
-                    datasets: [
-                        { label: 'แผนการผลิต (Plan)', data: [200,200,200,200,150,150,200,200], backgroundColor: '#374151' },
-                        { label: 'ผลิตได้จริง (Actual)', data: [180,190,170,160,120,130,150,200], backgroundColor: '#dc2626' }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { labels: { color: '#e2e8f0' } } },
-                    scales: {
-                        x: { ticks: { color: '#9ca3af' } },
-                        y: { ticks: { color: '#9ca3af' } }
-                    }
-                }
-            });
-        }
-    </script>
-</body>
-</html>     
+                type: '
