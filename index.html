@@ -198,63 +198,12 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-warning mb-2">📦 การเตือนวัตถุดิบและชิ้นส่วนรอประกอบ (Critical Component Alert)</h6>
-                        <div class="table-responsive">
-                            <table class="table table-dark table-hover small m-0">
-                                <thead>
-                                    <tr>
-                                        <th>Part No.</th>
-                                        <th>Part Name</th>
-                                        <th>Min Stock</th>
-                                        <th>คงเหลือจริง</th>
-                                        <th>สถานะ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td colspan="5" class="text-center text-muted py-2">ระบบปกติ - ยังไม่มีรายการแจ้งเตือน</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-info mb-2">🚛 สถานะการจัดส่งชิ้นส่วนประจำวัน (Today Delivery Status)</h6>
-                        <div class="table-responsive">
-                            <table class="table table-dark table-hover small m-0">
-                                <thead>
-                                    <tr>
-                                        <th>รอบส่ง (Trip)</th>
-                                        <th>Customer</th>
-                                        <th>Part No.</th>
-                                        <th>แผนจัดส่ง</th>
-                                        <th>สถานะ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td colspan="5" class="text-center text-muted py-2">ยังไม่มีแผนการจัดส่งในรอบนี้</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- 2. Capacity -->
         <div id="tab-capacity" class="tab-pane-content">
             <div class="card card-custom p-4 mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <h5 class="text-primary fw-bold m-0">1️⃣ Assembly Line Capacity (กำลังการผลิตงานประกอบ)</h5>
-                        <p class="text-muted small m-0 mt-1">ขีดความสามารถและรอบเวลาการประกอบชิ้นส่วนหลักส่ง Thai Honda</p>
-                    </div>
-                    <button class="btn btn-sm btn-danger fw-bold">+ เพิ่มข้อมูล Assembly</button>
-                </div>
+                <h5 class="text-primary fw-bold mb-3">1️⃣ Assembly Line Capacity (กำลังการผลิตงานประกอบ)</h5>
                 <div class="table-responsive">
                     <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
@@ -265,7 +214,6 @@
                                 <th>Cycle Time (sec)</th>
                                 <th>Target (Pcs/Hr)</th>
                                 <th>Max Capacity / Day</th>
-                                <th class="text-center">จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -276,7 +224,6 @@
                                 <td>45.0</td>
                                 <td>80 Pcs</td>
                                 <td>1,600 Pcs</td>
-                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">จัดการ</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -316,58 +263,81 @@
             </div>
         </div>
 
-        <!-- 7. Stock F/G (คลังสินค้าสำเร็จรูป) -->
+        <!-- 7. Stock F/G -->
         <div id="tab-stock-fg" class="tab-pane-content">
-            <div class="card card-custom p-4 mb-4">
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <div class="p-3 border border-secondary rounded bg-dark border-start border-success border-4">
-                            <span class="text-muted small">📦 สินค้าสำเร็จรูปพร้อมส่ง (Total F/G Ready)</span>
-                            <h3 class="text-success fw-bold m-0 mt-1">4,200 <small class="fs-6 text-muted">ชิ้น</small></h3>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-3 border border-secondary rounded bg-dark border-start border-warning border-4">
-                            <span class="text-muted small">📋 ยอดเตรียมจัดส่งวันนี้ (Today Delivery Plan)</span>
-                            <h3 class="text-warning fw-bold m-0 mt-1">3,000 <small class="fs-6 text-muted">ชิ้น</small></h3>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-3 border border-secondary rounded bg-dark border-start border-info border-4">
-                            <span class="text-muted small">🏭 พื้นที่จัดเก็บ (Warehouse Location)</span>
-                            <h3 class="text-info fw-bold m-0 mt-1">Zone FGR-01</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="card card-custom p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <h5 class="text-success fw-bold m-0">🏭 คลังสินค้าสำเร็จรูปส่ง Thai Honda (Finished Goods Inventory)</h5>
-                        <p class="text-muted small m-0 mt-1">ตรวจสอบสต็อกสินค้าสำเร็จรูป (F/G) สถานะ Lot และยอดพร้อมส่งมอบลูกค้า</p>
-                    </div>
-                    <button class="btn btn-sm btn-success fw-bold">+ บันทึกรับเข้า F/G</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover table-striped small align-middle">
-                        <thead>
-                            <tr class="text-success">
-                                <th>Part No.</th>
-                                <th>Part Name</th>
-                                <th>Lot No. (Production)</th>
-                                <th>Location (Pallet/Rack)</th>
-                                <th class="text-end">จำนวนคงเหลือ (Pcs)</th>
-                                <th class="text-center">สถานะสินค้า</th>
-                                <th class="text-center">จัดการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="fw-bold text-info">17535-0L060</td>
-                                <td>CAP COMP FUEL FILLER</td>
-                                <td>LOT-FG-20261023-01</td>
-                                <td><span class="badge bg-secondary">Pallet F-05</span></td>
-                                <td class="text-end text-success fw-bold">2,500 Pcs</td>
-                                <td class="text-center"><span class="badge bg-success">พร้อมส่ง (Ready)</span></td>
-                                <td class="text-center"><button class="btn btn-sm btn-outline-
+                <h5 class="text-success mb-3">🏭 คลังสินค้าสำเร็จรูปส่ง Thai Honda (Finished Goods Inventory)</h5>
+                <p class="text-muted">ตรวจสอบสต็อกสินค้าสำเร็จรูป (F/G) สถานะ Lot และยอดพร้อมส่งมอบลูกค้า</p>
+            </div>
+        </div>
+
+        <!-- 8. Delivery -->
+        <div id="tab-delivery" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-warning mb-3">🚛 Delivery (ระบบการจัดส่งสินค้า Thai Honda)</h5>
+                <p class="text-muted">ตารางและแผนการจัดส่งประจำวัน</p>
+            </div>
+        </div>
+
+        <!-- 9. PM Machine /Jig -->
+        <div id="tab-pm" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-danger mb-3">🛠️ PM Machine / Jig (การบำรุงรักษาเครื่องจักรและ Jig)</h5>
+                <p class="text-muted">ตารางตรวจเช็ก Preventive Maintenance</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Realtime Clock
+        setInterval(() => {
+            const now = new Date();
+            const clockEl = document.getElementById('clock');
+            if(clockEl) {
+                clockEl.innerText = now.toLocaleString('th-TH');
+            }
+        }, 1000);
+
+        // Direct Global Tab Switching Function
+        function switchTab(targetId, buttonElement) {
+            const panes = document.querySelectorAll('.tab-pane-content');
+            panes.forEach(pane => pane.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            const targetPane = document.getElementById(targetId);
+            if(targetPane) {
+                targetPane.classList.add('active');
+            }
+            if(buttonElement) {
+                buttonElement.classList.add('active');
+            }
+        }
+
+        // Hourly Production Chart
+        const ctxHourly = document.getElementById('hourlyChart');
+        if(ctxHourly) {
+            new Chart(ctxHourly.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'],
+                    datasets: [
+                        { label: 'เป้าหมาย (Plan)', data: [0,0,0,0,0,0,0,0], backgroundColor: '#374151' },
+                        { label: 'ผลิตได้จริง (Actual)', data: [0,0,0,0,0,0,0,0], backgroundColor: '#dc2626' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#e2e8f0' } } },
+                    scales: {
+                        x: { ticks: { color: '#9ca3af' } },
+                        y: { ticks: { color: '#9ca3af' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
