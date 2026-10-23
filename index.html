@@ -17,7 +17,7 @@
             display: grid;
             grid-template-columns: repeat(9, 1fr);
             gap: 10px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             padding: 0;
             list-style: none;
         }
@@ -56,7 +56,6 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
-        /* Active Tab - Honda Red Metallic */
         .nav-main-grid .nav-btn.active {
             background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
             color: #ffffff !important;
@@ -69,6 +68,7 @@
         .badge-danger { background-color: #ef4444; }
         .badge-success { background-color: #10b981; }
         .badge-warning { background-color: #f59e0b; color: #000; }
+        .badge-info { background-color: #3b82f6; }
         .badge-honda { background-color: #dc2626; color: #ffffff; font-size: 12px; font-weight: bold; }
         .tab-content-pane { display: none; }
         .tab-content-pane.active { display: block; }
@@ -84,7 +84,7 @@
                     <h3 class="m-0 text-white fw-bold">⚙️ Production-Control-Assembly-Line</h3>
                     <span class="badge badge-honda px-2 py-1">THAI HONDA</span>
                 </div>
-                <div class="small" style="color: #9ca3af;">Jozu Auto Part Co., Ltd. - ระบบควบคุมกระบวนการผลิตชิ้นส่วนยานยนต์ (Honda OEM Standards)</div>
+                <div class="small" style="color: #9ca3af;">Jozu Auto Part Co., Ltd. - ระบบควบคุมกระบวนการผลิตและงานประกอบ (Assembly Visual Control)</div>
             </div>
             <div class="text-warning fw-bold fs-5" id="clock"></div>
         </div>
@@ -105,67 +105,133 @@
             <li><button class="nav-btn" onclick="switchTab('tab-pm', this)">PM Machine /Jig</button></li>
         </ul>
 
-        <!-- Minimum Stock Alert Banner -->
-        <div class="alert alert-custom d-flex justify-content-between align-items-center p-2 mb-4">
-            <div class="d-flex align-items-center gap-2">
-                <span class="badge badge-danger">⚠️ แจ้งเตือน Part No. สต็อกต่ำกว่า Minimum</span>
-                <span class="small text-light" id="alert-text">- (กำลังรอข้อมูลเชื่อมต่อ)</span>
-            </div>
-            <div>
-                <button class="btn btn-sm btn-outline-light py-0">ตรวจสอบสต็อก</button>
-            </div>
-        </div>
-
         <!-- TAB CONTENTS -->
         
-        <!-- 1. Dashboard -->
+        <!-- 1. Dashboard Assembly Line -->
         <div id="tab-dashboard" class="tab-content-pane active">
+            
+            <!-- Key Assembly KPIs -->
             <div class="row g-3 mb-4">
-                <div class="col-md-4">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-muted">ยอดผลิตรวมประจำเดือน (Total Production)</h6>
-                        <h2 class="text-info fw-bold mb-0">0 <small class="fs-6 text-muted">ชิ้น</small></h2>
+                <div class="col-md-3">
+                    <div class="card card-custom p-3 border-start border-primary border-4">
+                        <span class="text-muted small">แผน vs ยอดผลิตจริง (Plan vs Actual)</span>
+                        <div class="d-flex align-items-baseline justify-content-between mt-1">
+                            <h2 class="text-white fw-bold mb-0" id="kpi-actual">0 <small class="fs-6 text-muted">/ 0 Pcs</small></h2>
+                            <span class="badge badge-info" id="kpi-achieve">0%</span>
+                        </div>
+                        <div class="progress mt-2" style="height: 6px; background-color: #1f2937;">
+                            <div class="progress-bar bg-primary" role="progressbar" id="kpi-progress" style="width: 0%"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-muted">ยอดของเสียรวม (Total NG Qty)</h6>
-                        <h2 class="text-danger fw-bold mb-0">0 <small class="fs-6 text-muted">ชิ้น</small></h2>
+                <div class="col-md-3">
+                    <div class="card card-custom p-3 border-start border-success border-4">
+                        <span class="text-muted small">ผ่านรอบแรก (First Time Yield - FTY)</span>
+                        <div class="d-flex align-items-baseline justify-content-between mt-1">
+                            <h2 class="text-success fw-bold mb-0" id="kpi-fty">0.0%</h2>
+                            <span class="small text-muted">Target > 98%</span>
+                        </div>
+                        <div class="small text-muted mt-2">ยอดประกอบผ่านโดยไม่ต้อง Re-work</div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-muted">อัตราของเสียรวม (Actual PPM)</h6>
-                        <h2 class="text-success fw-bold mb-0">0 PPM <small class="fs-6 text-muted">(Target 250 PPM)</small></h2>
+                <div class="col-md-3">
+                    <div class="card card-custom p-3 border-start border-danger border-4">
+                        <span class="text-muted small">อัตราของเสียรวม (Defect PPM)</span>
+                        <div class="d-flex align-items-baseline justify-content-between mt-1">
+                            <h2 class="text-danger fw-bold mb-0" id="kpi-ppm">0 <small class="fs-6 text-muted">PPM</small></h2>
+                            <span class="small text-muted">Target < 50 PPM</span>
+                        </div>
+                        <div class="small text-muted mt-2">ยอดเสียสะสมประจำวัน</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-custom p-3 border-start border-warning border-4">
+                        <span class="text-muted small">สถานะไลน์ผลิต (Line Andon Status)</span>
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <span class="spinner-grow spinner-grow-sm text-success" role="status"></span>
+                            <h3 class="text-success fw-bold mb-0">RUNNING</h3>
+                        </div>
+                        <div class="small text-muted mt-2">Line Assembly C1 (Thai Honda)</div>
                     </div>
                 </div>
             </div>
 
-            <div class="row g-3">
+            <!-- Visual Charts & Defect Analysis -->
+            <div class="row g-3 mb-4">
                 <div class="col-md-8">
                     <div class="card card-custom p-3">
-                        <h6 class="text-light mb-3">📈 สถิติของเสียและการผลิตรายเดือน (Thai Honda Parts)</h6>
-                        <canvas id="productionChart" height="130"></canvas>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="text-light m-0">📈 ติดตามยอดผลิตรายชั่วโมง (Hourly Production Output)</h6>
+                            <span class="badge bg-dark text-light border border-secondary small">08:00 - 17:00</span>
+                        </div>
+                        <canvas id="hourlyChart" height="120"></canvas>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card card-custom p-3">
-                        <h6 class="text-light mb-3">📋 สรุปคุณภาพงานประกอบและชุบรายลูกค้า</h6>
+                        <h6 class="text-light mb-3">⚠️ 5 อันดับแรกของเสียงานประกอบ (Top 5 Assembly Defects)</h6>
                         <table class="table table-dark table-striped table-borderless table-dark-custom small">
                             <thead>
-                                <tr>
-                                    <th>Customer</th>
-                                    <th>Target PPM</th>
-                                    <th>Status</th>
+                                <tr class="border-bottom border-secondary">
+                                    <th>ประเภท NG (Defect Mode)</th>
+                                    <th class="text-end">จำนวน</th>
+                                    <th class="text-end">สัดส่วน</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr><td>THAI HONDA</td><td>< 50 PPM</td><td><span class="badge badge-success">ผ่าน</span></td></tr>
+                            <tbody id="defect-table-body">
+                                <tr><td colspan="3" class="text-center text-muted py-3">ยังไม่มีข้อมูลบันทึก NG</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+
+            <!-- Lower Section: Material Alert & Delivery Status -->
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-warning mb-2">📦 การเตือนวัตถุดิบและชิ้นส่วนรอประกอบ (Critical Component Alert)</h6>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover small m-0">
+                                <thead>
+                                    <tr>
+                                        <th>Part No.</th>
+                                        <th>Part Name</th>
+                                        <th>Min Stock</th>
+                                        <th>คงเหลือจริง</th>
+                                        <th>สถานะ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="5" class="text-center text-muted py-2">ระบบปกติ - ยังไม่มีรายการแจ้งเตือน</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-info mb-2">🚛 สถานะการจัดส่งชิ้นส่วนประจำวัน (Today Delivery Status)</h6>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover small m-0">
+                                <thead>
+                                    <tr>
+                                        <th>รอบส่ง (Trip)</th>
+                                        <th>Customer</th>
+                                        <th>Part No.</th>
+                                        <th>แผนจัดส่ง</th>
+                                        <th>สถานะ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="5" class="text-center text-muted py-2">ยังไม่มีแผนการจัดส่งในรอบนี้</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- 2. Capacity -->
@@ -200,126 +266,3 @@
                     <table class="table table-dark table-hover small">
                         <thead>
                             <tr>
-                                <th>วันที่</th>
-                                <th>Subcontractor</th>
-                                <th>Part No.</th>
-                                <th>Lot No.</th>
-                                <th>จำนวนส่งชุบ</th>
-                                <th>จำนวนรับคืน</th>
-                                <th>สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colspan="7" class="text-center text-muted">ยังไม่มีข้อมูลในระบบ</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. Plating -->
-        <div id="tab-plating" class="tab-content-pane">
-            <div class="card card-custom p-4">
-                <h5 class="text-info mb-3">🧪 Plating Process (กระบวนการชุบผิว)</h5>
-                <div class="row g-3 mb-3">
-                    <div class="col-md-3">
-                        <div class="p-3 border border-secondary rounded bg-dark">
-                            <span class="text-muted small">งานอยู่ระหว่างชุบ (In-Process)</span>
-                            <h4 class="text-warning m-0">0 ชิ้น</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="p-3 border border-secondary rounded bg-dark">
-                            <span class="text-muted small">งานชุบเสร็จวันนี้</span>
-                            <h4 class="text-success m-0">0 ชิ้น</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. Stock Component -->
-        <div id="tab-stock-component" class="tab-content-pane">
-            <div class="card card-custom p-4">
-                <h5 class="text-primary mb-3">📦 Stock Component (คลังชิ้นส่วนรอประกอบ)</h5>
-                <p class="text-muted">รายการชิ้นส่วนวัตถุดิบประกอบ</p>
-            </div>
-        </div>
-
-        <!-- 6. รายงานการผลิต -->
-        <div id="tab-report" class="tab-content-pane">
-            <div class="card card-custom p-4">
-                <h5 class="text-success mb-3">📝 รายงานการผลิตประจำวัน (Daily Production Report)</h5>
-                <p class="text-muted">บันทึกผลงาน ยอด OK / NG รายชิฟต์</p>
-            </div>
-        </div>
-
-        <!-- 7. Stock F/G -->
-        <div id="tab-stock-fg" class="tab-content-pane">
-            <div class="card card-custom p-4">
-                <h5 class="text-info mb-3">🏭 Stock F/G (คลังสินค้าสำเร็จรูป)</h5>
-                <p class="text-muted">ยอดคงเหลือสินค้าสำเร็จรูปพร้อมส่งมอบ Thai Honda</p>
-            </div>
-        </div>
-
-        <!-- 8. Delivery -->
-        <div id="tab-delivery" class="tab-content-pane">
-            <div class="card card-custom p-4">
-                <h5 class="text-warning mb-3">🚛 Delivery (ระบบการจัดส่งสินค้า Thai Honda)</h5>
-                <p class="text-muted">แผนการส่งมอบงานให้ลูกค้าประจำวัน</p>
-            </div>
-        </div>
-
-        <!-- 9. PM Machine /Jig -->
-        <div id="tab-pm" class="tab-content-pane">
-            <div class="card card-custom p-4">
-                <h5 class="text-danger mb-3">🛠️ PM Machine / Jig (การบำรุงรักษาเครื่องจักรและ Jig)</h5>
-                <p class="text-muted">ตารางการตรวจเช็กและซ่อมบำรุงรักษาประจำงวด</p>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        // Clock
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleString('th-TH');
-        }, 1000);
-
-        // Tab Switching Function
-        function switchTab(tabId, element) {
-            const contents = document.querySelectorAll('.tab-content-pane');
-            contents.forEach(content => content.classList.remove('active'));
-
-            const buttons = document.querySelectorAll('.nav-main-grid .nav-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById(tabId).classList.add('active');
-            element.classList.add('active');
-        }
-
-        // Empty Chart Placeholder
-        const ctx = document.getElementById('productionChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.'],
-                datasets: [{
-                    label: 'ยอดผลิต (ชิ้น)',
-                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    backgroundColor: '#dc2626'
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { labels: { color: '#e2e8f0' } } },
-                scales: {
-                    x: { ticks: { color: '#9ca3af' } },
-                    y: { ticks: { color: '#9ca3af' } }
-                }
-            }
-        });
-    </script>
-</body>
-</html>
