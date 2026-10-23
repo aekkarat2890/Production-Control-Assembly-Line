@@ -124,8 +124,6 @@
         
         <!-- 1. Dashboard Assembly Line -->
         <div id="tab-dashboard" class="tab-pane-content active">
-            
-            <!-- Key Assembly KPIs -->
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-primary border-4">
@@ -171,7 +169,6 @@
                 </div>
             </div>
 
-            <!-- Visual Charts & Defect Analysis -->
             <div class="row g-3 mb-4">
                 <div class="col-md-8">
                     <div class="card card-custom p-3">
@@ -201,7 +198,6 @@
                 </div>
             </div>
 
-            <!-- Lower Section: Material Alert & Delivery Status -->
             <div class="row g-3">
                 <div class="col-md-6">
                     <div class="card card-custom p-3">
@@ -246,13 +242,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- 2. Capacity (Full 3 Sub-sections) -->
+        <!-- 2. Capacity -->
         <div id="tab-capacity" class="tab-pane-content">
-            
-            <!-- Sub-section 1: Assembly Line Capacity -->
             <div class="card card-custom p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
@@ -289,7 +282,6 @@
                 </div>
             </div>
 
-            <!-- Sub-section 2: Component Preparation Capacity -->
             <div class="card card-custom p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
@@ -326,7 +318,6 @@
                 </div>
             </div>
 
-            <!-- Sub-section 3: Machine Capacity -->
             <div class="card card-custom p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
@@ -360,15 +351,156 @@
                     </table>
                 </div>
             </div>
-
         </div>
 
-        <!-- 3. รับ component ส่งชุบ - รับชุบ -->
+        <!-- 3. รับ component ส่งชุบ - รับชุบ (Logbook Structure) -->
         <div id="tab-component" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h5 class="text-warning mb-3">🚚 รับ Component ส่งชุบ - รับชุบ (Subcontract Tracking)</h5>
-                <p class="text-muted">ติดตามสถานะชิ้นงานส่งชุบภายนอก / รับกลับเข้าโรงงาน</p>
+            
+            <!-- Overall Summary KPI -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark">
+                            <span class="text-muted small">📥 ยอดรับ Component เข้าสะสมวันนี้</span>
+                            <h3 class="text-info fw-bold m-0 mt-1">2,500 <small class="fs-6 text-muted">ชิ้น</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark">
+                            <span class="text-muted small">🚚 งานค้างชุบภายนอก (In-Process Plating)</span>
+                            <h3 class="text-warning fw-bold m-0 mt-1">1,000 <small class="fs-6 text-muted">ชิ้น</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark">
+                            <span class="text-muted small">✅ ยอดรับชิ้นส่วนชุบเสร็จสะสมวันนี้</span>
+                            <h3 class="text-success fw-bold m-0 mt-1">1,500 <small class="fs-6 text-muted">ชิ้น</small></h3>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Logbook 1: บันทึกรับ Component เข้าคลัง -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-info fw-bold m-0">1️⃣ Logbook: บันทึกรับ Component เข้าคลัง (Receiving Log)</h5>
+                        <p class="text-muted small m-0 mt-1">ประวัติการรับชิ้นส่วนดิบ / Subpart เข้ามาจาก Supplier หรือการผลิตภายใน</p>
+                    </div>
+                    <button class="btn btn-sm btn-info fw-bold text-dark">+ บันทึกรับ Component</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-info">
+                                <th>วัน-เวลา ที่รับ</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>Lot No.</th>
+                                <th>จำนวนที่รับ (Pcs)</th>
+                                <th>Supplier / Source</th>
+                                <th>ผู้บันทึก</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23/10/2026 08:30</td>
+                                <td class="fw-bold text-info">53683-0A040</td>
+                                <td>BRACKET COMP RAW</td>
+                                <td>LOT-RAW-001</td>
+                                <td>2,500 Pcs</td>
+                                <td>Supplier A Co., Ltd.</td>
+                                <td>Somchai K.</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Logbook 2: บันทึกส่งชิ้นส่วนไปชุบภายนอก -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-warning fw-bold m-0">2️⃣ Logbook: บันทึกส่งชิ้นส่วนไปชุบภายนอก (Outgoing Plating Log)</h5>
+                        <p class="text-muted small m-0 mt-1">ประวัติการส่งชิ้นส่วนออกไปชุบผิวกับ Subcontractor ภายนอก</p>
+                    </div>
+                    <button class="btn btn-sm btn-warning fw-bold text-dark">+ บันทึกส่งชุบ</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-warning">
+                                <th>วัน-เวลา ที่ส่ง</th>
+                                <th>Subcontractor (ผู้รับจ้างชุบ)</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>Lot No.</th>
+                                <th>จำนวนส่งชุบ (Pcs)</th>
+                                <th>กำหนดวันรับกลับ</th>
+                                <th>ผู้บันทึก</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23/10/2026 09:15</td>
+                                <td class="text-info fw-bold">Siam Plating Factory</td>
+                                <td>53683-0A040</td>
+                                <td>BRACKET COMP RAW</td>
+                                <td>LOT-RAW-001</td>
+                                <td>1,000 Pcs</td>
+                                <td>24/10/2026</td>
+                                <td>Wichai P.</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Logbook 3: บันทึกรับชิ้นส่วนกลับจากงานชุบ -->
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-success fw-bold m-0">3️⃣ Logbook: บันทึกรับชิ้นส่วนกลับจากงานชุบ (Incoming Plating Log)</h5>
+                        <p class="text-muted small m-0 mt-1">ประวัติการรับชิ้นส่วนที่ชุบผิวเสร็จสิ้นกลับเข้าโรงงาน พร้อมตรวจรับยอด OK/NG</p>
+                    </div>
+                    <button class="btn btn-sm btn-success fw-bold">+ บันทึกรับงานชุบกลับ</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-success">
+                                <th>วัน-เวลา ที่รับกลับ</th>
+                                <th>Subcontractor</th>
+                                <th>Part No.</th>
+                                <th>Lot No.</th>
+                                <th>จำนวนรับคืน</th>
+                                <th>ยอด OK</th>
+                                <th>ยอด NG</th>
+                                <th>สถานะ</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23/10/2026 11:00</td>
+                                <td class="text-info fw-bold">Bangkok Electro Plating</td>
+                                <td>64181-0D030</td>
+                                <td>LOT-PLT-088</td>
+                                <td>1,500 Pcs</td>
+                                <td class="text-success fw-bold">1,495 Pcs</td>
+                                <td class="text-danger fw-bold">5 Pcs</td>
+                                <td><span class="badge bg-success">รับครบถ้วน</span></td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
         <!-- 4. Plating -->
