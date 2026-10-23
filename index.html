@@ -37,14 +37,12 @@
             font-size: 15px;
             letter-spacing: 0.3px;
             border: 1px solid #3b4861;
-            border-top: 1px solid #4f6080; /* Top highlight for 3D effect */
+            border-top: 1px solid #4f6080;
             border-radius: 10px;
-            /* Multi-layer 3D Shadow */
             box-shadow: 
                 0 4px 6px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15),
                 inset 0 -2px 0 rgba(0, 0, 0, 0.4);
-            /* Embossed 3D Text Shadow */
             text-shadow: 0 2px 3px rgba(0, 0, 0, 0.8), 0 -1px 0 rgba(255, 255, 255, 0.1);
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -56,7 +54,6 @@
             padding: 6px 10px;
         }
 
-        /* Hover Effect */
         .nav-main-grid .nav-btn:hover {
             background: linear-gradient(180deg, #37455e 0%, #1f2a3f 100%);
             color: #ffffff;
@@ -68,7 +65,6 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(255, 255, 255, 0.3);
         }
 
-        /* Active Tab - Honda Metallic Red 3D Embossed */
         .nav-main-grid .nav-btn.active {
             background: linear-gradient(180deg, #ff3b3b 0%, #b91c1c 100%) !important;
             color: #ffffff !important;
@@ -79,7 +75,6 @@
                 0 5px 10px rgba(0, 0, 0, 0.5),
                 inset 0 1px 0 rgba(255, 255, 255, 0.45),
                 inset 0 -3px 0 rgba(127, 29, 29, 0.8) !important;
-            /* Strong Embossed Text for Active Button */
             text-shadow: 
                 0 2px 4px rgba(0, 0, 0, 0.9),
                 0 -1px 0 rgba(255, 255, 255, 0.4),
@@ -87,16 +82,9 @@
             font-weight: 900;
         }
 
-        .table-dark-custom { background-color: #111827; color: #d1d5db; }
         .badge-honda { background-color: #dc2626; color: #ffffff; font-size: 12px; font-weight: bold; }
-        
-        /* Tab Pane Logic */
-        .tab-pane-content {
-            display: none !important;
-        }
-        .tab-pane-content.active {
-            display: block !important;
-        }
+        .tab-pane-content { display: none !important; }
+        .tab-pane-content.active { display: block !important; }
     </style>
 </head>
 <body>
@@ -134,39 +122,23 @@
         
         <!-- 1. Dashboard Assembly Line -->
         <div id="tab-dashboard" class="tab-pane-content active">
-            
-            <!-- Key Assembly KPIs -->
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-primary border-4">
                         <span class="text-muted small">แผน vs ยอดผลิตจริง (Plan vs Actual)</span>
-                        <div class="d-flex align-items-baseline justify-content-between mt-1">
-                            <h2 class="text-white fw-bold mb-0">0 <small class="fs-6 text-muted">/ 0 Pcs</small></h2>
-                            <span class="badge bg-primary">0%</span>
-                        </div>
-                        <div class="progress mt-2" style="height: 6px; background-color: #1f2937;">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 0%"></div>
-                        </div>
+                        <h2 class="text-white fw-bold mb-0 mt-1">0 <small class="fs-6 text-muted">/ 0 Pcs</small></h2>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-success border-4">
                         <span class="text-muted small">ผ่านรอบแรก (First Time Yield - FTY)</span>
-                        <div class="d-flex align-items-baseline justify-content-between mt-1">
-                            <h2 class="text-success fw-bold mb-0">0.0%</h2>
-                            <span class="small text-muted">Target > 98%</span>
-                        </div>
-                        <div class="small text-muted mt-2">ยอดประกอบผ่านโดยไม่ต้อง Re-work</div>
+                        <h2 class="text-success fw-bold mb-0 mt-1">0.0%</h2>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-danger border-4">
                         <span class="text-muted small">อัตราของเสียรวม (Defect PPM)</span>
-                        <div class="d-flex align-items-baseline justify-content-between mt-1">
-                            <h2 class="text-danger fw-bold mb-0">0 <small class="fs-6 text-muted">PPM</small></h2>
-                            <span class="small text-muted">Target &lt; 50 PPM</span>
-                        </div>
-                        <div class="small text-muted mt-2">ยอดเสียสะสมประจำวัน</div>
+                        <h2 class="text-danger fw-bold mb-0 mt-1">0 <small class="fs-6 text-muted">PPM</small></h2>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -176,88 +148,253 @@
                             <span class="spinner-grow spinner-grow-sm text-success" role="status"></span>
                             <h3 class="text-success fw-bold mb-0">RUNNING</h3>
                         </div>
-                        <div class="small text-muted mt-2">Line Assembly C1 (Thai Honda)</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Visual Charts & Defect Analysis -->
-            <div class="row g-3 mb-4">
+            <div class="row g-3">
                 <div class="col-md-8">
                     <div class="card card-custom p-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h6 class="text-light m-0">📈 ติดตามยอดผลิตรายชั่วโมง (Hourly Production Output)</h6>
-                            <span class="badge bg-dark text-light border border-secondary small">08:00 - 17:00</span>
-                        </div>
+                        <h6 class="text-light mb-2">📈 ติดตามยอดผลิตรายชั่วโมง (Hourly Production Output)</h6>
                         <canvas id="hourlyChart" height="120"></canvas>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card card-custom p-3">
                         <h6 class="text-light mb-3">⚠️ 5 อันดับแรกของเสียงานประกอบ (Top 5 Assembly Defects)</h6>
-                        <table class="table table-dark table-striped table-borderless table-dark-custom small">
+                        <table class="table table-dark table-striped small">
                             <thead>
-                                <tr class="border-bottom border-secondary">
-                                    <th>ประเภท NG (Defect Mode)</th>
-                                    <th class="text-end">จำนวน</th>
-                                    <th class="text-end">สัดส่วน</th>
-                                </tr>
+                                <tr><th>ประเภท NG</th><th class="text-end">จำนวน</th></tr>
                             </thead>
                             <tbody>
-                                <tr><td colspan="3" class="text-center text-muted py-3">ยังไม่มีข้อมูลบันทึก NG</td></tr>
+                                <tr><td colspan="2" class="text-center text-muted py-3">ยังไม่มีข้อมูลบันทึก NG</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Lower Section: Material Alert & Delivery Status -->
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-warning mb-2">📦 การเตือนวัตถุดิบและชิ้นส่วนรอประกอบ (Critical Component Alert)</h6>
-                        <div class="table-responsive">
-                            <table class="table table-dark table-hover small m-0">
-                                <thead>
-                                    <tr>
-                                        <th>Part No.</th>
-                                        <th>Part Name</th>
-                                        <th>Min Stock</th>
-                                        <th>คงเหลือจริง</th>
-                                        <th>สถานะ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td colspan="5" class="text-center text-muted py-2">ระบบปกติ - ยังไม่มีรายการแจ้งเตือน</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
+        <!-- 2. Capacity (Expanded to 3 Sub-sections: Machine, Assembly, Component Preparation) -->
+        <div id="tab-capacity" class="tab-pane-content">
+            
+            <!-- Sub-section 1: Assembly Line Capacity -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-primary fw-bold m-0">1️⃣ Assembly Line Capacity (กำลังการผลิตงานประกอบ)</h5>
+                        <p class="text-muted small m-0 mt-1">ขีดความสามารถและรอบเวลาการประกอบชิ้นส่วนหลักส่ง Thai Honda</p>
                     </div>
+                    <button class="btn btn-sm btn-danger fw-bold">+ เพิ่มข้อมูล Assembly</button>
                 </div>
-                <div class="col-md-6">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-info mb-2">🚛 สถานะการจัดส่งชิ้นส่วนประจำวัน (Today Delivery Status)</h6>
-                        <div class="table-responsive">
-                            <table class="table table-dark table-hover small m-0">
-                                <thead>
-                                    <tr>
-                                        <th>รอบส่ง (Trip)</th>
-                                        <th>Customer</th>
-                                        <th>Part No.</th>
-                                        <th>แผนจัดส่ง</th>
-                                        <th>สถานะ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td colspan="5" class="text-center text-muted py-2">ยังไม่มีแผนการจัดส่งในรอบนี้</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-warning">
+                                <th>Line</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>Cycle Time (sec)</th>
+                                <th>Target (Pcs/Hr)</th>
+                                <th>Max Capacity / Day</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge bg-secondary">Line C1</span></td>
+                                <td class="fw-bold text-info">17535-0L060</td>
+                                <td>CAP COMP FUEL FILLER</td>
+                                <td>45.0</td>
+                                <td>80 Pcs</td>
+                                <td>1,600 Pcs</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">จัดการ</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Sub-section 2: Component Preparation Capacity -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-success fw-bold m-0">2️⃣ Component Preparation Capacity (การเตรียมชิ้นส่วนหลังรับเข้า)</h5>
+                        <p class="text-muted small m-0 mt-1">ขีดความสามารถในการคัดแยก ตรวจสอบ และเตรียมชุดชิ้นส่วนย่อย (Subparts) ป้อนเข้าไลน์</p>
                     </div>
+                    <button class="btn btn-sm btn-success fw-bold">+ เพิ่มข้อมูลเตรียมชิ้นส่วน</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-success">
+                                <th>Part No. (Subpart)</th>
+                                <th>Part Name</th>
+                                <th>กระบวนการเตรียม (Prep Process)</th>
+                                <th>Manpower</th>
+                                <th>Preparation Rate (Pcs/Hr)</th>
+                                <th>Max Prep Capacity / Day</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-info">SUB-BOLT-01</td>
+                                <td>BOLT WASHER ASSY</td>
+                                <td>ตรวจสอบแรงบิด/คัดแยกเกลียว</td>
+                                <td>2 คน</td>
+                                <td>500 Pcs/Hr</td>
+                                <td>8,000 Pcs</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">จัดการ</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Sub-section 3: Machine Capacity -->
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-info fw-bold m-0">3️⃣ Machine Capacity (กำลังการผลิตเครื่องจักรหลัก)</h5>
+                        <p class="text-muted small m-0 mt-1">ศักยภาพการทำงานของเครื่องจักรในสายการผลิต</p>
+                    </div>
+                    <button class="btn btn-sm btn-info fw-bold text-dark">+ เพิ่มเครื่องจักร</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-info">
+                                <th>Machine ID</th>
+                                <th>Machine Name</th>
+                                <th>Operating Hours/Day</th>
+                                <th>Cycle Time (sec)</th>
+                                <th>Max Machine Capacity / Day</th>
+                                <th class="text-center">สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-info">MC-PRESS-01</td>
+                                <td>Hydraulic Press 50 Tons</td>
+                                <td>16 Hrs (2 Shifts)</td>
+                                <td>15.0</td>
+                                <td>3,840 Pcs</td>
+                                <td class="text-center"><span class="badge bg-success">Normal</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
         </div>
 
-        <!-- 2. Capacity -->
-        <div id="tab-capacity
+        <!-- 3. รับ component ส่งชุบ - รับชุบ -->
+        <div id="tab-component" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-warning mb-3">🚚 รับ Component ส่งชุบ - รับชุบ (Subcontract Tracking)</h5>
+                <p class="text-muted">ติดตามสถานะชิ้นงานส่งชุบภายนอก / รับกลับเข้าโรงงาน</p>
+            </div>
+        </div>
+
+        <!-- 4. Plating -->
+        <div id="tab-plating" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-info mb-3">🧪 Plating Process (กระบวนการชุบผิว)</h5>
+                <p class="text-muted">ควบคุมและติดตามสถานะกระบวนการชุบ</p>
+            </div>
+        </div>
+
+        <!-- 5. Stock Component -->
+        <div id="tab-stock-component" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-primary mb-3">📦 Stock Component (คลังชิ้นส่วนรอประกอบ)</h5>
+                <p class="text-muted">ยอดสต็อกชิ้นส่วนดิบก่อนเข้าไลน์ประกอบ</p>
+            </div>
+        </div>
+
+        <!-- 6. รายงานการผลิต -->
+        <div id="tab-report" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-success mb-3">📝 รายงานการผลิตประจำวัน (Daily Production Report)</h5>
+                <p class="text-muted">ตารางบันทึกผลการผลิต ยอด OK / NG ประจำชิฟต์</p>
+            </div>
+        </div>
+
+        <!-- 7. Stock F/G -->
+        <div id="tab-stock-fg" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-info mb-3">🏭 Stock F/G (คลังสินค้าสำเร็จรูป)</h5>
+                <p class="text-muted">ยอดคงเหลือสินค้าสำเร็จรูปพร้อมจัดส่ง</p>
+            </div>
+        </div>
+
+        <!-- 8. Delivery -->
+        <div id="tab-delivery" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-warning mb-3">🚛 Delivery (ระบบการจัดส่งสินค้า Thai Honda)</h5>
+                <p class="text-muted">ตารางและแผนการจัดส่งประจำวัน</p>
+            </div>
+        </div>
+
+        <!-- 9. PM Machine /Jig -->
+        <div id="tab-pm" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-danger mb-3">🛠️ PM Machine / Jig (การบำรุงรักษาเครื่องจักรและ Jig)</h5>
+                <p class="text-muted">ตารางตรวจเช็ก Preventive Maintenance</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Realtime Clock
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleString('th-TH');
+        }, 1000);
+
+        // Robust Tab Switching System
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane-content');
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+
+                    this.classList.add('active');
+                    const targetPane = document.getElementById(targetId);
+                    if(targetPane) {
+                        targetPane.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Hourly Production Chart
+        const ctxHourly = document.getElementById('hourlyChart').getContext('2d');
+        new Chart(ctxHourly, {
+            type: 'bar',
+            data: {
+                labels: ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'],
+                datasets: [
+                    { label: 'เป้าหมาย (Plan)', data: [0,0,0,0,0,0,0,0], backgroundColor: '#374151' },
+                    { label: 'ผลิตได้จริง (Actual)', data: [0,0,0,0,0,0,0,0], backgroundColor: '#dc2626' }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: '#e2e8f0' } } },
+                scales: {
+                    x: { ticks: { color: '#9ca3af' } },
+                    y: { ticks: { color: '#9ca3af' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
