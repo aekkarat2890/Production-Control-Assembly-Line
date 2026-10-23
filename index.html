@@ -4,15 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Production Control Assembly Line - Jozu Auto Part Co., Ltd.</title>
-    <!-- Bootstrap CSS & Chart.js -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background-color: #080c14; color: #f1f5f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .navbar-custom { background-color: #0f172a; border-bottom: 2px solid #dc2626; }
+        .card-custom { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; }
+        
+        /* High Contrast Bright Text */
+        .text-muted, small.text-muted { color: #cbd5e1 !important; font-weight: 500; }
+        .card-title-sub { color: #93c5fd !important; font-weight: 600; font-size: 0.9rem; }
+        .card-info-text { color: #e2e8f0 !important; }
+        
+        /* 10-Column Button Nav Grid */
+        .nav-main-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+            padding: 0;
+            list-style: none;
+        }
+
+        @media (max-width: 1400px) {
+            .nav-main-grid { grid-template-columns: repeat(5, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-main-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* 3D Button Styling */
+        .nav-main-grid .nav-btn {
+            width: 100%;
+            height: 64px;
+            background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+            color: #f8fafc;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 0.2px;
+            border: 1px solid #475569;
+            border-top: 1px solid #64748b;
+            border-radius: 10px;
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.9);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.2;
+            cursor: pointer;
+            padding: 4px 6px;
+        }
+
+        .nav-main-grid .nav-btn:hover {
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+            color: #ffffff;
+            border-color: #94a3b8;
+            transform: translateY(-2px);
+        }
+
+        .nav-main-grid .nav-btn.active {
+            background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%) !important;
+            color: #ffffff !important;
+            border: 1px solid #f87171 !important;
+            border-top: 1px solid #fca5a5 !important;
+            box-shadow: 
+                0 0 18px rgba(239, 68, 68, 0.7),
+                0 5px 10px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -3px 0 rgba(127, 29, 29, 0.8) !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
+            font-weight: 900;
+        }
+
+        .table-dark-custom { background-color: #0f172a; color: #f1f5f9; }
+        .badge-honda { background-color: #dc2626; color: #ffffff; font-size: 12px; font-weight: bold; }
+        
+        .tab-pane-content { display: none; }
+        .tab-pane-content.active { display: block !important; }
+    </style>
 </head>
 <body>
 
-    <!-- Header Bar -->
+    <!-- Header -->
     <nav class="navbar navbar-custom px-4 py-3">
         <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
             <div>
@@ -20,14 +99,15 @@
                     <h3 class="m-0 text-white fw-bold">⚙️ Production-Control-Assembly-Line</h3>
                     <span class="badge badge-honda px-2 py-1">THAI HONDA</span>
                 </div>
-                <div class="small text-light">Jozu Auto Part Co., Ltd. - ระบบควบคุมกระบวนการผลิตและงานประกอบ (Assembly Visual Control)</div>
+                <div class="small text-light" style="color: #cbd5e1 !important;">Jozu Auto Part Co., Ltd. - ระบบควบคุมกระบวนการผลิตและงานประกอบ (Assembly Visual Control)</div>
             </div>
             <div class="text-warning fw-bold fs-5" id="clock"></div>
         </div>
     </nav>
 
     <div class="container-fluid px-4 py-3">
-        <!-- 10 Modules Navigation Grid -->
+
+        <!-- Nav Grid 10 Modules -->
         <ul class="nav-main-grid">
             <li><button class="nav-btn active" onclick="switchTab('tab-dashboard', this)">Dashboard</button></li>
             <li><button class="nav-btn" onclick="switchTab('tab-planning', this)">Planning</button></li>
@@ -41,9 +121,7 @@
             <li><button class="nav-btn" onclick="switchTab('tab-pm', this)">PM Machine /Jig</button></li>
         </ul>
 
-        <!-- 10 TAB CONTENTS -->
-
-        <!-- 1. Dashboard -->
+        <!-- TAB 1: Dashboard -->
         <div id="tab-dashboard" class="tab-pane-content active">
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
@@ -121,7 +199,7 @@
             </div>
         </div>
 
-        <!-- 2. Planning (4 แผนหลัก) -->
+        <!-- TAB 2: Planning (4 แผนงาน) -->
         <div id="tab-planning" class="tab-pane-content">
             <div class="card card-custom p-4 mb-4">
                 <div class="row g-3">
@@ -132,7 +210,6 @@
                 </div>
             </div>
 
-            <!-- 2.1 แผนผลิต -->
             <div class="card card-custom p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="text-primary fw-bold m-0">1️⃣ แผนการผลิตประจำวัน (Production Plan)</h5>
@@ -156,7 +233,6 @@
                 </div>
             </div>
 
-            <!-- 2.2 แผนรับ Component -->
             <div class="card card-custom p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="text-info fw-bold m-0">2️⃣ แผนรับชิ้นส่วน Component (Component Receiving Plan)</h5>
@@ -178,7 +254,6 @@
                 </div>
             </div>
 
-            <!-- 2.3 แผนส่งชุบ -->
             <div class="card card-custom p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="text-warning fw-bold m-0">3️⃣ แผนส่งชุบภายนอก (Outgoing Plating Plan)</h5>
@@ -200,7 +275,6 @@
                 </div>
             </div>
 
-            <!-- 2.4 แผนการส่งชิ้นงาน -->
             <div class="card card-custom p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="text-success fw-bold m-0">4️⃣ แผนการส่งมอบชิ้นงานให้ลูกค้า Thai Honda (Delivery Plan)</h5>
@@ -223,7 +297,7 @@
             </div>
         </div>
 
-        <!-- 3. Capacity -->
+        <!-- TAB 3: Capacity -->
         <div id="tab-capacity" class="tab-pane-content">
             <div class="card card-custom p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -247,7 +321,7 @@
             </div>
         </div>
 
-        <!-- 4. รับ component ส่งชุบ - รับชุบ -->
+        <!-- TAB 4: รับ Component/ส่งชุบ -->
         <div id="tab-component" class="tab-pane-content">
             <div class="card card-custom p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -271,7 +345,7 @@
             </div>
         </div>
 
-        <!-- 5. Plating -->
+        <!-- TAB 5: Plating -->
         <div id="tab-plating" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <h5 class="text-info fw-bold mb-3">🧪 ตารางคงเหลือชิ้นส่วนค้างชุบ แยกตามโรงชุบ (Plating Inventory)</h5>
@@ -292,7 +366,7 @@
             </div>
         </div>
 
-        <!-- 6. Stock Component -->
+        <!-- TAB 6: Stock Component -->
         <div id="tab-stock-component" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <h5 class="text-primary fw-bold mb-3">📦 คลังชิ้นส่วนรอประกอบ (Component Inventory Control)</h5>
@@ -313,7 +387,7 @@
             </div>
         </div>
 
-        <!-- 7. รายงานการผลิต -->
+        <!-- TAB 7: รายงานการผลิต -->
         <div id="tab-report" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <h5 class="text-primary fw-bold mb-3">📊 รายงานการผลิตงานประกอบเทียบแผน (Assembly Production Report vs Plan)</h5>
@@ -334,7 +408,7 @@
             </div>
         </div>
 
-        <!-- 8. Stock F/G -->
+        <!-- TAB 8: Stock F/G -->
         <div id="tab-stock-fg" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <h5 class="text-success fw-bold mb-3">🏭 คลังสินค้าสำเร็จรูปส่ง Thai Honda (Finished Goods Inventory)</h5>
@@ -355,7 +429,7 @@
             </div>
         </div>
 
-        <!-- 9. Delivery -->
+        <!-- TAB 9: Delivery -->
         <div id="tab-delivery" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <h5 class="text-warning fw-bold mb-3">🚛 ตารางแผนและสถานะการจัดส่งประจำวัน (Daily Delivery Schedule)</h5>
@@ -376,8 +450,9 @@
             </div>
         </div>
 
-        <!-- 10. PM Machine / Jig -->
+        <!-- TAB 10: PM Machine / Jig (2 ส่วน) -->
         <div id="tab-pm" class="tab-pane-content">
+            <!-- ส่วนที่ 1: เครื่องจักร -->
             <div class="card card-custom p-4 mb-4">
                 <h5 class="text-danger fw-bold mb-3">1️⃣ ระบบบำรุงรักษาเครื่องจักรหลัก (Machine Maintenance & PM Plan)</h5>
                 <div class="table-responsive">
@@ -396,6 +471,7 @@
                 </div>
             </div>
 
+            <!-- ส่วนที่ 2: Jig & Fixture -->
             <div class="card card-custom p-4">
                 <h5 class="text-warning fw-bold mb-3">2️⃣ ระบบตรวจเช็กและบำรุงรักษา Jig & Fixture (Jig Maintenance Log)</h5>
                 <div class="table-responsive">
@@ -417,7 +493,48 @@
 
     </div>
 
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+    <script>
+        // Clock
+        setInterval(() => {
+            const now = new Date();
+            const clockEl = document.getElementById('clock');
+            if(clockEl) clockEl.innerText = now.toLocaleString('th-TH');
+        }, 1000);
+
+        // Switch Tab
+        function switchTab(targetId, buttonElement) {
+            document.querySelectorAll('.tab-pane-content').forEach(pane => pane.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetPane = document.getElementById(targetId);
+            if(targetPane) targetPane.classList.add('active');
+            if(buttonElement) buttonElement.classList.add('active');
+        }
+
+        // Chart
+        window.addEventListener('load', () => {
+            const ctxHourly = document.getElementById('hourlyChart');
+            if(ctxHourly) {
+                new Chart(ctxHourly.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'],
+                        datasets: [
+                            { label: 'แผนการผลิต (Plan)', data: [200,200,200,200,150,150,200,200], backgroundColor: '#475569' },
+                            { label: 'ผลิตได้จริง (Actual)', data: [180,190,170,160,120,130,150,200], backgroundColor: '#ef4444' }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { labels: { color: '#f8fafc' } } },
+                        scales: {
+                            x: { ticks: { color: '#cbd5e1' } },
+                            y: { ticks: { color: '#cbd5e1' } }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
