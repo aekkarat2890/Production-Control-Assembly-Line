@@ -10,14 +10,13 @@
         body { background-color: #0b0f17; color: #e2e8f0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .navbar-custom { background-color: #111827; border-bottom: 2px solid #dc2626; }
         .card-custom { background-color: #161e2e; border: 1px solid #243044; border-radius: 8px; }
-        .alert-custom { background-color: #3b0764; border: 1px solid #6b21a8; color: #f3e8ff; }
         
-        /* Modern Button Nav Grid - Honda Sport Theme */
+        /* Modern 3D Embossed Button Nav Grid */
         .nav-main-grid {
             display: grid;
             grid-template-columns: repeat(9, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 24px;
             padding: 0;
             list-style: none;
         }
@@ -28,39 +27,64 @@
             }
         }
 
+        /* 3D Raised Button Styling */
         .nav-main-grid .nav-btn {
             width: 100%;
-            height: 58px;
-            background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
-            color: #d1d5db;
-            font-weight: 700;
-            font-size: 13px;
-            border: 1px solid #374151;
-            border-radius: 8px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-            transition: all 0.2s ease-in-out;
+            height: 64px;
+            background: linear-gradient(180deg, #2a3447 0%, #161e2e 100%);
+            color: #e2e8f0;
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            border: 1px solid #3b4861;
+            border-top: 1px solid #4f6080; /* Top highlight for 3D effect */
+            border-radius: 10px;
+            /* Multi-layer 3D Shadow */
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+            /* Embossed 3D Text Shadow */
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.8), 0 -1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             line-height: 1.2;
             cursor: pointer;
-            padding: 4px 8px;
+            padding: 6px 10px;
         }
 
+        /* Hover Effect */
         .nav-main-grid .nav-btn:hover {
-            background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+            background: linear-gradient(180deg, #37455e 0%, #1f2a3f 100%);
             color: #ffffff;
-            border-color: #4b5563;
+            border-color: #526485;
             transform: translateY(-2px);
+            box-shadow: 
+                0 7px 14px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(255, 255, 255, 0.3);
         }
 
+        /* Active Tab - Honda Metallic Red 3D Embossed */
         .nav-main-grid .nav-btn.active {
-            background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%) !important;
+            background: linear-gradient(180deg, #ff3b3b 0%, #b91c1c 100%) !important;
             color: #ffffff !important;
-            border-color: #f87171 !important;
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.6) !important;
-            font-weight: 800;
+            border: 1px solid #ef4444 !important;
+            border-top: 1px solid #fca5a5 !important;
+            box-shadow: 
+                0 0 18px rgba(239, 68, 68, 0.65),
+                0 5px 10px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45),
+                inset 0 -3px 0 rgba(127, 29, 29, 0.8) !important;
+            /* Strong Embossed Text for Active Button */
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.9),
+                0 -1px 0 rgba(255, 255, 255, 0.4),
+                0 0 10px rgba(255, 255, 255, 0.5) !important;
+            font-weight: 900;
         }
 
         .table-dark-custom { background-color: #111827; color: #d1d5db; }
@@ -93,7 +117,7 @@
 
     <div class="container-fluid px-4 py-3">
 
-        <!-- Modern Button Navigation Bar (9 Modules) -->
+        <!-- Modern 3D Embossed Button Navigation Bar (9 Modules) -->
         <ul class="nav-main-grid">
             <li><button class="nav-btn active" data-target="tab-dashboard">Dashboard</button></li>
             <li><button class="nav-btn" data-target="tab-capacity">Capacity</button></li>
@@ -236,16 +260,4 @@
         </div>
 
         <!-- 2. Capacity -->
-        <div id="tab-capacity" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <h5 class="text-primary fw-bold m-0">📊 Capacity Planning (กำลังการผลิตชิ้นส่วน Thai Honda)</h5>
-                        <p class="text-muted small m-0 mt-1">ตารางคำนวณ Cycle Time, Target ต่อชั่วโมง และ Max Capacity แยกตามไลน์ผลิต</p>
-                    </div>
-                    <button class="btn btn-sm btn-primary">+ เพิ่ม Part No.</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover table-striped small align-middle">
-                        <thead>
-                            <tr class="text-primary">
+        <div id="tab-capacity
