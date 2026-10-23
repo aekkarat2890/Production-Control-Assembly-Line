@@ -86,7 +86,7 @@
         .badge-honda { background-color: #dc2626; color: #ffffff; font-size: 12px; font-weight: bold; }
         
         /* Tab Pane Display Controls */
-        .tab-pane-content { display: none !important; }
+        .tab-pane-content { display: none; }
         .tab-pane-content.active { display: block !important; }
     </style>
 </head>
@@ -108,17 +108,17 @@
 
     <div class="container-fluid px-4 py-3">
 
-        <!-- Modern 3D Embossed Button Navigation Bar (9 Modules) -->
+        <!-- Modern 3D Embossed Button Navigation Bar (9 Modules) with Direct onclick -->
         <ul class="nav-main-grid">
-            <li><button class="nav-btn active" data-target="tab-dashboard">Dashboard</button></li>
-            <li><button class="nav-btn" data-target="tab-capacity">Capacity</button></li>
-            <li><button class="nav-btn" data-target="tab-component">รับ component<br>ส่งชุบ - รับชุบ</button></li>
-            <li><button class="nav-btn" data-target="tab-plating">Plating</button></li>
-            <li><button class="nav-btn" data-target="tab-stock-component">Stock Component</button></li>
-            <li><button class="nav-btn" data-target="tab-report">รายงานการผลิต</button></li>
-            <li><button class="nav-btn" data-target="tab-stock-fg">Stock F/G</button></li>
-            <li><button class="nav-btn" data-target="tab-delivery">Delivery</button></li>
-            <li><button class="nav-btn" data-target="tab-pm">PM Machine /Jig</button></li>
+            <li><button class="nav-btn active" id="btn-dashboard" onclick="switchTab('tab-dashboard', this)">Dashboard</button></li>
+            <li><button class="nav-btn" id="btn-capacity" onclick="switchTab('tab-capacity', this)">Capacity</button></li>
+            <li><button class="nav-btn" id="btn-component" onclick="switchTab('tab-component', this)">รับ component<br>ส่งชุบ - รับชุบ</button></li>
+            <li><button class="nav-btn" id="btn-plating" onclick="switchTab('tab-plating', this)">Plating</button></li>
+            <li><button class="nav-btn" id="btn-stock-component" onclick="switchTab('tab-stock-component', this)">Stock Component</button></li>
+            <li><button class="nav-btn" id="btn-report" onclick="switchTab('tab-report', this)">รายงานการผลิต</button></li>
+            <li><button class="nav-btn" id="btn-stock-fg" onclick="switchTab('tab-stock-fg', this)">Stock F/G</button></li>
+            <li><button class="nav-btn" id="btn-delivery" onclick="switchTab('tab-delivery', this)">Delivery</button></li>
+            <li><button class="nav-btn" id="btn-pm" onclick="switchTab('tab-pm', this)">PM Machine /Jig</button></li>
         </ul>
 
         <!-- TAB CONTENTS -->
@@ -480,9 +480,3 @@
                                 <th>ยอด OK</th>
                                 <th>ยอด NG</th>
                                 <th>สถานะ</th>
-                                <th class="text-center">จัดการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>23
