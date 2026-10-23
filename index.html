@@ -186,72 +186,57 @@
                 </div>
             </div>
 
-            <!-- Lower Section: Material Alert & Delivery Status -->
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-warning mb-2">📦 การเตือนวัตถุดิบและชิ้นส่วนรอประกอบ (Critical Component Alert)</h6>
-                        <div class="table-responsive">
-                            <table class="table table-dark table-hover small m-0">
-                                <thead>
-                                    <tr>
-                                        <th>Part No.</th>
-                                        <th>Part Name</th>
-                                        <th>Min Stock</th>
-                                        <th>คงเหลือจริง</th>
-                                        <th>สถานะ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td colspan="5" class="text-center text-muted py-2">ระบบปกติ - ยังไม่มีรายการแจ้งเตือน</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-info mb-2">🚛 สถานะการจัดส่งชิ้นส่วนประจำวัน (Today Delivery Status)</h6>
-                        <div class="table-responsive">
-                            <table class="table table-dark table-hover small m-0">
-                                <thead>
-                                    <tr>
-                                        <th>รอบส่ง (Trip)</th>
-                                        <th>Customer</th>
-                                        <th>Part No.</th>
-                                        <th>แผนจัดส่ง</th>
-                                        <th>สถานะ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td colspan="5" class="text-center text-muted py-2">ยังไม่มีแผนการจัดส่งในรอบนี้</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
-        <!-- 2. Capacity -->
+        <!-- 2. Capacity (Updated with Professional Layout) -->
         <div id="tab-capacity" class="tab-content-pane">
             <div class="card card-custom p-4">
-                <h5 class="text-primary mb-3">📊 Capacity Planning (กำลังการผลิตชิ้นส่วน Thai Honda)</h5>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-primary fw-bold m-0">📊 Capacity Planning (กำลังการผลิตชิ้นส่วน Thai Honda)</h5>
+                        <p class="text-muted small m-0 mt-1">ตารางคำนวณ Cycle Time, Target ต่อชั่วโมง และ Max Capacity แยกตามไลน์ผลิต</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-primary">+ เพิ่ม Part No. กำลังการผลิต</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-dark table-hover small">
+                    <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
-                            <tr>
+                            <tr class="text-primary">
                                 <th>Line</th>
                                 <th>Part No.</th>
                                 <th>Part Name</th>
                                 <th>Cycle Time (sec)</th>
                                 <th>Target (Pcs/Hr)</th>
-                                <th>Max Capacity/Day</th>
+                                <th>Max Capacity / Day</th>
+                                <th class="text-center">จัดการ</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr><td colspan="6" class="text-center text-muted">ยังไม่มีข้อมูลในระบบ</td></tr>
+                        <tbody id="capacity-table-body">
+                            <!-- ตัวอย่างโครงสร้างแถวข้อมูลที่จะดึงมาจาก Google Sheets -->
+                            <tr>
+                                <td><span class="badge bg-secondary">Line C1</span></td>
+                                <td class="fw-bold text-info">17535-0L060</td>
+                                <td>CAP COMP FUEL FILLER</td>
+                                <td>45.0</td>
+                                <td>80 Pcs</td>
+                                <td>1,600 Pcs</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-secondary">Line C2</span></td>
+                                <td class="fw-bold text-info">55375-0D050</td>
+                                <td>BRKT SUB-ASSY</td>
+                                <td>30.0</td>
+                                <td>120 Pcs</td>
+                                <td>2,400 Pcs</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -261,8 +246,4 @@
         <!-- 3. รับ component ส่งชุบ - รับชุบ -->
         <div id="tab-component" class="tab-content-pane">
             <div class="card card-custom p-4">
-                <h5 class="text-warning mb-3">🚚 รับ Component ส่งชุบ - รับชุบ (Subcontract Tracking)</h5>
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover small">
-                        <thead>
-                            <tr>
+                <h5
