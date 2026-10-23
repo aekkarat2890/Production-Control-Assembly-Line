@@ -53,25 +53,26 @@
             color: #ffffff;
             border-color: #4b5563;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
         .nav-main-grid .nav-btn.active {
-            background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+            background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%) !important;
             color: #ffffff !important;
-            border-color: #f87171;
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
+            border-color: #f87171 !important;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.6) !important;
             font-weight: 800;
         }
 
         .table-dark-custom { background-color: #111827; color: #d1d5db; }
-        .badge-danger { background-color: #ef4444; }
-        .badge-success { background-color: #10b981; }
-        .badge-warning { background-color: #f59e0b; color: #000; }
-        .badge-info { background-color: #3b82f6; }
         .badge-honda { background-color: #dc2626; color: #ffffff; font-size: 12px; font-weight: bold; }
-        .tab-content-pane { display: none; }
-        .tab-content-pane.active { display: block; }
+        
+        /* Tab Pane Logic */
+        .tab-pane-content {
+            display: none !important;
+        }
+        .tab-pane-content.active {
+            display: block !important;
+        }
     </style>
 </head>
 <body>
@@ -94,21 +95,21 @@
 
         <!-- Modern Button Navigation Bar (9 Modules) -->
         <ul class="nav-main-grid">
-            <li><button class="nav-btn active" onclick="switchTab('tab-dashboard', this)">Dashboard</button></li>
-            <li><button class="nav-btn" onclick="switchTab('tab-capacity', this)">Capacity</button></li>
-            <li><button class="nav-btn" onclick="switchTab('tab-component', this)">รับ component<br>ส่งชุบ - รับชุบ</button></li>
-            <li><button class="nav-btn" onclick="switchTab('tab-plating', this)">Plating</button></li>
-            <li><button class="nav-btn" onclick="switchTab('tab-stock-component', this)">Stock Component</button></li>
-            <li><button class="nav-btn" onclick="switchTab('tab-report', this)">รายงานการผลิต</button></li>
-            <li><button class="nav-btn" onclick="switchTab('tab-stock-fg', this)">Stock F/G</button></li>
-            <li><button class="nav-btn" onclick="switchTab('tab-delivery', this)">Delivery</button></li>
-            <li><button class="nav-btn" onclick="switchTab('tab-pm', this)">PM Machine /Jig</button></li>
+            <li><button class="nav-btn active" data-target="tab-dashboard">Dashboard</button></li>
+            <li><button class="nav-btn" data-target="tab-capacity">Capacity</button></li>
+            <li><button class="nav-btn" data-target="tab-component">รับ component<br>ส่งชุบ - รับชุบ</button></li>
+            <li><button class="nav-btn" data-target="tab-plating">Plating</button></li>
+            <li><button class="nav-btn" data-target="tab-stock-component">Stock Component</button></li>
+            <li><button class="nav-btn" data-target="tab-report">รายงานการผลิต</button></li>
+            <li><button class="nav-btn" data-target="tab-stock-fg">Stock F/G</button></li>
+            <li><button class="nav-btn" data-target="tab-delivery">Delivery</button></li>
+            <li><button class="nav-btn" data-target="tab-pm">PM Machine /Jig</button></li>
         </ul>
 
         <!-- TAB CONTENTS -->
         
         <!-- 1. Dashboard Assembly Line -->
-        <div id="tab-dashboard" class="tab-content-pane active">
+        <div id="tab-dashboard" class="tab-pane-content active">
             
             <!-- Key Assembly KPIs -->
             <div class="row g-3 mb-4">
@@ -116,11 +117,11 @@
                     <div class="card card-custom p-3 border-start border-primary border-4">
                         <span class="text-muted small">แผน vs ยอดผลิตจริง (Plan vs Actual)</span>
                         <div class="d-flex align-items-baseline justify-content-between mt-1">
-                            <h2 class="text-white fw-bold mb-0" id="kpi-actual">0 <small class="fs-6 text-muted">/ 0 Pcs</small></h2>
-                            <span class="badge badge-info" id="kpi-achieve">0%</span>
+                            <h2 class="text-white fw-bold mb-0">0 <small class="fs-6 text-muted">/ 0 Pcs</small></h2>
+                            <span class="badge bg-primary">0%</span>
                         </div>
                         <div class="progress mt-2" style="height: 6px; background-color: #1f2937;">
-                            <div class="progress-bar bg-primary" role="progressbar" id="kpi-progress" style="width: 0%"></div>
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
@@ -128,7 +129,7 @@
                     <div class="card card-custom p-3 border-start border-success border-4">
                         <span class="text-muted small">ผ่านรอบแรก (First Time Yield - FTY)</span>
                         <div class="d-flex align-items-baseline justify-content-between mt-1">
-                            <h2 class="text-success fw-bold mb-0" id="kpi-fty">0.0%</h2>
+                            <h2 class="text-success fw-bold mb-0">0.0%</h2>
                             <span class="small text-muted">Target > 98%</span>
                         </div>
                         <div class="small text-muted mt-2">ยอดประกอบผ่านโดยไม่ต้อง Re-work</div>
@@ -138,8 +139,8 @@
                     <div class="card card-custom p-3 border-start border-danger border-4">
                         <span class="text-muted small">อัตราของเสียรวม (Defect PPM)</span>
                         <div class="d-flex align-items-baseline justify-content-between mt-1">
-                            <h2 class="text-danger fw-bold mb-0" id="kpi-ppm">0 <small class="fs-6 text-muted">PPM</small></h2>
-                            <span class="small text-muted">Target < 50 PPM</span>
+                            <h2 class="text-danger fw-bold mb-0">0 <small class="fs-6 text-muted">PPM</small></h2>
+                            <span class="small text-muted">Target &lt; 50 PPM</span>
                         </div>
                         <div class="small text-muted mt-2">ยอดเสียสะสมประจำวัน</div>
                     </div>
@@ -178,7 +179,7 @@
                                     <th class="text-end">สัดส่วน</th>
                                 </tr>
                             </thead>
-                            <tbody id="defect-table-body">
+                            <tbody>
                                 <tr><td colspan="3" class="text-center text-muted py-3">ยังไม่มีข้อมูลบันทึก NG</td></tr>
                             </tbody>
                         </table>
@@ -186,64 +187,65 @@
                 </div>
             </div>
 
+            <!-- Lower Section: Material Alert & Delivery Status -->
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-warning mb-2">📦 การเตือนวัตถุดิบและชิ้นส่วนรอประกอบ (Critical Component Alert)</h6>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover small m-0">
+                                <thead>
+                                    <tr>
+                                        <th>Part No.</th>
+                                        <th>Part Name</th>
+                                        <th>Min Stock</th>
+                                        <th>คงเหลือจริง</th>
+                                        <th>สถานะ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="5" class="text-center text-muted py-2">ระบบปกติ - ยังไม่มีรายการแจ้งเตือน</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-info mb-2">🚛 สถานะการจัดส่งชิ้นส่วนประจำวัน (Today Delivery Status)</h6>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover small m-0">
+                                <thead>
+                                    <tr>
+                                        <th>รอบส่ง (Trip)</th>
+                                        <th>Customer</th>
+                                        <th>Part No.</th>
+                                        <th>แผนจัดส่ง</th>
+                                        <th>สถานะ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="5" class="text-center text-muted py-2">ยังไม่มีแผนการจัดส่งในรอบนี้</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- 2. Capacity (Updated with Professional Layout) -->
-        <div id="tab-capacity" class="tab-content-pane">
+        <!-- 2. Capacity -->
+        <div id="tab-capacity" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
                         <h5 class="text-primary fw-bold m-0">📊 Capacity Planning (กำลังการผลิตชิ้นส่วน Thai Honda)</h5>
                         <p class="text-muted small m-0 mt-1">ตารางคำนวณ Cycle Time, Target ต่อชั่วโมง และ Max Capacity แยกตามไลน์ผลิต</p>
                     </div>
-                    <div>
-                        <button class="btn btn-sm btn-primary">+ เพิ่ม Part No. กำลังการผลิต</button>
-                    </div>
+                    <button class="btn btn-sm btn-primary">+ เพิ่ม Part No.</button>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
                             <tr class="text-primary">
-                                <th>Line</th>
-                                <th>Part No.</th>
-                                <th>Part Name</th>
-                                <th>Cycle Time (sec)</th>
-                                <th>Target (Pcs/Hr)</th>
-                                <th>Max Capacity / Day</th>
-                                <th class="text-center">จัดการ</th>
-                            </tr>
-                        </thead>
-                        <tbody id="capacity-table-body">
-                            <!-- ตัวอย่างโครงสร้างแถวข้อมูลที่จะดึงมาจาก Google Sheets -->
-                            <tr>
-                                <td><span class="badge bg-secondary">Line C1</span></td>
-                                <td class="fw-bold text-info">17535-0L060</td>
-                                <td>CAP COMP FUEL FILLER</td>
-                                <td>45.0</td>
-                                <td>80 Pcs</td>
-                                <td>1,600 Pcs</td>
-                                <td class="text-center">
-                                    <button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-secondary">Line C2</span></td>
-                                <td class="fw-bold text-info">55375-0D050</td>
-                                <td>BRKT SUB-ASSY</td>
-                                <td>30.0</td>
-                                <td>120 Pcs</td>
-                                <td>2,400 Pcs</td>
-                                <td class="text-center">
-                                    <button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. รับ component ส่งชุบ - รับชุบ -->
-        <div id="tab-component" class="tab-content-pane">
-            <div class="card card-custom p-4">
-                <h5
