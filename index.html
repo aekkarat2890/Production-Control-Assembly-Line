@@ -185,4 +185,633 @@
                         <table class="table table-dark table-striped table-borderless table-dark-custom small">
                             <thead>
                                 <tr class="border-bottom border-secondary">
-                                    <th>ประเภท
+                                    <th>ประเภท NG (Defect Mode)</th>
+                                    <th class="text-end">จำนวน</th>
+                                    <th class="text-end">สัดส่วน</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="3" class="text-center text-muted py-3">ยังไม่มีข้อมูลบันทึก NG</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-warning mb-2">📦 การเตือนวัตถุดิบและชิ้นส่วนรอประกอบ (Critical Component Alert)</h6>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover small m-0">
+                                <thead>
+                                    <tr>
+                                        <th>Part No.</th>
+                                        <th>Part Name</th>
+                                        <th>Min Stock</th>
+                                        <th>คงเหลือจริง</th>
+                                        <th>สถานะ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="5" class="text-center text-muted py-2">ระบบปกติ - ยังไม่มีรายการแจ้งเตือน</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-custom p-3">
+                        <h6 class="text-info mb-2">🚛 สถานะการจัดส่งชิ้นส่วนประจำวัน (Today Delivery Status)</h6>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover small m-0">
+                                <thead>
+                                    <tr>
+                                        <th>รอบส่ง (Trip)</th>
+                                        <th>Customer</th>
+                                        <th>Part No.</th>
+                                        <th>แผนจัดส่ง</th>
+                                        <th>สถานะ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="5" class="text-center text-muted py-2">ยังไม่มีแผนการจัดส่งในรอบนี้</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Capacity -->
+        <div id="tab-capacity" class="tab-pane-content">
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-primary fw-bold m-0">1️⃣ Assembly Line Capacity (กำลังการผลิตงานประกอบ)</h5>
+                        <p class="text-muted small m-0 mt-1">ขีดความสามารถและรอบเวลาการประกอบชิ้นส่วนหลักส่ง Thai Honda</p>
+                    </div>
+                    <button class="btn btn-sm btn-danger fw-bold">+ เพิ่มข้อมูล Assembly</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-warning">
+                                <th>Line</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>Cycle Time (sec)</th>
+                                <th>Target (Pcs/Hr)</th>
+                                <th>Max Capacity / Day</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge bg-secondary">Line C1</span></td>
+                                <td class="fw-bold text-info">17535-0L060</td>
+                                <td>CAP COMP FUEL FILLER</td>
+                                <td>45.0</td>
+                                <td>80 Pcs</td>
+                                <td>1,600 Pcs</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">จัดการ</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-success fw-bold m-0">2️⃣ Component Preparation Capacity (การเตรียมชิ้นส่วนหลังรับเข้า)</h5>
+                        <p class="text-muted small m-0 mt-1">ขีดความสามารถในการคัดแยก ตรวจสอบ และเตรียมชุดชิ้นส่วนย่อย (Subparts) ป้อนเข้าไลน์</p>
+                    </div>
+                    <button class="btn btn-sm btn-success fw-bold">+ เพิ่มข้อมูลเตรียมชิ้นส่วน</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-success">
+                                <th>Part No. (Subpart)</th>
+                                <th>Part Name</th>
+                                <th>กระบวนการเตรียม (Prep Process)</th>
+                                <th>Manpower</th>
+                                <th>Preparation Rate (Pcs/Hr)</th>
+                                <th>Max Prep Capacity / Day</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-info">SUB-BOLT-01</td>
+                                <td>BOLT WASHER ASSY</td>
+                                <td>ตรวจสอบแรงบิด/คัดแยกเกลียว</td>
+                                <td>2 คน</td>
+                                <td>500 Pcs/Hr</td>
+                                <td>8,000 Pcs</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">จัดการ</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-info fw-bold m-0">3️⃣ Machine Capacity (กำลังการผลิตเครื่องจักรหลัก)</h5>
+                        <p class="text-muted small m-0 mt-1">ศักยภาพการทำงานของเครื่องจักรในสายการผลิต</p>
+                    </div>
+                    <button class="btn btn-sm btn-info fw-bold text-dark">+ เพิ่มเครื่องจักร</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-info">
+                                <th>Machine ID</th>
+                                <th>Machine Name</th>
+                                <th>Operating Hours/Day</th>
+                                <th>Cycle Time (sec)</th>
+                                <th>Max Machine Capacity / Day</th>
+                                <th class="text-center">สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-info">MC-PRESS-01</td>
+                                <td>Hydraulic Press 50 Tons</td>
+                                <td>16 Hrs (2 Shifts)</td>
+                                <td>15.0</td>
+                                <td>3,840 Pcs</td>
+                                <td class="text-center"><span class="badge bg-success">Normal</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. รับ component ส่งชุบ - รับชุบ -->
+        <div id="tab-component" class="tab-pane-content">
+            <div class="card card-custom p-4 mb-4">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark">
+                            <span class="text-muted small">📥 ยอดรับ Component เข้าสะสมวันนี้</span>
+                            <h3 class="text-info fw-bold m-0 mt-1">2,500 <small class="fs-6 text-muted">ชิ้น</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark">
+                            <span class="text-muted small">🚚 งานค้างชุบภายนอก (In-Process Plating)</span>
+                            <h3 class="text-warning fw-bold m-0 mt-1">1,000 <small class="fs-6 text-muted">ชิ้น</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark">
+                            <span class="text-muted small">✅ ยอดรับชิ้นส่วนชุบเสร็จสะสมวันนี้</span>
+                            <h3 class="text-success fw-bold m-0 mt-1">1,500 <small class="fs-6 text-muted">ชิ้น</small></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logbook 1: บันทึกรับ Component เข้าคลัง -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-info fw-bold m-0">1️⃣ Logbook: บันทึกรับ Component เข้าคลัง (Receiving Log)</h5>
+                        <p class="text-muted small m-0 mt-1">ประวัติการรับชิ้นส่วนดิบ / Subpart เข้ามาจาก Supplier หรือการผลิตภายใน</p>
+                    </div>
+                    <button class="btn btn-sm btn-info fw-bold text-dark">+ บันทึกรับ Component</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-info">
+                                <th>วัน-เวลา ที่รับ</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>Lot No.</th>
+                                <th>จำนวนที่รับ (Pcs)</th>
+                                <th>Supplier / Source</th>
+                                <th>ผู้บันทึก</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23/10/2026 08:30</td>
+                                <td class="fw-bold text-info">53683-0A040</td>
+                                <td>BRACKET COMP RAW</td>
+                                <td>LOT-RAW-001</td>
+                                <td>2,500 Pcs</td>
+                                <td>Supplier A Co., Ltd.</td>
+                                <td>Somchai K.</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Logbook 2: บันทึกส่งชิ้นส่วนไปชุบภายนอก -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-warning fw-bold m-0">2️⃣ Logbook: บันทึกส่งชิ้นส่วนไปชุบภายนอก (Outgoing Plating Log)</h5>
+                        <p class="text-muted small m-0 mt-1">ประวัติการส่งชิ้นส่วนออกไปชุบผิวกับ Subcontractor ภายนอก</p>
+                    </div>
+                    <button class="btn btn-sm btn-warning fw-bold text-dark">+ บันทึกส่งชุบ</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-warning">
+                                <th>วัน-เวลา ที่ส่ง</th>
+                                <th>Subcontractor (ผู้รับจ้างชุบ)</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>Lot No.</th>
+                                <th>จำนวนส่งชุบ (Pcs)</th>
+                                <th>กำหนดวันรับกลับ</th>
+                                <th>ผู้บันทึก</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23/10/2026 09:15</td>
+                                <td class="text-info fw-bold">Siam Plating Factory</td>
+                                <td>53683-0A040</td>
+                                <td>BRACKET COMP RAW</td>
+                                <td>LOT-RAW-001</td>
+                                <td>1,000 Pcs</td>
+                                <td>24/10/2026</td>
+                                <td>Wichai P.</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Logbook 3: บันทึกรับชิ้นส่วนกลับจากงานชุบ -->
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-success fw-bold m-0">3️⃣ Logbook: บันทึกรับชิ้นส่วนกลับจากงานชุบ (Incoming Plating Log)</h5>
+                        <p class="text-muted small m-0 mt-1">ประวัติการรับชิ้นส่วนที่ชุบผิวเสร็จสิ้นกลับเข้าโรงงาน พร้อมตรวจรับยอด OK/NG</p>
+                    </div>
+                    <button class="btn btn-sm btn-success fw-bold">+ บันทึกรับงานชุบกลับ</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-success">
+                                <th>วัน-เวลา ที่รับกลับ</th>
+                                <th>Subcontractor</th>
+                                <th>Part No.</th>
+                                <th>Lot No.</th>
+                                <th>จำนวนรับคืน</th>
+                                <th>ยอด OK</th>
+                                <th>ยอด NG</th>
+                                <th>สถานะ</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23/10/2026 11:00</td>
+                                <td class="text-info fw-bold">Bangkok Electro Plating</td>
+                                <td>64181-0D030</td>
+                                <td>LOT-PLT-088</td>
+                                <td>1,500 Pcs</td>
+                                <td class="text-success fw-bold">1,495 Pcs</td>
+                                <td class="text-danger fw-bold">5 Pcs</td>
+                                <td><span class="badge bg-success">รับครบถ้วน</span></td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Plating -->
+        <div id="tab-plating" class="tab-pane-content">
+            <div class="card card-custom p-4 mb-4">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-warning border-4">
+                            <span class="text-muted small">🧪 ยอดงานค้างชุบรวมทุกโรงชุบ (Total Outstanding)</span>
+                            <h3 class="text-warning fw-bold m-0 mt-1">2,500 <small class="fs-6 text-muted">ชิ้น</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-info border-4">
+                            <span class="text-muted small">🚚 ยอดชุบเสร็จ/กำลังขนส่งกลับ (In-Transit Return)</span>
+                            <h3 class="text-info fw-bold m-0 mt-1">800 <small class="fs-6 text-muted">ชิ้น</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-success border-4">
+                            <span class="text-muted small">🏭 โรงชุบภายนอกที่เปิดงานอยู่ (Active Suppliers)</span>
+                            <h3 class="text-success fw-bold m-0 mt-1">2 <small class="fs-6 text-muted">แห่ง</small></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-info fw-bold m-0">🧪 ตารางคงเหลือชิ้นส่วนค้างชุบ แยกตามโรงชุบ (Plating Inventory by Supplier)</h5>
+                        <p class="text-muted small m-0 mt-1">แสดงยอดชิ้นส่วนคงค้างที่โรงชุบภายนอกแยกแต่ละรายการ เพื่อการติดตามงาน (Follow-up)</p>
+                    </div>
+                    <button class="btn btn-sm btn-info fw-bold text-dark">🔄 อัปเดตข้อมูลสถานะ</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-info">
+                                <th>โรงชุบ (Plating Supplier)</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>วันที่ส่งชุบล่าสุด</th>
+                                <th class="text-end">จำนวนส่งทั้งหมด</th>
+                                <th class="text-end">รับคืนแล้ว</th>
+                                <th class="text-end text-warning fw-bold">คงเหลือที่โรงชุบ</th>
+                                <th class="text-center">สถานะติดตาม</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-white">Siam Plating Factory</td>
+                                <td class="fw-bold text-info">53683-0A040</td>
+                                <td>BRACKET COMP PLATED</td>
+                                <td>23/10/2026</td>
+                                <td class="text-end">1,500 Pcs</td>
+                                <td class="text-end">500 Pcs</td>
+                                <td class="text-end text-warning fw-bold fs-6">1,000 Pcs</td>
+                                <td class="text-center"><span class="badge bg-warning text-dark">อยู่ระหว่างชุบ (ปกติ)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-white">Bangkok Electro Plating</td>
+                                <td class="fw-bold text-info">64181-0D030</td>
+                                <td>PLATE SUB-ASSY</td>
+                                <td>20/10/2026</td>
+                                <td class="text-end">2,000 Pcs</td>
+                                <td class="text-end">500 Pcs</td>
+                                <td class="text-end text-danger fw-bold fs-6">1,500 Pcs</td>
+                                <td class="text-center"><span class="badge bg-danger">เกินกำหนดรับคืน (Overdue)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Stock Component -->
+        <div id="tab-stock-component" class="tab-pane-content">
+            <div class="card card-custom p-4 mb-4">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-primary border-4">
+                            <span class="text-muted small">📦 รายการชิ้นส่วนทั้งหมด (Total Items)</span>
+                            <h3 class="text-white fw-bold m-0 mt-1">24 <small class="fs-6 text-muted">รายการ</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-danger border-4">
+                            <span class="text-muted small">⚠️ ชิ้นส่วนระดับวิกฤต/ต้องเติมด่วน (Low Stock Alert)</span>
+                            <h3 class="text-danger fw-bold m-0 mt-1">2 <small class="fs-6 text-muted">รายการ</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-success border-4">
+                            <span class="text-muted small">📊 ปริมาณชิ้นส่วนคงเหลือรวมทั้งหมด</span>
+                            <h3 class="text-success fw-bold m-0 mt-1">18,450 <small class="fs-6 text-muted">ชิ้น</small></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-primary fw-bold m-0">📦 คลังชิ้นส่วนรอประกอบ (Component Inventory Control)</h5>
+                        <p class="text-muted small m-0 mt-1">ตรวจสอบตำแหน่งและยอดคงเหลือของชิ้นส่วนย่อยก่อนป้อนเข้าไลน์ประกอบ</p>
+                    </div>
+                    <button class="btn btn-sm btn-primary fw-bold">+ เพิ่มรายการ Component</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-primary">
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>ตำแหน่งจัดเก็บ (Location/Rack)</th>
+                                <th class="text-end">Min / Safety Stock</th>
+                                <th class="text-end">ยอดคงเหลือจริง (On-Hand)</th>
+                                <th class="text-center">สถานะสต็อก</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-info">17535-0L060-SUB1</td>
+                                <td>CAP FUEL FILLER BRACKET</td>
+                                <td><span class="badge bg-secondary">Rack A-01</span></td>
+                                <td class="text-end">500 Pcs</td>
+                                <td class="text-end text-success fw-bold">1,200 Pcs</td>
+                                <td class="text-center"><span class="badge bg-success">ปกติ (OK)</span></td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">ปรับยอด</button></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-info">53683-0A040-SUB2</td>
+                                <td>SPRING PLATED COMP</td>
+                                <td><span class="badge bg-secondary">Rack B-04</span></td>
+                                <td class="text-end">1,000 Pcs</td>
+                                <td class="text-end text-danger fw-bold">300 Pcs</td>
+                                <td class="text-center"><span class="badge bg-danger">เตือนสต็อกต่ำ (LOW STOCK)</span></td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">ปรับยอด</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. รายงานการผลิต (Active Focus) -->
+        <div id="tab-report" class="tab-pane-content">
+            
+            <!-- Summary KPI Cards -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-primary border-4">
+                            <span class="text-muted small">📋 แผนผลิตรวมวันนี้ (Total Plan)</span>
+                            <h3 class="text-white fw-bold m-0 mt-1">1,500 <small class="fs-6 text-muted">Pcs</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-success border-4">
+                            <span class="text-muted small">✅ ยอดผลิตจริงรวม (Total Actual)</span>
+                            <h3 class="text-success fw-bold m-0 mt-1">1,200 <small class="fs-6 text-muted">Pcs</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-info border-4">
+                            <span class="text-muted small">📊 ประสิทธิภาพตามแผน (% Achievement)</span>
+                            <h3 class="text-info fw-bold m-0 mt-1">80.0%</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-danger border-4">
+                            <span class="text-muted small">⚠️ ยอดของเสียรวมวันนี้ (Total NG)</span>
+                            <h3 class="text-danger fw-bold m-0 mt-1">12 <small class="fs-6 text-muted">Pcs</small></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Production Report Table -->
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="text-success fw-bold m-0">📝 รายงานผลการผลิตประจำวัน (Daily Production Report Log)</h5>
+                        <p class="text-muted small m-0 mt-1">บันทึกและตรวจสอบยอดผลิตรายชิฟต์และรายชั่วโมงของไลน์ประกอบ</p>
+                    </div>
+                    <button class="btn btn-sm btn-success fw-bold">+ บันทึกผลการผลิต</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-success">
+                                <th>กะ (Shift)</th>
+                                <th>ช่วงเวลา</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th class="text-end">แผน (Plan)</th>
+                                <th class="text-end">ยอดจริง (Actual)</th>
+                                <th class="text-end text-success">ยอดดี (OK)</th>
+                                <th class="text-end text-danger">ของเสีย (NG)</th>
+                                <th class="text-center">FTY %</th>
+                                <th>ผู้บันทึก</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge bg-danger">Shift A</span></td>
+                                <td>08:00 - 09:00</td>
+                                <td class="fw-bold text-info">17535-0L060</td>
+                                <td>CAP COMP FUEL FILLER</td>
+                                <td class="text-end">100 Pcs</td>
+                                <td class="text-end fw-bold">100 Pcs</td>
+                                <td class="text-end text-success">99 Pcs</td>
+                                <td class="text-end text-danger">1 Pcs</td>
+                                <td class="text-center text-success fw-bold">99.0%</td>
+                                <td>Somchai K.</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button></td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-danger">Shift A</span></td>
+                                <td>09:00 - 10:00</td>
+                                <td class="fw-bold text-info">17535-0L060</td>
+                                <td>CAP COMP FUEL FILLER</td>
+                                <td class="text-end">100 Pcs</td>
+                                <td class="text-end fw-bold">95 Pcs</td>
+                                <td class="text-end text-success">93 Pcs</td>
+                                <td class="text-end text-danger">2 Pcs</td>
+                                <td class="text-center text-success fw-bold">97.8%</td>
+                                <td>Somchai K.</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">แก้ไข</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 7. Stock F/G -->
+        <div id="tab-stock-fg" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-info mb-3">🏭 Stock F/G (คลังสินค้าสำเร็จรูป)</h5>
+                <p class="text-muted">ยอดคงเหลือสินค้าสำเร็จรูปพร้อมจัดส่ง</p>
+            </div>
+        </div>
+
+        <!-- 8. Delivery -->
+        <div id="tab-delivery" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-warning mb-3">🚛 Delivery (ระบบการจัดส่งสินค้า Thai Honda)</h5>
+                <p class="text-muted">ตารางและแผนการจัดส่งประจำวัน</p>
+            </div>
+        </div>
+
+        <!-- 9. PM Machine /Jig -->
+        <div id="tab-pm" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-danger mb-3">🛠️ PM Machine / Jig (การบำรุงรักษาเครื่องจักรและ Jig)</h5>
+                <p class="text-muted">ตารางตรวจเช็ก Preventive Maintenance</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Realtime Clock
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleString('th-TH');
+        }, 1000);
+
+        // Robust Tab Switching System
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane-content');
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+
+                    this.classList.add('active');
+                    const targetPane = document.getElementById(targetId);
+                    if(targetPane) {
+                        targetPane.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Hourly Production Chart
+        const ctxHourly = document.getElementById('hourlyChart').getContext('2d');
+        new Chart(ctxHourly, {
+            type: 'bar',
+            data: {
+                labels: ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'],
+                datasets: [
+                    { label: 'เป้าหมาย (Plan)', data: [0,0,0,0,0,0,0,0], backgroundColor: '#374151' },
+                    { label: 'ผลิตได้จริง (Actual)', data: [0,0,0,0,0,0,0,0], backgroundColor: '#dc2626' }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: '#e2e8f0' } } },
+                scales: {
+                    x: { ticks: { color: '#9ca3af' } },
+                    y: { ticks: { color: '#9ca3af' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
