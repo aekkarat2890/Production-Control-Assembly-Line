@@ -202,40 +202,9 @@
 
         <!-- 2. Capacity -->
         <div id="tab-capacity" class="tab-pane-content">
-            <div class="card card-custom p-4 mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <h5 class="text-primary fw-bold m-0">1️⃣ Assembly Line Capacity (กำลังการผลิตงานประกอบ)</h5>
-                        <p class="text-muted small m-0 mt-1">ขีดความสามารถและรอบเวลาการประกอบชิ้นส่วนหลักส่ง Thai Honda</p>
-                    </div>
-                    <button class="btn btn-sm btn-danger fw-bold">+ เพิ่มข้อมูล Assembly</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover table-striped small align-middle">
-                        <thead>
-                            <tr class="text-warning">
-                                <th>Line</th>
-                                <th>Part No.</th>
-                                <th>Part Name</th>
-                                <th>Cycle Time (sec)</th>
-                                <th>Target (Pcs/Hr)</th>
-                                <th>Max Capacity / Day</th>
-                                <th class="text-center">จัดการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="badge bg-secondary">Line C1</span></td>
-                                <td class="fw-bold text-info">17535-0L060</td>
-                                <td>CAP COMP FUEL FILLER</td>
-                                <td>45.0</td>
-                                <td>80 Pcs</td>
-                                <td>1,600 Pcs</td>
-                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">จัดการ</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="card card-custom p-4">
+                <h5 class="text-primary fw-bold mb-3">1️⃣ Assembly Line Capacity (กำลังการผลิตงานประกอบ)</h5>
+                <p class="text-muted">ขีดความสามารถและรอบเวลาการประกอบชิ้นส่วนหลัก</p>
             </div>
         </div>
 
@@ -279,32 +248,40 @@
             </div>
         </div>
 
-        <!-- 8. Delivery (ระบบการจัดส่งสินค้า Thai Honda) -->
+        <!-- 8. Delivery -->
         <div id="tab-delivery" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h5 class="text-warning mb-3">🚛 Delivery (ระบบการจัดส่งสินค้า Thai Honda)</h5>
+                <p class="text-muted">ตารางและแผนการจัดส่งประจำวันตามรอบ JIT</p>
+            </div>
+        </div>
+
+        <!-- 9. PM Machine / Jig (ระบบการบำรุงรักษาเครื่องจักรและอุปกรณ์ Jig) -->
+        <div id="tab-pm" class="tab-pane-content">
             <div class="card card-custom p-4 mb-4">
                 <div class="row g-3">
                     <div class="col-md-3">
-                        <div class="p-3 border border-secondary rounded bg-dark border-start border-primary border-4">
-                            <span class="text-muted small">📋 แผนจัดส่งรวมวันนี้ (Total Plan)</span>
-                            <h3 class="text-white fw-bold m-0 mt-1">3,000 <small class="fs-6 text-muted">Pcs</small></h3>
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-danger border-4">
+                            <span class="text-muted small">🛠️ เครื่องจักร/Jig ทั้งหมด (Total Items)</span>
+                            <h3 class="text-white fw-bold m-0 mt-1">12 <small class="fs-6 text-muted">รายการ</small></h3>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="p-3 border border-secondary rounded bg-dark border-start border-success border-4">
-                            <span class="text-muted small">✅ จัดส่งสำเร็จแล้ว (Completed)</span>
-                            <h3 class="text-success fw-bold m-0 mt-1">1,500 <small class="fs-6 text-muted">Pcs</small></h3>
+                            <span class="text-muted small">✅ สภาพพร้อมใช้งาน (Normal)</span>
+                            <h3 class="text-success fw-bold m-0 mt-1">11 <small class="fs-6 text-muted">รายการ</small></h3>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="p-3 border border-secondary rounded bg-dark border-start border-warning border-4">
-                            <span class="text-muted small">🚚 กำลังขนส่ง (In-Transit)</span>
-                            <h3 class="text-warning fw-bold m-0 mt-1">1,500 <small class="fs-6 text-muted">Pcs</small></h3>
+                            <span class="text-muted small">⚠️ ครบกำหนด PM สัปดาห์นี้ (Due Soon)</span>
+                            <h3 class="text-warning fw-bold m-0 mt-1">1 <small class="fs-6 text-muted">รายการ</small></h3>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="p-3 border border-secondary rounded bg-dark border-start border-info border-4">
-                            <span class="text-muted small">⏱️ อัตราส่งตรงเวลา (OTD Rate)</span>
-                            <h3 class="text-info fw-bold m-0 mt-1">100.0%</h3>
+                        <div class="p-3 border border-secondary rounded bg-dark border-start border-danger border-4">
+                            <span class="text-muted small">🛑 แจ้งซ่อมด่วน/Breakdown</span>
+                            <h3 class="text-danger fw-bold m-0 mt-1">0 <small class="fs-6 text-muted">รายการ</small></h3>
                         </div>
                     </div>
                 </div>
@@ -313,63 +290,49 @@
             <div class="card card-custom p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
-                        <h5 class="text-warning fw-bold m-0">🚛 ตารางแผนและสถานะการจัดส่งประจำวัน (Daily Delivery Schedule)</h5>
-                        <p class="text-muted small m-0 mt-1">ติดตามรอบการส่งมอบชิ้นส่วนให้ Thai Honda ตามตารางเวลา (JIT / Milk Run)</p>
+                        <h5 class="text-danger fw-bold m-0">🛠️ ตารางแผนและประวัติการบำรุงรักษา (PM Schedule & Maintenance Log)</h5>
+                        <p class="text-muted small m-0 mt-1">ควบคุมรอบการตรวจสอบและบำรุงรักษาเครื่องจักรในสายการผลิตและชุดประกอบ Jig</p>
                     </div>
-                    <button class="btn btn-sm btn-warning fw-bold text-dark">+ เพิ่มรอบจัดส่ง</button>
+                    <button class="btn btn-sm btn-danger fw-bold">+ เพิ่มแผน PM / แจ้งซ่อม</button>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
-                            <tr class="text-warning">
-                                <th>รอบส่ง (Trip)</th>
-                                <th>เวลาออกเดินทาง</th>
-                                <th>Customer / Plant</th>
-                                <th>Part No.</th>
-                                <th>Part Name</th>
-                                <th class="text-end">แผนจัดส่ง</th>
-                                <th class="text-end">ส่งจริง</th>
-                                <th>ทะเบียนรถ / พนักงานขับรถ</th>
+                            <tr class="text-danger">
+                                <th>Machine / Jig ID</th>
+                                <th>ชื่อเครื่องจักร / อุปกรณ์ Jig</th>
+                                <th>ประเภท PM</th>
+                                <th>รอบการตรวจเช็ก</th>
+                                <th>กำหนด PM ถัดไป</th>
+                                <th>ผู้รับผิดชอบ</th>
                                 <th class="text-center">สถานะ</th>
                                 <th class="text-center">จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><span class="badge bg-secondary">Trip 01</span></td>
-                                <td>10:00 น.</td>
-                                <td class="fw-bold text-white">Thai Honda (Plant 1)</td>
-                                <td class="fw-bold text-info">17535-0L060</td>
-                                <td>CAP COMP FUEL FILLER</td>
-                                <td class="text-end">1,500 Pcs</td>
-                                <td class="text-end fw-bold">1,500 Pcs</td>
-                                <td>8ทะเบียน-1234 (สมชาย)</td>
-                                <td class="text-center"><span class="badge bg-success">จัดส่งสำเร็จ (Delivered)</span></td>
-                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">พิมพ์ใบส่งของ</button></td>
+                                <td class="fw-bold text-info">MC-PRESS-01</td>
+                                <td>Hydraulic Press 50 Tons</td>
+                                <td><span class="badge bg-secondary">Monthly PM</span></td>
+                                <td>ทุก 30 วัน</td>
+                                <td>28/10/2026</td>
+                                <td>ช่างประสิทธิ์ (MT)</td>
+                                <td class="text-center"><span class="badge bg-success">ปกติ (Normal)</span></td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">บันทึก PM</button></td>
                             </tr>
                             <tr>
-                                <td><span class="badge bg-secondary">Trip 02</span></td>
-                                <td>14:30 น.</td>
-                                <td class="fw-bold text-white">Thai Honda (Plant 2)</td>
-                                <td class="fw-bold text-info">64181-0D030</td>
-                                <td>PLATE SUB-ASSY FUEL</td>
-                                <td class="text-end">1,500 Pcs</td>
-                                <td class="text-end fw-bold">1,500 Pcs</td>
-                                <td>8ทะเบียน-5678 (วิชัย)</td>
-                                <td class="text-center"><span class="badge bg-warning text-dark">กำลังขนส่ง (In-Transit)</span></td>
-                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">พิมพ์ใบส่งของ</button></td>
+                                <td class="fw-bold text-info">JIG-ASB-05</td>
+                                <td>Assembly Jig Fuel Filler Cap</td>
+                                <td><span class="badge bg-warning text-dark">Weekly PM</span></td>
+                                <td>ทุก 7 วัน</td>
+                                <td>25/10/2026</td>
+                                <td>ช่างสมศักดิ์ (MT)</td>
+                                <td class="text-center"><span class="badge bg-warning text-dark">ใกล้ครบกำหนด (Due Soon)</span></td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">บันทึก PM</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-
-        <!-- 9. PM Machine /Jig -->
-        <div id="tab-pm" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h5 class="text-danger mb-3">🛠️ PM Machine / Jig (การบำรุงรักษาเครื่องจักรและ Jig)</h5>
-                <p class="text-muted">ตารางตรวจเช็ก Preventive Maintenance</p>
             </div>
         </div>
 
