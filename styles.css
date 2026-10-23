@@ -1,0 +1,97 @@
+body { 
+    background-color: #080c14; 
+    color: #f1f5f9; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+.navbar-custom { 
+    background-color: #0f172a; 
+    border-bottom: 2px solid #dc2626; 
+}
+
+.card-custom { 
+    background-color: #1e293b; 
+    border: 1px solid #334155; 
+    border-radius: 8px; 
+}
+
+/* Bright High-Contrast Text Fix */
+.text-muted, small.text-muted { color: #cbd5e1 !important; font-weight: 500; }
+.card-title-sub { color: #93c5fd !important; font-weight: 600; font-size: 0.9rem; }
+.card-info-text { color: #e2e8f0 !important; }
+
+/* Modern 3D Embossed Button Nav Grid (10 Columns) */
+.nav-main-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+    padding: 0;
+    list-style: none;
+}
+
+@media (max-width: 1400px) {
+    .nav-main-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .nav-main-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* 3D Raised Button Styling */
+.nav-main-grid .nav-btn {
+    width: 100%;
+    height: 64px;
+    background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+    color: #f8fafc;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    border: 1px solid #475569;
+    border-top: 1px solid #64748b;
+    border-radius: 10px;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.9);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    cursor: pointer;
+    padding: 4px 6px;
+}
+
+.nav-main-grid .nav-btn:hover {
+    background: linear-gradient(180deg, #475569 0%, #334155 100%);
+    color: #ffffff;
+    border-color: #94a3b8;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 7px 14px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.nav-main-grid .nav-btn.active {
+    background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #f87171 !important;
+    border-top: 1px solid #fca5a5 !important;
+    box-shadow: 
+        0 0 18px rgba(239, 68, 68, 0.7),
+        0 5px 10px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -3px 0 rgba(127, 29, 29, 0.8) !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
+    font-weight: 900;
+}
+
+.table-dark-custom { background-color: #0f172a; color: #f1f5f9; }
+.badge-honda { background-color: #dc2626; color: #ffffff; font-size: 12px; font-weight: bold; }
+
+.tab-pane-content { display: none; }
+.tab-pane-content.active { display: block !important; }
