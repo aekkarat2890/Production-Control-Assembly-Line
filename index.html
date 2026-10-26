@@ -68,7 +68,6 @@
         .tab-pane-content { display: none !important; }
         .tab-pane-content.active { display: block !important; }
 
-        /* ปรับขนาดตัวหนังสือตารางแผนงานให้ใหญ่และอ่านง่ายขึ้น */
         .plan-table th {
             font-size: 13px !important;
             font-weight: bold !important;
@@ -82,7 +81,25 @@
             text-align: center;
             vertical-align: middle;
             white-space: nowrap;
-            padding: 8px 6px !important;
+            padding: 6px 4px !important;
+        }
+        /* ช่องใส่ข้อมูลให้แก้ไขได้ (Editable Input) */
+        .plan-input {
+            width: 45px;
+            background-color: #0f172a;
+            color: #38bdf8;
+            border: 1px solid #475569;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 0;
+        }
+        .plan-input:focus {
+            background-color: #1e293b;
+            color: #ffffff;
+            border-color: #ef4444;
+            outline: none;
         }
         .sun-col { background-color: #334155 !important; color: #cbd5e1; }
         .row-label { text-align: left !important; font-weight: 700 !important; padding-left: 10px !important; font-size: 13px !important; }
@@ -207,7 +224,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
                         <h4 class="text-success fw-bold m-0">📄 แผ่นที่ 1: MASTER PLAN ทั้งเดือน (แผนส่งมอบ & แผนผลิต)</h4>
-                        <small class="text-light fs-6">เมื่อคีย์จัดส่งจะ Update สถานะจัดส่ง | เมื่อคีย์ผลิตจะตัดยอด B/L ใน Master Plan</small>
+                        <small class="text-light fs-6">สามารถแก้ไขตัวเลขในช่องตารางได้โดยตรง | เพิ่มช่อง Stock คงเหลือต้นเดือน</small>
                     </div>
                     <span class="badge bg-success px-3 py-2 fs-6">MASTER PLAN FORM</span>
                 </div>
@@ -218,6 +235,7 @@
                                 <th rowspan="2">Item</th>
                                 <th rowspan="2">Part No. / Name</th>
                                 <th rowspan="2">จำนวนส่ง/<br>เดือน</th>
+                                <th rowspan="2">Stock<br>ต้นเดือน</th>
                                 <th rowspan="2">LOCATION</th>
                                 <th rowspan="2">Status/Date</th>
                                 <th colspan="31" class="text-white">NOV '26 (Days 1 - 31)</th>
@@ -232,18 +250,19 @@
                                 <td rowspan="4" class="fw-bold">1</td>
                                 <td rowspan="4" class="text-start fw-bold text-info">17620-Z1T-8010<br><span class="text-light">CAP COMP FUEL FILLER</span></td>
                                 <td rowspan="4" class="text-warning fw-bold">9,723</td>
+                                <td rowspan="4" class="text-success fw-bold">2,500</td>
                                 <td rowspan="4" class="text-start">05504 / 05120</td>
                                 <td class="row-label text-success">แผนส่ง</td>
-                                <td>-</td><td>807</td><td>410</td><td>316</td><td>652</td><td>280</td><td class="sun-col">52</td><td>-</td><td>181</td><td>171</td><td>162</td><td>139</td><td>415</td><td>-</td><td class="sun-col">-</td><td>955</td><td>499</td><td>389</td><td>226</td><td>187</td><td>-</td><td class="sun-col">-</td><td>721</td><td>409</td><td>564</td><td>554</td><td>748</td><td>537</td><td class="sun-col">-</td><td>-</td><td>-</td>
+                                <td>-</td><td><input type="text" class="plan-input" value="807"></td><td><input type="text" class="plan-input" value="410"></td><td><input type="text" class="plan-input" value="316"></td><td><input type="text" class="plan-input" value="652"></td><td><input type="text" class="plan-input" value="280"></td><td class="sun-col"><input type="text" class="plan-input" value="52"></td><td>-</td><td><input type="text" class="plan-input" value="181"></td><td><input type="text" class="plan-input" value="171"></td><td><input type="text" class="plan-input" value="162"></td><td><input type="text" class="plan-input" value="139"></td><td><input type="text" class="plan-input" value="415"></td><td>-</td><td class="sun-col">-</td><td><input type="text" class="plan-input" value="955"></td><td><input type="text" class="plan-input" value="499"></td><td><input type="text" class="plan-input" value="389"></td><td><input type="text" class="plan-input" value="226"></td><td><input type="text" class="plan-input" value="187"></td><td>-</td><td class="sun-col">-</td><td><input type="text" class="plan-input" value="721"></td><td><input type="text" class="plan-input" value="409"></td><td><input type="text" class="plan-input" value="564"></td><td><input type="text" class="plan-input" value="554"></td><td><input type="text" class="plan-input" value="748"></td><td><input type="text" class="plan-input" value="537"></td><td class="sun-col">-</td><td>-</td><td>-</td>
                                 <td rowspan="4" class="text-center text-warning">N+1: 7,242<br>N+2: 7,325<br>N+3: 9,722</td>
                             </tr>
                             <tr>
                                 <td class="row-label text-info">ส่งจริง (Act)</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
+                                <td>-</td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td class="sun-col"><input type="text" class="plan-input" value="0"></td><td>-</td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td>-</td><td class="sun-col">-</td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td>-</td><td class="sun-col">-</td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td class="sun-col">-</td><td>-</td><td>-</td>
                             </tr>
                             <tr>
                                 <td class="row-label text-primary">ผลิตจริง (Act)</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
+                                <td>-</td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td class="sun-col"><input type="text" class="plan-input" value="0"></td><td>-</td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td>-</td><td class="sun-col">-</td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td>-</td><td class="sun-col">-</td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td><input type="text" class="plan-input" value="0"></td><td class="sun-col">-</td><td>-</td><td>-</td>
                             </tr>
                             <tr>
                                 <td class="row-label text-danger">B/L คงเหลือ</td>
@@ -254,12 +273,12 @@
                 </div>
             </div>
 
-            <!-- 📄 แผ่นที่ 2: MATERIAL PLAN ทั้งเดือน (ชิ้นส่วน Component 3 รายการ) -->
+            <!-- 📄 แผ่นที่ 2: MATERIAL PLAN ทั้งเดือน (3 รายการ Component) -->
             <div class="card card-custom p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
                         <h4 class="text-info fw-bold m-0">📄 แผ่นที่ 2: MATERIAL PLAN ทั้งเดือน (แผนการรับ Component 3 รายการ)</h4>
-                        <small class="text-light fs-6">เฉพาะชิ้นส่วนที่ไม่ต้องส่งชุบ (Separator Sup.B, Packing, Rivet)</small>
+                        <small class="text-light fs-6">เพิ่มช่อง Stock ต้นเดือน และช่องแก้ไขข้อมูลแผน/รับจริงได้ทันที</small>
                     </div>
                     <span class="badge bg-info text-dark px-3 py-2 fs-6">MATERIAL PLAN FORM</span>
                 </div>
@@ -270,10 +289,10 @@
                                 <th rowspan="2">Item</th>
                                 <th rowspan="2">SIZE/P.NO</th>
                                 <th rowspan="2">SPEC/P.N (Name)</th>
+                                <th rowspan="2">Stock<br>ต้นเดือน</th>
                                 <th rowspan="2">Status</th>
                                 <th colspan="31" class="text-white">NOV '26 (Days 1 - 31)</th>
                                 <th rowspan="2">Pcs/Unit</th>
-                                <th rowspan="2">Stock</th>
                                 <th rowspan="2">ORDER</th>
                                 <th rowspan="2">FORECAST<br>N+1 / N+2 / N+3</th>
                             </tr>
@@ -287,9 +306,10 @@
                                 <td rowspan="3" class="fw-bold">1</td>
                                 <td rowspan="3" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-22</td>
                                 <td rowspan="3" class="text-start">SEPARATOR, FUEL (Sup.B)<br><small class="text-light">(Technic)</small></td>
+                                <td rowspan="3" class="text-success fw-bold">5,000</td>
                                 <td class="row-label text-info">Pl (แผน)</td>
                                 <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="3" class="fw-bold">1</td><td rowspan="3" class="text-success fw-bold">5,000</td><td rowspan="3">0</td><td rowspan="3" class="text-center text-light">0/0/0</td>
+                                <td rowspan="3" class="fw-bold">1</td><td rowspan="3">0</td><td rowspan="3" class="text-center text-light">0/0/0</td>
                             </tr>
                             <tr><td class="row-label text-success">Act (รับจริง)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label text-warning">B/L คงเหลือ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
@@ -299,9 +319,10 @@
                                 <td rowspan="3" class="fw-bold">2</td>
                                 <td rowspan="3" class="text-start fw-bold text-info">J0701-17631-Z1T-8002</td>
                                 <td rowspan="3" class="text-start">PACKING, FUEL FILLER<br><small class="text-light">(Technic)</small></td>
+                                <td rowspan="3" class="text-success fw-bold">1,800</td>
                                 <td class="row-label text-info">Pl (แผน)</td>
                                 <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="3" class="fw-bold">1</td><td rowspan="3" class="text-success fw-bold">1,800</td><td rowspan="3">0</td><td rowspan="3" class="text-center text-light">0/0/0</td>
+                                <td rowspan="3" class="fw-bold">1</td><td rowspan="3">0</td><td rowspan="3" class="text-center text-light">0/0/0</td>
                             </tr>
                             <tr><td class="row-label text-success">Act (รับจริง)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label text-warning">B/L คงเหลือ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
@@ -311,9 +332,10 @@
                                 <td rowspan="3" class="fw-bold">3</td>
                                 <td rowspan="3" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-24</td>
                                 <td rowspan="3" class="text-start">RIVET 3x4<br><small class="text-light">(YKK)</small></td>
+                                <td rowspan="3" class="text-success fw-bold">12,000</td>
                                 <td class="row-label text-info">Pl (แผน)</td>
                                 <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="3" class="fw-bold text-warning">2</td><td rowspan="3" class="text-success fw-bold">12,000</td><td rowspan="3">0</td><td rowspan="3" class="text-center text-light">0/0/0</td>
+                                <td rowspan="3" class="fw-bold text-warning">2</td><td rowspan="3">0</td><td rowspan="3" class="text-center text-light">0/0/0</td>
                             </tr>
                             <tr><td class="row-label text-success">Act (รับจริง)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label text-warning">B/L คงเหลือ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
@@ -322,12 +344,12 @@
                 </div>
             </div>
 
-            <!-- 📄 แผ่นที่ 3: PLATING PLAN ทั้งเดือน (ชิ้นส่วนงานชุบ 4 รายการ) -->
+            <!-- 📄 แผ่นที่ 3: PLATING PLAN ทั้งเดือน (4 รายการชุบ) -->
             <div class="card card-custom p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
                         <h4 class="text-warning fw-bold m-0">📄 แผ่นที่ 3: PLATING PLAN ทั้งเดือน (แผนรับ - ส่งชุบ 4 รายการ)</h4>
-                        <small class="text-light fs-6">ติดตามชิ้นส่วนงานชุบ: Cap Outer, Cap Inner, Spring Plate, Separator Sup</small>
+                        <small class="text-light fs-6">เพิ่มช่อง Stock ต้นเดือนสำหรับคุมยอดชุบ และแก้ไขข้อมูลได้ทุกช่อง</small>
                     </div>
                     <span class="badge bg-warning text-dark px-3 py-2 fs-6">PLATING PLAN FORM</span>
                 </div>
@@ -338,9 +360,9 @@
                                 <th rowspan="2">Item</th>
                                 <th rowspan="2">Part No.</th>
                                 <th rowspan="2">Part Name / โรงชุบ</th>
+                                <th rowspan="2">Stock<br>ต้นเดือน</th>
                                 <th rowspan="2">Status</th>
                                 <th colspan="31" class="text-white">NOV '26 (Days 1 - 31)</th>
-                                <th rowspan="2">Stock</th>
                                 <th rowspan="2">QT'Y / Box</th>
                                 <th rowspan="2">FORECAST<br>N+1 / N+2 / N+3</th>
                             </tr>
@@ -354,9 +376,10 @@
                                 <td rowspan="5" class="fw-bold">1</td>
                                 <td rowspan="5" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-20</td>
                                 <td rowspan="5" class="text-start">CAP, OUTER<br><small class="text-warning">ชุบ: MFCr2-C (TEP, BC)</small></td>
+                                <td rowspan="5" class="text-warning fw-bold">3,500</td>
                                 <td class="row-label text-warning">แผนส่ง</td>
                                 <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="5" class="text-warning fw-bold">3,500</td><td rowspan="5">50</td><td rowspan="5" class="text-center text-light">0/0/0</td>
+                                <td rowspan="5">50</td><td rowspan="5" class="text-center text-light">0/0/0</td>
                             </tr>
                             <tr><td class="row-label text-warning">ส่งจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label text-info">แผนรับ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
@@ -368,9 +391,10 @@
                                 <td rowspan="5" class="fw-bold">2</td>
                                 <td rowspan="5" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-21</td>
                                 <td rowspan="5" class="text-start">CAP, INNER<br><small class="text-warning">ชุบ: MFZn2-B (TPI, APK)</small></td>
+                                <td rowspan="5" class="text-warning fw-bold">4,200</td>
                                 <td class="row-label text-warning">แผนส่ง</td>
                                 <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="5" class="text-warning fw-bold">4,200</td><td rowspan="5">50</td><td rowspan="5" class="text-center text-light">0/0/0</td>
+                                <td rowspan="5">50</td><td rowspan="5" class="text-center text-light">0/0/0</td>
                             </tr>
                             <tr><td class="row-label text-warning">ส่งจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label text-info">แผนรับ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
@@ -382,9 +406,10 @@
                                 <td rowspan="5" class="fw-bold">3</td>
                                 <td rowspan="5" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-23</td>
                                 <td rowspan="5" class="text-start">SPRING, PLATE<br><small class="text-warning">ชุบแข็ง/รมดำ (TI, ADT)</small></td>
+                                <td rowspan="5" class="text-warning fw-bold">6,100</td>
                                 <td class="row-label text-warning">แผนส่ง</td>
                                 <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="5" class="text-warning fw-bold">6,100</td><td rowspan="5">100</td><td rowspan="5" class="text-center text-light">0/0/0</td>
+                                <td rowspan="5">100</td><td rowspan="5" class="text-center text-light">0/0/0</td>
                             </tr>
                             <tr><td class="row-label text-warning">ส่งจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label text-info">แผนรับ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
@@ -396,9 +421,10 @@
                                 <td rowspan="5" class="fw-bold">4</td>
                                 <td rowspan="5" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-25</td>
                                 <td rowspan="5" class="text-start">SEPARATOR, FUEL SUP<br><small class="text-warning">ชุบ: MFZn2-B (TPI, APK)</small></td>
+                                <td rowspan="5" class="text-warning fw-bold">3,800</td>
                                 <td class="row-label text-warning">แผนส่ง</td>
                                 <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="5" class="text-warning fw-bold">3,800</td><td rowspan="5">50</td><td rowspan="5" class="text-center text-light">0/0/0</td>
+                                <td rowspan="5">50</td><td rowspan="5" class="text-center text-light">0/0/0</td>
                             </tr>
                             <tr><td class="row-label text-warning">ส่งจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label text-info">แผนรับ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
