@@ -529,7 +529,7 @@
             </div>
         </div>
 
-        <!-- 7. รายงานการผลิต (Tab Report) -->
+        <!-- 7. รายงานการผลิต (Tab Report) - อัปเดตเพิ่ม 2 ส่วนใหม่ -->
         <div id="tab-report" class="tab-pane-content">
             <!-- 1. รายงานการผลิตงานประกอบเทียบแผน -->
             <div class="card card-custom p-4 mb-4">
@@ -568,6 +568,48 @@
                         </thead>
                         <tbody>
                             <tr><td colspan="6" class="text-center text-muted">ยังไม่มีข้อมูล - กรุณากดปุ่มบันทึกเตรียมชิ้นส่วน</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. [NEW] ใบรายงานพนักงานประจำไลน์ (Operator & Labor Production Report) -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold m-0" style="color: #38bdf8;">3️⃣ ใบรายงานพนักงานประจำไลน์ (Operator & Labor Report)</h5>
+                    <button class="btn btn-sm fw-bold text-dark" style="background-color: #38bdf8;">+ บันทึกรายชื่อพนักงาน/ผลงาน</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr style="color: #38bdf8;">
+                                <th>กะ (Shift)</th><th>รหัสพนักงาน</th><th>ชื่อ-นามสกุล พนักงาน</th><th>ตำแหน่ง / Station</th>
+                                <th class="text-end">ยอดผลิต OK (Pcs)</th><th class="text-end">ยอดเสีย NG (Pcs)</th><th class="text-center">ชั่วโมงทำงาน (Man-hour)</th><th class="text-center">สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="8" class="text-center text-muted">ยังไม่มีข้อมูลพนักงานประจำไลน์ - กรุณากดปุ่มบันทึกรายชื่อ</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 4. [NEW] Log การนำชิ้นส่วนเข้ามาใช้ (Component Consumption / Material Issue Log) -->
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold m-0" style="color: #c084fc;">4️⃣ Log การนำชิ้นส่วนเข้ามาใช้ในไลน์ (Material Issue & Consumption Log)</h5>
+                    <button class="btn btn-sm fw-bold text-white" style="background-color: #c084fc;">+ บันทึกเบิกจ่ายชิ้นส่วนเข้าไลน์</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr style="color: #c084fc;">
+                                <th>วัน-เวลา ที่เบิก</th><th>Part No. / Component ID</th><th>ชื่อชิ้นส่วน (Part Name)</th>
+                                <th>Lot No. วัตถุดิบ</th><th class="text-end">จำนวนที่เบิกใช้ (Pcs)</th><th>Location ปลายทาง</th><th>ผู้เบิกจ่าย (Issuer)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="7" class="text-center text-muted">ยังไม่มีประวัติการเบิกจ่ายชิ้นส่วนเข้าไลน์ผลิต</td></tr>
                         </tbody>
                     </table>
                 </div>
