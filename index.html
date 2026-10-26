@@ -780,81 +780,93 @@
             </div>
         </div>
 
-        <!-- 10. PM Machine / Jig -->
+      <!-- 10. PM Machine / Jig (แยกเครื่องจักร และ Jig ชัดเจน) -->
         <div id="tab-pm" class="tab-pane-content">
-            <div class="card card-custom p-4">
+            
+            <!-- 1. การบำรุงรักษาเครื่องจักร (Machine PM) -->
+            <div class="card card-custom p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="text-danger fw-bold m-0">🔧 การบำรุงรักษาเครื่องจักรและ Jig (Preventive Maintenance & Calibration)</h5>
-                    <button class="btn btn-sm btn-danger fw-bold">+ บันทึกการ PM / Calibration</button>
+                    <h5 class="text-danger fw-bold m-0">🛠️ 1️⃣ การบำรุงรักษาเครื่องจักร (Machine PM & Plan)</h5>
+                    <button class="btn btn-sm btn-danger fw-bold">+ บันทึก PM เครื่องจักร</button>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
                             <tr class="text-danger">
-                                <th>Equipment / Jig ID</th><th>รายการเครื่องมือ / Jig</th><th>รอบ PM ถัดไป</th><th>อายุการใช้งาน (Shot / Stroke)</th>
-                                <th>สถานะ Calibration</th><th>ผู้ดูแล</th><th class="text-center">สถานะเครื่องจักร</th>
+                                <th>Machine ID</th>
+                                <th>ชื่อเครื่องจักร / Station</th>
+                                <th>รอบ PM ถัดไป</th>
+                                <th>ชั่วโมงทำงานสะสม / Strokes</th>
+                                <th class="text-center">สถานะเครื่องจักร</th>
+                                <th>ผู้รับผิดชอบ (ช่างเทคนิค)</th>
+                                <th class="text-center">จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="fw-bold text-info">JIG-ASSY-01</td><td>Jig ประกอบ Cap Fuel Filler</td><td>01/11/2026</td><td>45,200 / 100,000 Shots</td>
-                                <td><span class="badge bg-success">Valid (Calibrated)</span></td><td>ช่างวิชัย</td><td class="text-center"><span class="badge bg-success">พร้อมใช้งาน</span></td>
+                                <td class="fw-bold text-info">MC-PRESS-02</td>
+                                <td>Pneumatic Press Machine 5-Ton (Station 2)</td>
+                                <td class="text-warning fw-bold">28/10/2026</td>
+                                <td>120,000 / 150,000 Strokes</td>
+                                <td class="text-center"><span class="badge bg-success">พร้อมใช้งาน (Running)</span></td>
+                                <td>ช่างสมศักดิ์</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">ประวัติ PM</button></td>
                             </tr>
                             <tr>
-                                <td class="fw-bold text-info">MC-PRESS-02</td><td>Pneumatic Press Machine 5-Ton</td><td>28/10/2026</td><td>120,000 / 150,000 Strokes</td>
-                                <td><span class="badge bg-warning text-dark">ใกล้ครบกำหนด</span></td><td>ช่างสมศักดิ์</td><td class="text-center"><span class="badge bg-success">พร้อมใช้งาน</span></td>
+                                <td class="fw-bold text-info">MC-AIR-LEAK-01</td>
+                                <td>Air Leak Tester Machine (Station 4)</td>
+                                <td class="text-danger fw-bold">26/10/2026 (วันนี้)</td>
+                                <td>4,800 / 5,000 Hours</td>
+                                <td class="text-center"><span class="badge bg-warning text-dark">ถึงกำหนด PM</span></td>
+                                <td>ช่างวิชัย</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">ประวัติ PM</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            <!-- 2. การตรวจสอบและ Calibration Jig / Fixture -->
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="text-warning fw-bold m-0">📐 2️⃣ การตรวจสอบและ Calibration Jig / Fixture (Jig Maintenance & Calibration)</h5>
+                    <button class="btn btn-sm btn-warning fw-bold text-dark">+ บันทึกตรวจเช็ค Jig / Calibration</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-warning">
+                                <th>Jig / Fixture ID</th>
+                                <th>รายการ Jig / Fixture</th>
+                                <th>รอบตรวจเช็คถัดไป</th>
+                                <th>อายุการใช้งาน (Shot Count)</th>
+                                <th class="text-center">สถานะ Calibration</th>
+                                <th>ผู้ดูแล / ผู้ตรวจสอบ</th>
+                                <th class="text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-info">JIG-ASSY-01</td>
+                                <td>Jig ประกอบ Cap Fuel Filler (Station 1)</td>
+                                <td>01/11/2026</td>
+                                <td>45,200 / 100,000 Shots</td>
+                                <td class="text-center"><span class="badge bg-success">Valid (Calibrated)</span></td>
+                                <td>ช่างวิชัย</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">ประวัติ Cal</button></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-info">JIG-CHECK-02</td>
+                                <td>Checking Fixture Dimensions Part 17535</td>
+                                <td>15/11/2026</td>
+                                <td>12,400 / 50,000 Shots</td>
+                                <td class="text-center"><span class="badge bg-success">Valid (Calibrated)</span></td>
+                                <td>QC Team</td>
+                                <td class="text-center"><button class="btn btn-sm btn-outline-warning py-0 px-2">ประวัติ Cal</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
-
-    </div>
-
-    <script>
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.tab-pane-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        // Live Clock Script
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleDateString('th-TH') + ' ' + now.toLocaleTimeString('th-TH');
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Chart.js Setup for Tab 1 (Hourly Chart)
-        window.onload = function() {
-            const ctx = document.getElementById('hourlyChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'],
-                    datasets: [{
-                        label: 'ยอดผลิตจริง (Pcs)',
-                        data: [150, 180, 160, 200, 170, 190, 160, 140],
-                        backgroundColor: '#3b82f6',
-                        borderRadius: 4
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { labels: { color: '#f8fafc' } }
-                    },
-                    scales: {
-                        x: { ticks: { color: '#cbd5e1' }, grid: { color: '#334155' } },
-                        y: { ticks: { color: '#cbd5e1' }, grid: { color: '#334155' } }
-                    }
-                }
-            });
-        };
-    </script>
-</body>
-</html>
