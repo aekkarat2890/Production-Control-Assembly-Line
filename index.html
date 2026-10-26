@@ -1357,22 +1357,142 @@
             </div>
         </div>
 
-        <!-- 7. รายงานการผลิต -->
+<!-- 7. รายงานการผลิต (Tab Report) -->
         <div id="tab-report" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h5 class="text-primary fw-bold mb-3">📊 รายงานการผลิตงานประกอบเทียบแผน (Assembly Production Report vs Plan)</h5>
+            <!-- 1. รายงานการผลิตงานประกอบเทียบแผน -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="text-primary fw-bold m-0">1️⃣ รายงานการผลิตงานประกอบเทียบแผน (Assembly Production Report vs Plan)</h5>
+                    <button class="btn btn-sm btn-primary fw-bold">+ บันทึกผลผลิตรายชั่วโมง</button>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
                             <tr class="text-primary">
-                                <th>กะ</th><th>ช่วงเวลา</th><th>Part No.</th><th>Part Name</th><th class="text-warning">แผนการผลิต (Plan)</th>
-                                <th>ผลิตจริง</th><th class="text-success">OK</th><th class="text-danger">NG</th><th class="text-center">FTY %</th>
+                                <th>กะ</th>
+                                <th>ช่วงเวลา</th>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th class="text-end">แผนการผลิต (Plan)</th>
+                                <th class="text-end">ผลิตจริง (Actual)</th>
+                                <th class="text-success text-end">OK</th>
+                                <th class="text-danger text-end">NG</th>
+                                <th class="text-success text-end">FTY %</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><span class="badge bg-danger">Shift A</span></td><td>08:00 - 09:00</td><td class="fw-bold text-info">17535-0L060</td><td>CAP COMP FUEL FILLER</td>
-                                <td class="text-warning fw-bold">100 Pcs</td><td>100 Pcs</td><td class="text-success">99 Pcs</td><td class="text-danger">1 Pcs</td><td class="text-center text-success fw-bold">99.0%</td>
+                                <td><span class="badge bg-danger">Shift A</span></td>
+                                <td>08:00 - 09:00</td>
+                                <td class="fw-bold text-info">17535-0L060</td>
+                                <td>CAP COMP FUEL FILLER</td>
+                                <td class="text-end text-warning fw-bold">100 Pcs</td>
+                                <td class="text-end text-success fw-bold">100 Pcs</td>
+                                <td class="text-success text-end">99 Pcs</td>
+                                <td class="text-danger text-end">1 Pcs</td>
+                                <td class="text-success text-end fw-bold">99.0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 2. รายงานการเตรียมชิ้นส่วน (Component Preparation Report) -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="text-info fw-bold m-0">2️⃣ รายงานการเตรียมชิ้นส่วน (Component Preparation Report)</h5>
+                    <button class="btn btn-sm btn-info fw-bold text-dark">+ บันทึกเตรียมชิ้นส่วน</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-info">
+                                <th>วันที่ / กะ</th>
+                                <th>Part No. (Subpart)</th>
+                                <th>Part Name</th>
+                                <th>กระบวนการเตรียม</th>
+                                <th class="text-end">จำนวนเตรียมได้ (Pcs)</th>
+                                <th>ผู้รับผิดชอบ</th>
+                                <th class="text-center">สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23/10/2026 (Shift A)</td>
+                                <td class="fw-bold text-info">SUB-BOLT-01</td>
+                                <td>BOLT WASHER ASSY</td>
+                                <td>ตรวจสอบแรงบิด/คัดแยกเกลียว</td>
+                                <td class="text-end text-success fw-bold">1,500 Pcs</td>
+                                <td>Somchai S.</td>
+                                <td class="text-center"><span class="badge bg-success">พร้อมใช้งาน</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. Log Book การนำชิ้นส่วนมาใช้ในไลน์ผลิต -->
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="text-warning fw-bold m-0">3️⃣ Log Book การเบิก-จ่ายและนำชิ้นส่วนมาใช้ (Component Usage Log Book)</h5>
+                    <button class="btn btn-sm btn-warning fw-bold text-dark">+ บันทึกเบิกใช้ชิ้นส่วน</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-warning">
+                                <th>วัน-เวลา เบิก</th>
+                                <th>Line / Station</th>
+                                <th>Part No.</th>
+                                <th>Part Name / Lot No.</th>
+                                <th class="text-end">จำนวนเบิกใช้</th>
+                                <th>ผู้เบิก</th>
+                                <th>ผู้จ่าย (Stock)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23/10/2026 08:10</td>
+                                <td><span class="badge bg-secondary">Line C1</span></td>
+                                <td class="fw-bold text-info">53683-0A040</td>
+                                <td>BRACKET COMP PLATED (Lot: LOT-PL-001)</td>
+                                <td class="text-end text-warning fw-bold">500 Pcs</td>
+                                <td>Wichai P.</td>
+                                <td>Prasert M.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 4. ใบรายงานของพนักงาน (Operator Daily Report & Performance) -->
+            <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="text-success fw-bold m-0">4️⃣ ใบรายงานการปฏิบัติงานของพนักงาน (Operator Daily Report)</h5>
+                    <button class="btn btn-sm btn-success fw-bold">+ บันทึกรายงานพนักงาน</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped small align-middle">
+                        <thead>
+                            <tr class="text-success">
+                                <th>รหัสพนักงาน</th>
+                                <th>ชื่อ - สกุล</th>
+                                <th>ตำแหน่ง / หน้าที่</th>
+                                <th>Line / Station</th>
+                                <th class="text-end">ยอดผลิตสะสม (Pcs)</th>
+                                <th class="text-end">เวลาทำงาน (Hrs)</th>
+                                <th class="text-center">หมายเหตุ / ปัญหาหน้างาน</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-info">EMP-1024</td>
+                                <td>นายสมชาย ใจดี</td>
+                                <td>Assembly Operator</td>
+                                <td><span class="badge bg-secondary">Line C1 - Station 1</span></td>
+                                <td class="text-end text-success fw-bold">1,200 Pcs</td>
+                                <td class="text-end">8.0 Hrs</td>
+                                <td class="text-center"><span class="badge bg-success">ปกติ ไม่มีปัญหา</span></td>
                             </tr>
                         </tbody>
                     </table>
