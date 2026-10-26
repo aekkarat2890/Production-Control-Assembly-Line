@@ -201,7 +201,7 @@
             </div>
         </div>
 
-        <!-- 2. Planning (แผนการจัดส่งลูกค้านำหน้า) -->
+        <!-- 2. Planning -->
         <div id="tab-planning" class="tab-pane-content">
             <div class="card card-custom p-4 mb-4">
                 <div class="row g-3">
@@ -340,7 +340,7 @@
             </div>
         </div>
 
-        <!-- 3. Capacity (ปรับเพิ่มรายละเอียดตารางครบถ้วน 3 ส่วน) -->
+        <!-- 3. Capacity -->
         <div id="tab-capacity" class="tab-pane-content">
             <!-- 3.1 Assembly Line Capacity -->
             <div class="card card-custom p-4 mb-4">
@@ -563,54 +563,11 @@
                     <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
                             <tr class="text-info">
-                                <th>วันที่ / กะ</th><th>Part No. (Subpart)</th><th>Part Name</th><th>กระบวนการเตรียม</th>
-                                <th class="text-end">เตรียมได้ (Pcs)</th><th>ผู้รับผิดชอบ</th><th class="text-center">สถานะ</th>
+                                <th>วันที่เตรียม</th><th>Subpart / Component ID</th><th>Part Name</th><th class="text-end">ยอดเตรียม (Pcs)</th><th>ผู้เตรียม</th><th>สถานะ</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="7" class="text-center text-muted">ยังไม่มีข้อมูล - กรุณากดปุ่มบันทึกเตรียมชิ้นส่วน</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 3. Log Book การนำชิ้นส่วนมาใช้ -->
-            <div class="card card-custom p-4 mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="text-warning fw-bold m-0">3️⃣ Log Book การนำชิ้นส่วนมาใช้ (Component Usage Log Book)</h5>
-                    <button class="btn btn-sm btn-warning fw-bold text-dark">+ บันทึกเบิกใช้ชิ้นส่วน</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover table-striped small align-middle">
-                        <thead>
-                            <tr class="text-warning">
-                                <th>วัน-เวลา เบิก</th><th>Line / Station</th><th>Part No.</th><th>Part Name / Lot No.</th>
-                                <th class="text-end">จำนวนเบิกใช้</th><th>ผู้เบิก</th><th>ผู้จ่าย (Stock)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colspan="7" class="text-center text-muted">ยังไม่มีข้อมูล - กรุณากดปุ่มบันทึกเบิกใช้ชิ้นส่วน</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 4. ใบรายงานของพนักงาน -->
-            <div class="card card-custom p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="text-success fw-bold m-0">4️⃣ ใบรายงานของพนักงาน (Operator Daily Report)</h5>
-                    <button class="btn btn-sm btn-success fw-bold">+ บันทึกรายงานพนักงาน</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover table-striped small align-middle">
-                        <thead>
-                            <tr class="text-success">
-                                <th>รหัสพนักงาน</th><th>ชื่อ - สกุล</th><th>ตำแหน่ง / หน้าที่</th><th>Line / Station</th>
-                                <th class="text-end">ยอดผลิต (Pcs)</th><th class="text-end">เวลาทำงาน</th><th class="text-center">หมายเหตุ / ปัญหา</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colspan="7" class="text-center text-muted">ยังไม่มีข้อมูล - กรุณากดปุ่มบันทึกรายงานพนักงาน</td></tr>
+                            <tr><td colspan="6" class="text-center text-muted">ยังไม่มีข้อมูล - กรุณากดปุ่มบันทึกเตรียมชิ้นส่วน</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -620,16 +577,16 @@
         <!-- 8. Stock F/G -->
         <div id="tab-stock-fg" class="tab-pane-content">
             <div class="card card-custom p-4">
-                <h5 class="text-success fw-bold mb-3">🏭 คลังสินค้าสำเร็จรูป (Stock Finished Goods)</h5>
+                <h5 class="text-success fw-bold mb-3">🏭 คลังสินค้าสำเร็จรูป (Finished Goods Stock)</h5>
                 <div class="table-responsive">
                     <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
                             <tr class="text-success">
-                                <th>Part No.</th><th>Part Name</th><th>Customer</th><th>Pallet/Box ID</th><th class="text-end">จำนวนคงเหลือ (Pcs)</th><th class="text-center">สถานะ QC</th>
+                                <th>Part No.</th><th>Part Name</th><th>Customer</th><th>Location</th><th class="text-end">ยอดคงเหลือสุทธิ (Pcs)</th><th class="text-center">สถานะ QC</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="6" class="text-center text-muted">ยังไม่มีข้อมูลสินค้าสำเร็จรูป</td></tr>
+                            <tr><td colspan="6" class="text-center text-muted">ยังไม่มีข้อมูลคลังสินค้าสำเร็จรูป</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -639,12 +596,12 @@
         <!-- 9. Delivery -->
         <div id="tab-delivery" class="tab-pane-content">
             <div class="card card-custom p-4">
-                <h5 class="text-success fw-bold mb-3">🚚 บันทึกการจัดส่งสินค้า (Delivery Log)</h5>
+                <h5 class="text-success fw-bold mb-3">🚚 บันทึกการจัดส่งสินค้า (Delivery Tracking)</h5>
                 <div class="table-responsive">
                     <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
                             <tr class="text-success">
-                                <th>รอบส่ง (Trip)</th><th>วัน-เวลา ที่ส่ง</th><th>ทะเบียนรถ</th><th>Part No.</th><th class="text-end">จำนวนส่งจริง (Pcs)</th><th>ผู้ขับรถ</th><th class="text-center">สถานะ</th>
+                                <th>รอบส่ง (Trip)</th><th>Customer / Plant</th><th>Part No.</th><th>Part Name</th><th class="text-end">จำนวนส่งจริง (Pcs)</th><th>ทะเบียนรถ / ผู้ขับ</th><th class="text-center">สถานะการส่ง</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -655,43 +612,19 @@
             </div>
         </div>
 
-        <!-- 10. PM Machine / Jig (แยกส่วนชัดเจน) -->
+        <!-- 10. PM Machine / Jig -->
         <div id="tab-pm" class="tab-pane-content">
-            <!-- 1. การบำรุงรักษาเครื่องจักร -->
-            <div class="card card-custom p-4 mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="text-danger fw-bold m-0">🛠️ 1️⃣ การบำรุงรักษาเครื่องจักร (Machine PM & Plan)</h5>
-                    <button class="btn btn-sm btn-danger fw-bold">+ บันทึก PM เครื่องจักร</button>
-                </div>
+            <div class="card card-custom p-4">
+                <h5 class="text-danger fw-bold mb-3">🛠️ แผนบำรุงรักษาเครื่องจักรและ Jig (PM & Calibration)</h5>
                 <div class="table-responsive">
                     <table class="table table-dark table-hover table-striped small align-middle">
                         <thead>
                             <tr class="text-danger">
-                                <th>Machine ID</th><th>ชื่อเครื่องจักร / Station</th><th>รอบ PM ถัดไป</th><th>ชั่วโมงทำงานสะสม / Strokes</th><th class="text-center">สถานะเครื่องจักร</th><th>ผู้รับผิดชอบ</th><th class="text-center">จัดการ</th>
+                                <th>Machine / Jig ID</th><th>ชื่ออุปกรณ์ / เครื่องจักร</th><th>รอบ PM / Calibration</th><th>กำหนดการครั้งถัดไป</th><th class="text-center">ผู้รับผิดชอบ</th><th class="text-center">สถานะ</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="7" class="text-center text-muted">ยังไม่มีข้อมูล - กรุณากดปุ่มบันทึก PM เครื่องจักร</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 2. การตรวจสอบและ Calibration Jig / Fixture -->
-            <div class="card card-custom p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="text-warning fw-bold m-0">📐 2️⃣ การตรวจสอบและ Calibration Jig / Fixture (Jig Maintenance & Calibration)</h5>
-                    <button class="btn btn-sm btn-warning fw-bold text-dark">+ บันทึกตรวจเช็ค Jig / Calibration</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover table-striped small align-middle">
-                        <thead>
-                            <tr class="text-warning">
-                                <th>Jig / Fixture ID</th><th>รายการ Jig / Fixture</th><th>รอบตรวจเช็คถัดไป</th><th>อายุการใช้งาน (Shot Count)</th><th class="text-center">สถานะ Calibration</th><th>ผู้ดูแล / ผู้ตรวจสอบ</th><th class="text-center">จัดการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colspan="7" class="text-center text-muted">ยังไม่มีข้อมูล - กรุณากดปุ่มบันทึกตรวจเช็ค Jig</td></tr>
+                            <tr><td colspan="6" class="text-center text-muted">ยังไม่มีข้อมูลแผน PM</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -720,7 +653,6 @@
                 });
             });
 
-            // Clock Script
             function updateClock() {
                 const now = new Date();
                 const clockEl = document.getElementById('clock');
@@ -731,7 +663,6 @@
             setInterval(updateClock, 1000);
             updateClock();
 
-            // Chart Script (Empty Data Initial State)
             const ctx = document.getElementById('hourlyChart');
             if (ctx) {
                 new Chart(ctx.getContext('2d'), {
