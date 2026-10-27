@@ -3,105 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Production Control Assembly Line - Jozu Auto Part Co., Ltd.</title>
+    <title>Master Plan - Jozu Auto Part Co., Ltd.</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { background-color: #080c14; color: #f1f5f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #080c14; color: #f1f5f9; font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; }
         .navbar-custom { background-color: #0f172a; border-bottom: 2px solid #dc2626; }
         .card-custom { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; }
-        .text-muted, small.text-muted { color: #cbd5e1 !important; font-weight: 500; }
-        .card-title-sub { color: #93c5fd !important; font-weight: 600; font-size: 0.9rem; }
         
         .nav-main-grid {
-            display: grid;
-            grid-template-columns: repeat(9, 1fr);
-            gap: 10px;
-            margin-bottom: 24px;
-            padding: 0;
-            list-style: none;
+            display: grid; grid-template-columns: repeat(9, 1fr); gap: 8px;
+            margin-bottom: 16px; padding: 0; list-style: none;
         }
         @media (max-width: 1400px) { .nav-main-grid { grid-template-columns: repeat(5, 1fr); } }
         @media (max-width: 768px) { .nav-main-grid { grid-template-columns: repeat(2, 1fr); } }
 
         .nav-main-grid .nav-btn {
-            width: 100%; height: 64px;
+            width: 100%; height: 50px;
             background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
-            color: #f8fafc; font-weight: 800; font-size: 13px;
-            border: 1px solid #475569; border-radius: 10px;
+            color: #f8fafc; font-weight: 800; font-size: 12px;
+            border: 1px solid #475569; border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
-            text-align: center; cursor: pointer; padding: 4px 6px;
+            text-align: center; cursor: pointer; padding: 2px 4px;
         }
         .nav-main-grid .nav-btn.active {
             background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%) !important;
             color: #ffffff !important; border: 1px solid #f87171 !important;
-            box-shadow: 0 0 18px rgba(239, 68, 68, 0.7);
+            box-shadow: 0 0 14px rgba(239, 68, 68, 0.7);
         }
 
         .tab-pane-content { display: none !important; }
         .tab-pane-content.active { display: block !important; }
 
-        /* Formula Bar & Grid Excel Style */
-        .formula-bar-container {
-            display: flex; align-items: center; gap: 10px;
-            background-color: #0f172a; border: 1px solid #475569;
-            padding: 6px 12px; border-radius: 6px; margin-bottom: 12px;
+        /* Formula Bar */
+        .formula-bar-box {
+            display: flex; align-items: center; gap: 8px;
+            background-color: #1e293b; border: 1px solid #475569;
+            padding: 4px 10px; border-radius: 4px; margin-bottom: 10px;
         }
-        .formula-input {
-            flex-grow: 1; background-color: #1e293b; color: #38bdf8;
-            border: 1px solid #475569; border-radius: 4px; padding: 4px 8px;
-            font-family: monospace; font-weight: bold; font-size: 13px;
+        .formula-input-field {
+            flex-grow: 1; background-color: #0f172a; color: #38bdf8;
+            border: 1px solid #475569; border-radius: 3px; padding: 3px 8px;
+            font-family: monospace; font-weight: bold; font-size: 12px;
         }
+
+        /* Excel 1:1 Spreadsheet Table Design */
+        .excel-table-container {
+            background-color: #ffffff; color: #000000;
+            border: 2px solid #000000; padding: 10px; overflow-x: auto;
+        }
+        .excel-table {
+            border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; font-size: 10px;
+        }
+        .excel-table td, .excel-table th {
+            border: 1px solid #a6a6a6; text-align: center; vertical-align: middle; padding: 2px 3px; height: 22px; white-space: nowrap;
+        }
+
+        /* Column Headers (A, B, C...) & Row Numbers */
+        .excel-col-header { background-color: #e6e6e6 !important; color: #333333 !important; font-weight: bold; border: 1px solid #b2b2b2 !important; font-size: 9px; }
+        .excel-row-header { background-color: #e6e6e6 !important; color: #333333 !important; font-weight: bold; border: 1px solid #b2b2b2 !important; width: 25px; font-size: 9px; }
+
+        /* Form Headings */
+        .hdr-title { font-size: 24px; font-weight: 900; letter-spacing: 2px; }
+        .hdr-box-title { background-color: #ffffff; font-weight: bold; }
+        .hdr-box-val { background-color: #ffffff; font-weight: bold; }
         
-        .plan-table th {
-            font-size: 11px !important; font-weight: bold !important;
-            padding: 5px 2px !important; text-align: center; vertical-align: middle;
-            background-color: #1e293b; color: #f8fafc; border: 1px solid #475569;
+        /* Sun Columns Striped Gray */
+        .sun-col-bg { background-color: #808080 !important; color: #ffffff; }
+
+        /* Editable Input Cell inside Excel Table */
+        .ex-input {
+            width: 100%; height: 100%; background: transparent; border: none;
+            text-align: center; font-size: 10px; font-weight: bold; color: inherit; outline: none; padding: 0;
         }
-        .plan-table td {
-            font-size: 11px !important; font-weight: 600 !important;
-            text-align: center; vertical-align: middle; white-space: nowrap;
-            padding: 0 !important; border: 1px solid #334155;
-            background-color: #0f172a; color: #f1f5f9; height: 30px;
+        .ex-input:focus {
+            background-color: #e0f2fe !important; color: #000000 !important;
+            box-shadow: inset 0 0 0 2px #2563eb;
         }
-        
-        /* Direct Editable Inputs inside Table */
-        .cell-input {
-            width: 100%; height: 100%; background: transparent;
-            color: #38bdf8; border: none; text-align: center;
-            font-size: 11px; font-weight: bold; outline: none; padding: 2px;
-        }
-        .cell-input:focus {
-            background-color: #1e293b; color: #ffffff;
-            box-shadow: inset 0 0 0 2px #ef4444; z-index: 10; position: relative;
-        }
-        .sun-col { background-color: #334155 !important; }
-        .row-label { text-align: left !important; font-weight: 600 !important; padding-left: 6px !important; font-size: 11px !important; }
-        .excel-header-box { background-color: #1e293b; border: 1px solid #475569; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; }
+        .red-text { color: #dc2626 !important; font-weight: bold; }
+        .blue-text { color: #1d4ed8 !important; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <!-- Top Navigation Header -->
-    <nav class="navbar navbar-custom px-4 py-3">
+    <nav class="navbar navbar-custom px-4 py-2">
         <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
             <div>
-                <div class="d-flex align-items-center gap-2 mb-1">
-                    <h3 class="m-0 text-white fw-bold">⚙️ Production-Control-Assembly-Line</h3>
+                <div class="d-flex align-items-center gap-2">
+                    <h4 class="m-0 text-white fw-bold">⚙️ Production-Control-Assembly-Line</h4>
                     <span class="badge bg-danger px-2 py-1">THAI HONDA</span>
                 </div>
-                <div class="small text-light">Jozu Auto Part Co., Ltd. - ระบบควบคุมกระบวนการผลิตและงานประกอบ (Assembly Visual Control)</div>
+                <div class="small text-light" style="font-size: 11px;">Jozu Auto Part Co., Ltd. - Master Plan Visual Control System</div>
             </div>
-            <div class="text-warning fw-bold fs-5" id="clock"></div>
+            <div class="text-warning fw-bold fs-6" id="clock"></div>
         </div>
     </nav>
 
-    <div class="container-fluid px-4 py-3">
+    <div class="container-fluid px-3 py-3">
 
         <!-- Navigation Bar -->
         <ul class="nav-main-grid">
             <li><button class="nav-btn active" data-tab="tab-dashboard">Dashboard</button></li>
-            <li><button class="nav-btn" data-tab="tab-planning">Planning</button></li>
+            <li><button class="nav-btn" data-tab="tab-planning">Planning (Master Plan)</button></li>
             <li><button class="nav-btn" data-tab="tab-component">รับ component<br>ส่งชุบ - รับชุบ</button></li>
             <li><button class="nav-btn" data-tab="tab-stock-component">Stock Component</button></li>
             <li><button class="nav-btn" data-tab="tab-report">รายงานการผลิต</button></li>
@@ -113,87 +117,272 @@
 
         <!-- TAB CONTENTS -->
         <div id="tab-dashboard" class="tab-pane-content active">
-            <div class="row g-3 mb-4">
+            <div class="row g-3 mb-3">
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-primary border-4">
-                        <span class="card-title-sub">แผน vs ยอดผลิตจริง (Plan vs Actual)</span>
-                        <div class="d-flex align-items-baseline justify-content-between mt-1">
-                            <h2 class="text-white fw-bold mb-0" id="dashProdActual">0 <small class="fs-6 text-light">/ 9,723 Pcs</small></h2>
-                            <span class="badge bg-primary fs-6" id="dashProdPct">0%</span>
-                        </div>
+                        <span class="text-info fw-bold">แผน vs ยอดผลิตจริง (Plan vs Actual)</span>
+                        <h3 class="text-white fw-bold mb-0 mt-1" id="dashProdActual">0 <small class="fs-6 text-light">/ 9,723 Pcs</small></h3>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-success border-4">
-                        <span class="card-title-sub">ผ่านรอบแรก (First Time Yield - FTY)</span>
-                        <h2 class="text-success fw-bold mb-0 mt-1">100.0%</h2>
+                        <span class="text-success fw-bold">ผ่านรอบแรก (FTY)</span>
+                        <h3 class="text-success fw-bold mb-0 mt-1">100.0%</h3>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-danger border-4">
-                        <span class="card-title-sub">อัตราของเสียรวม (Defect PPM)</span>
-                        <h2 class="text-danger fw-bold mb-0 mt-1">0 PPM</h2>
+                        <span class="text-danger fw-bold">อัตราของเสียรวม (Defect PPM)</span>
+                        <h3 class="text-danger fw-bold mb-0 mt-1">0 PPM</h3>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-warning border-4">
-                        <span class="card-title-sub">สถานะไลน์ผลิต (Line Andon Status)</span>
+                        <span class="text-warning fw-bold">สถานะไลน์ผลิต</span>
                         <h3 class="text-warning fw-bold mb-0 mt-1">RUNNING</h3>
                     </div>
                 </div>
             </div>
             <div class="card card-custom p-3">
                 <h6 class="text-light mb-2 fw-bold">📈 ติดตามยอดผลิตรายชั่วโมง (Hourly Output)</h6>
-                <canvas id="hourlyChart" height="100"></canvas>
+                <canvas id="hourlyChart" height="90"></canvas>
             </div>
         </div>
 
-        <!-- Planning Tab -->
+        <!-- Planning Tab (Excel 1:1 Replica) -->
         <div id="tab-planning" class="tab-pane-content">
-            <div class="card card-custom p-4 mb-4">
-                <!-- Excel Header Box -->
-                <div class="excel-header-box d-flex flex-wrap justify-content-between align-items-center">
-                    <div class="d-flex align-items-center gap-3">
-                        <h4 class="text-white m-0 fw-bold">Master Plan (Excel-Like Engine)</h4>
-                        <span class="badge bg-danger">พิมพ์แก้และใส่สูตรได้ทุกช่องอิสระ</span>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-success fw-bold" onclick="saveMasterPlanData()">💾 บันทึกข้อมูล</button>
-                        <button class="btn btn-sm btn-outline-light fw-bold" onclick="resetDefaultMasterPlan()">🔄 รีเซ็ตค่า</button>
-                    </div>
+            
+            <!-- Excel Controls & Formula Bar -->
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-success fs-6">Excel 1:1 Form Replica</span>
+                    <span class="text-light small">พิมพ์แก้ไขและใส่สูตร = ได้ทุกช่อง</span>
                 </div>
-
-                <!-- Formula Bar -->
-                <div class="formula-bar-container">
-                    <span class="text-warning fw-bold fs-6"><i>fx</i></span>
-                    <span class="text-muted small" id="activeCellAddr">Cell Active</span>
-                    <input type="text" id="formulaBar" class="formula-input" placeholder="พิมพ์ตัวเลข ข้อความ หรือสูตร เช่น =100+200 หรือ =SUM(10,20)" oninput="onFormulaBarInput(this.value)">
-                </div>
-
-                <div class="table-responsive">
-                    <table class="table table-dark table-bordered plan-table" id="masterPlanGrid">
-                        <thead>
-                            <tr>
-                                <th style="width: 35px;">Item</th>
-                                <th style="width: 155px;">Part No. / Part Name</th>
-                                <th style="width: 70px;">จำนวนส่ง/<br>เดือน</th>
-                                <th style="width: 110px;">HOME / LOCATION</th>
-                                <th colspan="31" class="text-center text-warning">NOV'26 (Days 1 - 31)</th>
-                                <th style="width: 50px;">STD.Pack</th>
-                                <th style="width: 85px;">FORECAST<br>N+1 / N+2 / N+3</th>
-                            </tr>
-                            <tr>
-                                <th colspan="4" class="text-end text-muted">วัน (1 - 31)</th>
-                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th class="sun-col">7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th class="sun-col">15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th><th class="sun-col">22</th><th>23</th><th>24</th><th>25</th><th>26</th><th>27</th><th>28</th><th class="sun-col">29</th><th>30</th><th>31</th>
-                                <th>-</th><th>-</th>
-                            </tr>
-                        </thead>
-                        <tbody id="masterPlanTbody"></tbody>
-                    </table>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-sm btn-success fw-bold" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
+                    <button class="btn btn-sm btn-outline-light fw-bold" onclick="location.reload()">🔄 รีเซ็ตตาราง</button>
                 </div>
             </div>
+
+            <div class="formula-bar-box">
+                <span class="text-warning fw-bold"><i>fx</i></span>
+                <span class="text-light fw-bold" id="activeCellAddr" style="width: 50px;">-</span>
+                <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข หรือสูตร เช่น =SUM(...) หรือ =2500-807" oninput="onFormulaBarInput(this.value)">
+            </div>
+
+            <!-- Excel 100% Visual Container -->
+            <div class="excel-table-container">
+                <table class="excel-table" id="excelGrid">
+                    <thead>
+                        <!-- Column Headers (A - AP) -->
+                        <tr class="excel-col-header">
+                            <th class="excel-row-header"></th>
+                            <th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th><th>M</th><th>N</th><th>O</th><th>P</th><th>Q</th><th>R</th><th>S</th><th>T</th><th>U</th><th>V</th><th>W</th><th>X</th><th>Y</th><th>Z</th><th>AA</th><th>AB</th><th>AC</th><th>AD</th><th>AE</th><th>AF</th><th>AG</th><th>AH</th><th>AI</th><th>AJ</th><th>AK</th><th>AL</th><th>AM</th><th>AN</th><th>AO</th><th>AP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Excel Header Row 1: Logo & Title -->
+                        <tr>
+                            <td class="excel-row-header">1</td>
+                            <td colspan="4" style="background:#ffffff; vertical-align:middle; text-align:left;">
+                                <strong style="color:#008000; font-size:16px;">JOZU</strong><br>
+                                <span style="font-size:8px; font-weight:bold;">Jozu Auto Part Co.,Ltd.</span>
+                            </td>
+                            <td colspan="14" class="hdr-title" style="text-align:center;">Master Plan</td>
+                            <td colspan="3" class="hdr-box-title">For Month</td>
+                            <td colspan="3" class="hdr-box-title">Customer</td>
+                            <td colspan="2" class="hdr-box-title">Del.Time</td>
+                            <td colspan="2" class="hdr-box-title">Page</td>
+                            <td colspan="2" class="hdr-box-title">Issue</td>
+                            <td colspan="4" class="hdr-box-title" style="text-align:left;">Remark</td>
+                            <td class="hdr-box-title">Approve</td>
+                            <td class="hdr-box-title">Check</td>
+                            <td class="hdr-box-title">Issue</td>
+                        </tr>
+                        <!-- Excel Header Row 2: Header Values -->
+                        <tr>
+                            <td class="excel-row-header">2</td>
+                            <td colspan="4"></td>
+                            <td colspan="14"></td>
+                            <td colspan="3" class="hdr-box-val">NOV'26</td>
+                            <td colspan="3" class="hdr-box-val">TH</td>
+                            <td colspan="2" class="hdr-box-val">11.00</td>
+                            <td colspan="2" class="hdr-box-val">1/1</td>
+                            <td colspan="2" class="hdr-box-val">26-Oct-26</td>
+                            <td colspan="4" style="text-align:left; font-size:8px;">Pro................. Delivery .................<br>PPC................. QA .................</td>
+                            <td></td><td></td><td></td>
+                        </tr>
+
+                        <!-- Excel Table Header Days Row -->
+                        <tr style="font-weight:bold; background:#f2f2f2;">
+                            <td class="excel-row-header">3</td>
+                            <td rowspan="2" style="width:30px;">Item</td>
+                            <td rowspan="2" style="width:140px;">Part No./<br>Part Name</td>
+                            <td rowspan="2" style="width:70px;">จำนวนส่ง/เดือน</td>
+                            <td rowspan="2" style="width:110px;">HOME /LOCATION</td>
+                            <td colspan="31" style="background:#f2f2f2;">NOV'26</td>
+                            <td rowspan="2" style="width:45px;">STD.Pack</td>
+                            <td colspan="3">NEXT MONTH</td>
+                        </tr>
+                        <tr style="font-weight:bold; background:#f2f2f2;">
+                            <td class="excel-row-header">4</td>
+                            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td class="sun-col-bg">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td class="sun-col-bg">15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td class="sun-col-bg">22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td class="sun-col-bg">29</td><td>30</td><td>31</td>
+                            <td>N+1</td><td>N+2</td><td>N+3</td>
+                        </tr>
+
+                        <!-- Data Rows (Location 1 - 12) -->
+                        <script>
+                            const locations = [
+                                "05504 L3ME01", "05120 L3BE01", "05505 L3SP01", "05503 L2AF01",
+                                "05503 L2AF02", "05503 L2AF03", "05506 L2KD01", "05504 L3SE01",
+                                "06244 L3MF04", "05120 L3ME07", "HTAS", "ASH"
+                            ];
+                            const initForecast = {
+                                "05504 L3ME01": [0, 262, 211, 224, 606, 280, 0, 0, 181, 171, 134, 76, 255, 0, 0, 698, 398, 365, 114, 53, 0, 0, 586, 252, 430, 420, 105, 403, 0, 0, 0],
+                                "05120 L3BE01": [0, 545, 199, 92, 46, 0, 52, 0, 0, 0, 0, 28, 63, 160, 0, 257, 101, 24, 112, 134, 0, 0, 0, 135, 157, 134, 134, 135, 134, 0, 0]
+                            };
+
+                            let rowIndex = 5;
+                            locations.forEach((loc, idx) => {
+                                document.write(`<tr><td class="excel-row-header">${rowIndex}</td>`);
+                                if (idx === 0) {
+                                    document.write(`<td rowspan="12" style="font-weight:bold;">1</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; text-align:center;">17620-Z1T-8010 /<br>CAP COMP FUEL FILLER</td>`);
+                                    document.write(`<td rowspan="2" style="font-weight:bold;">Forecast</td><td rowspan="2" style="font-weight:bold;">9723</td>`);
+                                } else if (idx === 2) {
+                                    document.write(`<td rowspan="2" style="font-weight:bold;">Pcs./Month</td><td rowspan="2" style="font-weight:bold;">9374</td>`);
+                                } else if (idx === 4) {
+                                    document.write(`<td rowspan="2" style="font-weight:bold;">Delivery/day</td><td rowspan="2" style="font-weight:bold;">391</td>`);
+                                } else if (idx === 6) {
+                                    document.write(`<td rowspan="2" style="font-weight:bold;">Safety 6 Day</td><td rowspan="2" style="font-weight:bold;">2344</td>`);
+                                }
+
+                                document.write(`<td style="text-align:left; font-weight:600; padding-left:4px;">${loc}</td>`);
+
+                                const rowData = initForecast[loc] || Array(31).fill(0);
+                                for (let d = 1; d <= 31; d++) {
+                                    const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
+                                    const val = rowData[d - 1] || 0;
+                                    document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
+                                        <input type="text" class="ex-input loc-input" data-day="${d}" data-addr="E${rowIndex}" value="${val > 0 ? val : ''}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                    </td>`);
+                                }
+
+                                if (idx === 0) {
+                                    document.write(`<td rowspan="12" style="font-weight:bold;">50</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg);">7,242</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg);">7,325</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg);">9,722</td>`);
+                                }
+                                document.write(`</tr>`);
+                                rowIndex++;
+                            });
+                        </script>
+
+                        <!-- Row 17: Plan Delivery/Day -->
+                        <tr>
+                            <td class="excel-row-header">17</td>
+                            <td colspan="3" style="font-weight:bold;">Plan Delivery/Day</td>
+                            <td style="font-weight:bold;">รวมชิ้นงานส่ง</td>
+                            <script>
+                                for (let d = 1; d <= 31; d++) {
+                                    const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
+                                    document.write(`<td class="${isSun ? 'sun-col-bg' : ''}" style="font-weight:bold;">
+                                        <input type="text" class="ex-input deliv-sum-cell" id="deliv_sum_${d}" data-addr="E17" value="0" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                    </td>`);
+                                }
+                            </script>
+                            <td colspan="4"></td>
+                        </tr>
+
+                        <!-- Row 18: Lot No Production -->
+                        <tr>
+                            <td class="excel-row-header">18</td>
+                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:6px;">Lot No Production ( ปี-เดือน-ล็อต)</td>
+                            <script>
+                                for (let d = 1; d <= 31; d++) {
+                                    const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
+                                    let defaultLot = (d === 4) ? "261001" : (d === 8) ? "261002" : (d === 11) ? "261003" : (d === 14) ? "261004" : (d === 18) ? "261005" : (d === 23) ? "261206" : "";
+                                    document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
+                                        <input type="text" class="ex-input" data-addr="E18" value="${defaultLot}" onfocus="onCellFocus(this)">
+                                    </td>`);
+                                }
+                            </script>
+                            <td colspan="4"></td>
+                        </tr>
+
+                        <!-- Row 19: แผนการผลิต/วัน -->
+                        <tr>
+                            <td class="excel-row-header">19</td>
+                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:6px;">แผนการผลิต/วัน</td>
+                            <script>
+                                for (let d = 1; d <= 31; d++) {
+                                    const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
+                                    let defaultPlan = (d === 4 || d === 8 || d === 11 || d === 14 || d === 18 || d === 23) ? 1200 : "";
+                                    document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
+                                        <input type="text" class="ex-input blue-text" data-addr="E19" value="${defaultPlan}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                    </td>`);
+                                }
+                            </script>
+                            <td colspan="4"></td>
+                        </tr>
+
+                        <!-- Row 20: Stock/Pcs. & ยอดการผลิต OK -->
+                        <tr>
+                            <td class="excel-row-header">20</td>
+                            <td rowspan="3" style="font-weight:bold;">Stock/Pcs.</td>
+                            <td rowspan="3" style="font-weight:bold;">
+                                <input type="text" class="ex-input blue-text" id="startStockVal" value="2500" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                            </td>
+                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:6px;">ยอดการผลิต OK</td>
+                            <script>
+                                for (let d = 1; d <= 31; d++) {
+                                    const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
+                                    document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
+                                        <input type="text" class="ex-input blue-text act-prod-cell" data-day="${d}" data-addr="E20" value="" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                    </td>`);
+                                }
+                            </script>
+                            <td colspan="4"></td>
+                        </tr>
+
+                        <!-- Row 21: ยอดการผลิต NG -->
+                        <tr>
+                            <td class="excel-row-header">21</td>
+                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:6px;">ยอดการผลิต NG</td>
+                            <script>
+                                for (let d = 1; d <= 31; d++) {
+                                    const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
+                                    let defaultNg = (d === 28) ? "508" : "";
+                                    document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
+                                        <input type="text" class="ex-input red-text" data-addr="E21" value="${defaultNg}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                    </td>`);
+                                }
+                            </script>
+                            <td colspan="4"></td>
+                        </tr>
+
+                        <!-- Row 22: จำนวนงานคงเหลือ (Balance) -->
+                        <tr>
+                            <td class="excel-row-header">22</td>
+                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:6px;">จำนวนงานคงเหลือ</td>
+                            <script>
+                                for (let d = 1; d <= 31; d++) {
+                                    const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
+                                    document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
+                                        <input type="text" class="ex-input bl-result-cell" id="bl_day_${d}" data-addr="E22" value="0" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                    </td>`);
+                                }
+                            </script>
+                            <td colspan="4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
+        <!-- 3-9 Other Modules -->
         <div id="tab-component" class="tab-pane-content"><div class="card card-custom p-4"><h5>📦 บันทึกรับเข้า Component และงานชุบ</h5></div></div>
         <div id="tab-stock-component" class="tab-pane-content"><div class="card card-custom p-4"><h5>📦 ตารางสต็อกชิ้นส่วน Component</h5></div></div>
         <div id="tab-report" class="tab-pane-content"><div class="card card-custom p-4"><h5>📊 รายงานผลการผลิต</h5></div></div>
@@ -201,26 +390,15 @@
         <div id="tab-delivery" class="tab-pane-content"><div class="card card-custom p-4"><h5>🚚 บันทึกการจัดส่งสินค้า</h5></div></div>
         <div id="tab-capacity" class="tab-pane-content"><div class="card card-custom p-4"><h5>⚡ กำลังการผลิต (Capacity Management)</h5></div></div>
         <div id="tab-pm" class="tab-pane-content"><div class="card card-custom p-4"><h5>🛠️ แผนบำรุงรักษาเครื่องจักรและ Jig</h5></div></div>
+
     </div>
 
     <script>
-        const locationNames = [
-            "05504 L3ME01", "05120 L3BE01", "05505 L3SP01", "05503 L2AF01",
-            "05503 L2AF02", "05503 L2AF03", "05506 L2KD01", "05504 L3SE01",
-            "06244 L3MF04", "05120 L3ME07", "HTAS", "ASH"
-        ];
-
-        const initialForecasts = {
-            "05504 L3ME01": [0, 262, 211, 224, 606, 280, 0, 0, 181, 171, 134, 76, 255, 0, 0, 698, 398, 365, 114, 53, 0, 0, 586, 252, 430, 420, 105, 403, 0, 0, 0],
-            "05120 L3BE01": [0, 545, 199, 92, 46, 0, 52, 0, 0, 0, 0, 28, 63, 160, 0, 257, 101, 24, 112, 134, 0, 0, 0, 135, 157, 134, 134, 135, 134, 0, 0]
-        };
-
         let activeInputEl = null;
 
-        // แปลงสูตร Excel ทุกช่องให้ประมวลผลได้อิสระ
-        function evaluateCellFormula(formulaStr) {
-            if (formulaStr === undefined || formulaStr === null) return 0;
-            let str = formulaStr.toString().trim();
+        function evaluateCellFormula(str) {
+            if (!str) return 0;
+            str = str.toString().trim();
             if (str === '' || str === '-') return 0;
 
             if (str.startsWith('=')) {
@@ -231,8 +409,8 @@
                         let numbers = inner.split(',').map(n => parseFloat(n.trim()) || 0);
                         return numbers.reduce((a, b) => a + b, 0);
                     }
-                    let result = Function(`'use strict'; return (${expr})`)();
-                    return isNaN(result) ? 0 : result;
+                    let res = Function(`'use strict'; return (${expr})`)();
+                    return isNaN(res) ? 0 : res;
                 } catch (e) {
                     return 0;
                 }
@@ -241,203 +419,67 @@
             return isNaN(num) ? str : num;
         }
 
-        function renderMasterPlanGrid() {
-            const tbody = document.getElementById('masterPlanTbody');
-            tbody.innerHTML = '';
-
-            // 1. สร้างแถว Location (พิมพ์แก้ได้ทุกช่อง)
-            locationNames.forEach((loc, idx) => {
-                const tr = document.createElement('tr');
-                let html = '';
-                if (idx === 0) {
-                    html += `<td rowspan="13" class="fw-bold align-middle">1</td>
-                             <td rowspan="13" class="text-start fw-bold text-info align-middle">17620-Z1T-8010 /<br><span class="text-light">CAP COMP FUEL FILLER</span></td>
-                             <td rowspan="13" class="text-warning fw-bold align-middle">9,723</td>`;
-                }
-                html += `<td class="row-label">${loc}</td>`;
-
-                const locData = initialForecasts[loc] || Array(31).fill(0);
-                for (let day = 1; day <= 31; day++) {
-                    const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
-                    const val = locData[day - 1] || 0;
-                    html += `<td class="${isSun ? 'sun-col' : ''}">
-                                <input type="text" class="cell-input loc-cell" data-day="${day}" value="${val > 0 ? val : '-'}" onfocus="onCellFocus(this)" oninput="onCellInput(this)">
-                             </td>`;
-                }
-
-                if (idx === 0) {
-                    html += `<td rowspan="11" class="fw-bold align-middle">50</td>
-                             <td rowspan="13" class="text-warning small align-middle">N+1: 7,242<br>N+2: 7,325<br>N+3: 9,722</td>`;
-                }
-                tr.innerHTML = html;
-                tbody.appendChild(tr);
-            });
-
-            // 2. แถว Plan Delivery/Day (รวมชิ้นงานส่ง - คำนวณออโต้อัตโนมัติ แต่พิมพ์ทับแก้ได้)
-            const trDeliv = document.createElement('tr');
-            trDeliv.className = 'fw-bold bg-secondary';
-            let htmlDeliv = `<td class="row-label text-success">Plan Delivery/Day</td>`;
-            for (let day = 1; day <= 31; day++) {
-                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
-                htmlDeliv += `<td class="${isSun ? 'sun-col' : ''}">
-                                <input type="text" class="cell-input text-success fw-bold deliv-sum-cell" id="deliv_sum_${day}" value="0" onfocus="onCellFocus(this)" oninput="onCellInput(this)">
-                              </td>`;
-            }
-            trDeliv.innerHTML = htmlDeliv;
-            tbody.appendChild(trDeliv);
-
-            // 3. แถว Lot No Production (พิมพ์แก้ได้ทุกช่อง)
-            const trLot = document.createElement('tr');
-            let htmlLot = `<td colspan="4" class="row-label text-warning">Lot No Production</td>`;
-            for (let day = 1; day <= 31; day++) {
-                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
-                let defaultLot = (day === 7) ? "261001" : (day === 14) ? "261002" : (day === 21) ? "261003" : (day === 27) ? "261004" : (day === 29) ? "261005" : "";
-                htmlLot += `<td class="${isSun ? 'sun-col' : ''}">
-                               <input type="text" class="cell-input text-warning" value="${defaultLot}" onfocus="onCellFocus(this)" oninput="onCellInput(this)">
-                            </td>`;
-            }
-            htmlLot += `<td>-</td><td>-</td>`;
-            trLot.innerHTML = htmlLot;
-            tbody.appendChild(trLot);
-
-            // 4. แถว แผนการผลิต/วัน (พิมพ์แก้ได้ทุกช่อง)
-            const trPlanProd = document.createElement('tr');
-            let htmlPlanProd = `<td colspan="4" class="row-label text-primary">แผนการผลิต/วัน</td>`;
-            for (let day = 1; day <= 31; day++) {
-                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
-                let defaultPlan = (day === 7 || day === 14 || day === 21 || day === 27 || day === 29) ? 1200 : 0;
-                htmlPlanProd += `<td class="${isSun ? 'sun-col' : ''}">
-                                    <input type="text" class="cell-input text-info" value="${defaultPlan > 0 ? defaultPlan : '-'}" onfocus="onCellFocus(this)" oninput="onCellInput(this)">
-                                 </td>`;
-            }
-            htmlPlanProd += `<td>-</td><td>-</td>`;
-            trPlanProd.innerHTML = htmlPlanProd;
-            tbody.appendChild(trPlanProd);
-
-            // 5. แถว ยอดการผลิต OK (พิมพ์แก้และใส่สูตรได้ทุกช่อง)
-            const trProdOk = document.createElement('tr');
-            let htmlProdOk = `<td colspan="4" class="row-label text-info">ยอดการผลิต OK (Actual Production)</td>`;
-            for (let day = 1; day <= 31; day++) {
-                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
-                htmlProdOk += `<td class="${isSun ? 'sun-col' : ''}">
-                                  <input type="text" class="cell-input text-info act-prod-cell" data-day="${day}" value="0" onfocus="onCellFocus(this)" oninput="onCellInput(this)">
-                               </td>`;
-            }
-            htmlProdOk += `<td>-</td><td>-</td>`;
-            trProdOk.innerHTML = htmlProdOk;
-            tbody.appendChild(trProdOk);
-
-            // 6. แถว ยอดการผลิต NG (พิมพ์แก้ได้ทุกช่อง)
-            const trProdNg = document.createElement('tr');
-            let htmlProdNg = `<td colspan="4" class="row-label text-danger">ยอดการผลิต NG</td>`;
-            for (let day = 1; day <= 31; day++) {
-                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
-                htmlProdNg += `<td class="${isSun ? 'sun-col' : ''}">
-                                  <input type="text" class="cell-input text-danger" value="0" onfocus="onCellFocus(this)" oninput="onCellInput(this)">
-                               </td>`;
-            }
-            htmlProdNg += `<td>-</td><td>-</td>`;
-            trProdNg.innerHTML = htmlProdNg;
-            tbody.appendChild(trProdNg);
-
-            // 7. แถว Balance B/L (คำนวณออโต้ แต่พิมพ์ทับแก้ได้ทุกช่องเช่นกัน)
-            const trBl = document.createElement('tr');
-            let htmlBl = `<td colspan="3" class="row-label text-danger fw-bold">จำนวนงานคงเหลือ (Balance)</td>
-                          <td><input type="text" class="cell-input text-success fw-bold" id="startStockVal" value="2500" onfocus="onCellFocus(this)" oninput="onCellInput(this)"></td>`;
-            for (let day = 1; day <= 31; day++) {
-                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
-                htmlBl += `<td class="${isSun ? 'sun-col' : ''}">
-                             <input type="text" class="cell-input text-danger fw-bold bl-result-cell" id="bl_day_${day}" value="0" onfocus="onCellFocus(this)" oninput="onCellInput(this)">
-                           </td>`;
-            }
-            htmlBl += `<td>-</td><td>-</td>`;
-            trBl.innerHTML = htmlBl;
-            tbody.appendChild(trBl);
-
-            recalculateAll();
-        }
-
         function onCellFocus(el) {
             activeInputEl = el;
             document.getElementById('formulaBar').value = el.value;
+            document.getElementById('activeCellAddr').innerText = el.dataset.addr || "Cell";
             el.select();
-        }
-
-        function onCellInput(el) {
-            document.getElementById('formulaBar').value = el.value;
-            recalculateAll();
         }
 
         function onFormulaBarInput(val) {
             if (activeInputEl) {
                 activeInputEl.value = val;
-                recalculateAll();
+                recalculateMasterPlan();
             }
         }
 
-        function recalculateAll() {
-            let totalProdActualMonth = 0;
+        function recalculateMasterPlan() {
+            let totalActualMonth = 0;
 
-            // 1. คำนวณผลรวม Plan Delivery/Day อัตโนมัติ (เฉพาะช่องที่ไม่ได้พิมพ์สูตรทับ)
-            for (let day = 1; day <= 31; day++) {
-                const sumCell = document.getElementById(`deliv_sum_${day}`);
-                if (sumCell && !sumCell.dataset.userEdited) {
-                    let daySum = 0;
-                    const locInputs = document.querySelectorAll(`.loc-cell[data-day="${day}"]`);
-                    locInputs.forEach(input => {
-                        let val = evaluateCellFormula(input.value);
-                        if (typeof val === 'number') daySum += val;
-                    });
-                    sumCell.value = daySum;
-                }
+            // 1. คำนวณยอด Plan Delivery/Day
+            for (let d = 1; d <= 31; d++) {
+                let sum = 0;
+                const locInputs = document.querySelectorAll(`.loc-input[data-day="${d}"]`);
+                locInputs.forEach(inp => {
+                    let v = evaluateCellFormula(inp.value);
+                    if (typeof v === 'number') sum += v;
+                });
+                const sumCell = document.getElementById(`deliv_sum_${d}`);
+                if (sumCell) sumCell.value = sum;
             }
 
-            // 2. คำนวณ Balance B/L อัตโนมัติ
-            let startStockValRaw = document.getElementById('startStockVal')?.value || "2500";
-            let startStock = evaluateCellFormula(startStockValRaw);
+            // 2. คำนวณ Balance B/L
+            let startStockRaw = document.getElementById('startStockVal')?.value || "2500";
+            let startStock = evaluateCellFormula(startStockRaw);
             if (typeof startStock !== 'number') startStock = 2500;
 
             let currentBL = startStock;
 
-            for (let day = 1; day <= 31; day++) {
-                let delivSum = evaluateCellFormula(document.getElementById(`deliv_sum_${day}`)?.value || "0");
-                const prodActInput = document.querySelector(`.act-prod-cell[data-day="${day}"]`);
-                let prodAct = evaluateCellFormula(prodActInput?.value || "0");
+            for (let d = 1; d <= 31; d++) {
+                let deliv = evaluateCellFormula(document.getElementById(`deliv_sum_${d}`)?.value || "0");
+                const prodInp = document.querySelector(`.act-prod-cell[data-day="${d}"]`);
+                let prod = evaluateCellFormula(prodInp?.value || "0");
 
-                if (typeof prodAct === 'number') totalProdActualMonth += prodAct;
-                if (typeof delivSum !== 'number') delivSum = 0;
-                if (typeof prodAct !== 'number') prodAct = 0;
+                if (typeof prod === 'number') totalActualMonth += prod;
+                if (typeof deliv !== 'number') deliv = 0;
+                if (typeof prod !== 'number') prod = 0;
 
-                currentBL = currentBL + prodAct - delivSum;
+                currentBL = currentBL + prod - deliv;
 
-                const blCell = document.getElementById(`bl_day_${day}`);
-                if (blCell && !blCell.dataset.userEdited) {
+                const blCell = document.getElementById(`bl_day_${d}`);
+                if (blCell) {
                     blCell.value = currentBL;
-                    blCell.style.color = currentBL < 0 ? '#ef4444' : '#38bdf8';
+                    blCell.className = currentBL < 0 ? 'ex-input red-text bl-result-cell' : 'ex-input bl-result-cell';
                 }
             }
 
-            // อัปเดต Dashboard
+            // Update Dashboard Stats
             const dashProdEl = document.getElementById('dashProdActual');
-            const dashPctEl = document.getElementById('dashProdPct');
-            if (dashProdEl) dashProdEl.innerHTML = `${totalProdActualMonth.toLocaleString()} <small class="fs-6 text-light">/ 9,723 Pcs</small>`;
-            if (dashPctEl) {
-                let pct = Math.round((totalProdActualMonth / 9723) * 100);
-                dashPctEl.innerText = `${pct}%`;
-            }
-        }
-
-        function saveMasterPlanData() {
-            alert('💾 บันทึกข้อมูลเรียบร้อยแล้วครับ!');
-        }
-
-        function resetDefaultMasterPlan() {
-            if (confirm('ต้องการรีเซ็ตตารางใหม่ทั้งหมดหรือไม่?')) {
-                renderMasterPlanGrid();
-            }
+            if (dashProdEl) dashProdEl.innerHTML = `${totalActualMonth.toLocaleString()} <small class="fs-6 text-light">/ 9,723 Pcs</small>`;
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Tab Toggle
             const buttons = document.querySelectorAll('.nav-btn');
             const tabs = document.querySelectorAll('.tab-pane-content');
 
@@ -452,6 +494,7 @@
                 });
             });
 
+            // Clock
             function updateClock() {
                 const now = new Date();
                 const clockEl = document.getElementById('clock');
@@ -460,8 +503,9 @@
             setInterval(updateClock, 1000);
             updateClock();
 
-            renderMasterPlanGrid();
+            recalculateMasterPlan();
 
+            // Chart
             const ctx = document.getElementById('hourlyChart');
             if (ctx) {
                 new Chart(ctx.getContext('2d'), {
