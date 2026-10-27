@@ -85,9 +85,18 @@
         .green-text { color: #4ade80 !important; font-weight: 900; }
         .yellow-text { color: #fbbf24 !important; font-weight: 900; }
 
-        .summary-table th { background-color: #334155; color: #fff; text-align: center; padding: 14px; font-size: 18px; }
-        .summary-table td { background-color: #1e293b; color: #f8fafc; text-align: center; padding: 12px; border: 2px solid #334155; font-size: 18px; }
         .module-box { background-color: #1e293b; border: 2px solid #334155; border-radius: 10px; padding: 24px; margin-bottom: 20px; }
+
+        /* Print Style for Document Generation */
+        @media print {
+            body { background: white !important; color: black !important; font-size: 12px; }
+            .navbar-custom, .nav-main-grid, .formula-bar-box, .d-flex.justify-content-between.align-items-center.mb-3 div:last-child { display: none !important; }
+            .excel-table-container { background: white !important; border: none !important; box-shadow: none !important; padding: 0 !important; }
+            .excel-table td, .excel-table th { border: 1px solid black !important; color: black !important; height: 30px; padding: 4px; }
+            .excel-col-header, .excel-row-header, .hdr-box-title { background-color: #e2e8f0 !important; color: black !important; }
+            .ex-input { color: black !important; font-size: 14px; background: transparent !important; }
+            .sun-col-bg { background-color: #cbd5e1 !important; }
+        }
     </style>
 </head>
 <body>
@@ -156,7 +165,7 @@
                 <div class="col-md-4">
                     <div class="module-box">
                         <h3 class="text-warning fw-bold mb-3">📋 Planning (3 แผนหลัก)</h3>
-                        <p class="text-light fs-5">ควบคุม Master Plan, Material Plan และ Plating Plan ครบถ้วนในหน้าเดียว</p>
+                        <p class="text-light fs-5">ควบคุม Master Plan, Material Plan และ Plating Plan แก้ไขได้อิสระเหมือน Excel</p>
                         <button class="btn btn-warning fw-bold fs-5 px-4 py-2 mt-2" onclick="switchTab('tab-planning')">เปิด 3 แผนงานหลัก</button>
                     </div>
                 </div>
@@ -186,11 +195,12 @@
         <div id="tab-planning" class="tab-pane-content">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center gap-3">
-                    <span class="badge bg-danger fs-4 px-3 py-2">Planning Management (3 แผนหลัก)</span>
-                    <span class="text-light fs-5">1. Master Plan | 2. Material Plan | 3. Plating Plan (ฟอนต์ใหญ่พิเศษ)</span>
+                    <span class="badge bg-danger fs-4 px-3 py-2">Master Plan & Document Control</span>
+                    <span class="text-light fs-5">คลิกแก้ข้อมูล วันหยุด จำนวน หรือยอดส่งได้อิสระเหมือน Excel แล้วกดพิมพ์เอกสารได้ทันที</span>
                 </div>
                 <div class="d-flex gap-3">
-                    <button class="btn btn-success fw-bold px-4 py-2 fs-5" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
+                    <button class="btn btn-primary fw-bold px-4 py-2 fs-5" onclick="window.print()">🖨️ พิมพ์เอกสาร (Print / PDF)</button>
+                    <button class="btn btn-success fw-bold px-4 py-2 fs-5" onclick="alert('💾 บันทึกข้อมูลลงระบบเรียบร้อยแล้ว!')">💾 บันทึกข้อมูล</button>
                     <button class="btn btn-outline-light fw-bold px-4 py-2 fs-5" onclick="location.reload()">🔄 รีเซ็ตตาราง</button>
                 </div>
             </div>
@@ -198,8 +208,8 @@
             <!-- Formula Bar -->
             <div class="formula-bar-box">
                 <span class="text-warning fw-bold fs-3"><i>fx</i></span>
-                <span class="text-light fw-bold fs-4" id="activeCellAddr" style="width: 80px;">-</span>
-                <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข หรือสูตร เช่น =SUM(...) หรือ =2500-807" oninput="onFormulaBarInput(this.value)">
+                <span class="text-light fw-bold fs-4" id="activeCellAddr" style="width: 80px;">E5</span>
+                <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกช่องตารางแล้วพิมพ์ตัวเลข หรือแก้ไขวันหยุด/ยอดส่งตามลูกค้าได้ทันที" onkeydown="onFormulaBarKeyDown(event)">
             </div>
 
             <!-- 1. MASTER PLAN -->
@@ -292,8 +302,9 @@
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     const val = rowData[d - 1] || 0;
+                                    let cellId = `cell_${rowIndex}_${d}`;
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input loc-input" data-loc="${loc}" data-day="${d}" data-addr="E${rowIndex}" value="${val > 0 ? val : ''}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                        <input type="text" class="ex-input loc-input grid-cell" id="${cellId}" data-row="${rowIndex}" data-col="${d}" data-addr="Col${d}R${rowIndex}" value="${val > 0 ? val : ''}" onfocus="onCellFocus(this)" onkeydown="onGridKeyDown(event, ${rowIndex}, ${d})" oninput="recalculateMasterPlan()">
                                     </td>`);
                                 }
 
@@ -316,7 +327,7 @@
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input green-text deliv-sum-cell" id="deliv_sum_${d}" data-addr="E17" value="0" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                        <input type="text" class="ex-input green-text deliv-sum-cell grid-cell" id="deliv_sum_${d}" data-row="17" data-col="${d}" value="0" onfocus="onCellFocus(this)" onkeydown="onGridKeyDown(event, 17, ${d})" oninput="recalculateMasterPlan()">
                                     </td>`);
                                 }
                             </script>
@@ -330,7 +341,7 @@
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     let defaultLot = (d === 4) ? "261001" : (d === 8) ? "261002" : (d === 11) ? "261003" : (d === 14) ? "261004" : (d === 18) ? "261005" : (d === 23) ? "261206" : "";
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input yellow-text" data-addr="E18" value="${defaultLot}" onfocus="onCellFocus(this)">
+                                        <input type="text" class="ex-input yellow-text grid-cell" id="lot_${d}" data-row="18" data-col="${d}" value="${defaultLot}" onfocus="onCellFocus(this)" onkeydown="onGridKeyDown(event, 18, ${d})">
                                     </td>`);
                                 }
                             </script>
@@ -344,7 +355,7 @@
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     let defaultPlan = (d === 4 || d === 8 || d === 11 || d === 14 || d === 18 || d === 23) ? 1200 : "";
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input blue-text plan-prod-cell" data-day="${d}" data-addr="E19" value="${defaultPlan}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                        <input type="text" class="ex-input blue-text plan-prod-cell grid-cell" id="plan_${d}" data-row="19" data-col="${d}" value="${defaultPlan}" onfocus="onCellFocus(this)" onkeydown="onGridKeyDown(event, 19, ${d})" oninput="recalculateMasterPlan()">
                                     </td>`);
                                 }
                             </script>
@@ -354,14 +365,14 @@
                             <td class="excel-row-header">20</td>
                             <td rowspan="3" style="font-weight:bold; font-size:16px;">Stock/Pcs.</td>
                             <td rowspan="3" style="font-weight:bold;">
-                                <input type="text" class="ex-input green-text" id="startStockVal" value="2500" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                <input type="text" class="ex-input green-text grid-cell" id="startStockVal" data-row="20" data-col="0" value="2500" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
                             </td>
                             <td colspan="2" style="font-weight:bold; text-align:left; padding-left:12px; font-size:16px;" class="text-info">ยอดการผลิต OK</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input blue-text act-prod-cell" data-day="${d}" data-addr="E20" value="" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                        <input type="text" class="ex-input blue-text act-prod-cell grid-cell" id="prod_${d}" data-row="20" data-col="${d}" value="" onfocus="onCellFocus(this)" onkeydown="onGridKeyDown(event, 20, ${d})" oninput="recalculateMasterPlan()">
                                     </td>`);
                                 }
                             </script>
@@ -375,7 +386,7 @@
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     let defaultNg = (d === 28) ? "508" : "";
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input red-text act-ng-cell" data-day="${d}" data-addr="E21" value="${defaultNg}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                        <input type="text" class="ex-input red-text act-ng-cell grid-cell" id="ng_${d}" data-row="21" data-col="${d}" value="${defaultNg}" onfocus="onCellFocus(this)" onkeydown="onGridKeyDown(event, 21, ${d})" oninput="recalculateMasterPlan()">
                                     </td>`);
                                 }
                             </script>
@@ -388,7 +399,7 @@
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input bl-result-cell" id="bl_day_${d}" data-addr="E22" value="0" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                        <input type="text" class="ex-input bl-result-cell grid-cell" id="bl_day_${d}" data-row="22" data-col="${d}" value="0" onfocus="onCellFocus(this)" onkeydown="onGridKeyDown(event, 22, ${d})">
                                     </td>`);
                                 }
                             </script>
@@ -526,14 +537,57 @@
         function onCellFocus(el) {
             activeInputEl = el;
             document.getElementById('formulaBar').value = el.value;
-            document.getElementById('activeCellAddr').innerText = el.dataset.addr || "Cell";
+            let r = el.dataset.row;
+            let c = el.dataset.col;
+            document.getElementById('activeCellAddr').innerText = `R${r}C${c}`;
             el.select();
         }
 
-        function onFormulaBarInput(val) {
+        document.getElementById('formulaBar').addEventListener('input', function(e) {
             if (activeInputEl) {
-                activeInputEl.value = val;
+                activeInputEl.value = e.target.value;
                 recalculateMasterPlan();
+            }
+        });
+
+        function onGridKeyDown(event, row, col) {
+            let targetRow = row;
+            let targetCol = col;
+
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                targetRow = row + 1;
+            } else if (event.key === 'Tab') {
+                event.preventDefault();
+                targetCol = col + 1;
+            } else if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                targetRow = row + 1;
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                targetRow = row - 1;
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                targetCol = col + 1;
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                targetCol = col - 1;
+            } else {
+                return;
+            }
+
+            let nextInput = document.querySelector(`.grid-cell[data-row="${targetRow}"][data-col="${targetCol}"]`);
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+
+        function onFormulaBarKeyDown(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                if (activeInputEl) {
+                    activeInputEl.focus();
+                }
             }
         }
 
@@ -568,7 +622,7 @@
                 const sumCell = document.getElementById(`deliv_sum_${d}`);
                 if (sumCell) sumCell.value = delivSum;
 
-                const prodInp = document.querySelector(`.act-prod-cell[data-day="${d}"]`);
+                const prodInp = document.getElementById(`prod_${d}`);
                 let prodVal = evaluateCellFormula(prodInp?.value || "0");
 
                 if (typeof prodVal === 'number') totalActualMonth += prodVal;
@@ -580,7 +634,7 @@
                 const blCell = document.getElementById(`bl_day_${d}`);
                 if (blCell) {
                     blCell.value = currentBL;
-                    blCell.className = currentBL < 0 ? 'ex-input red-text bl-result-cell' : 'ex-input blue-text bl-result-cell';
+                    blCell.className = currentBL < 0 ? 'ex-input red-text bl-result-cell grid-cell' : 'ex-input blue-text bl-result-cell grid-cell';
                 }
             }
 
