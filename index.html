@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
@@ -7,17 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { 
-            background-color: #080c14; 
-            color: #f1f5f9; 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            font-size: 14px; 
-        }
+        body { background-color: #080c14; color: #f1f5f9; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; }
         .navbar-custom { background-color: #0f172a; border-bottom: 2px solid #dc2626; }
         .card-custom { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; }
         
         .nav-main-grid {
-            display: grid; grid-template-columns: repeat(9, 1fr); gap: 10px;
+            display: grid; grid-template-columns: repeat(9, 1fr); gap: 8px;
             margin-bottom: 20px; padding: 0; list-style: none;
         }
         @media (max-width: 1400px) { .nav-main-grid { grid-template-columns: repeat(5, 1fr); } }
@@ -26,10 +21,10 @@
         .nav-main-grid .nav-btn {
             width: 100%; height: 56px;
             background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
-            color: #f8fafc; font-weight: 800; font-size: 13px;
+            color: #f8fafc; font-weight: 800; font-size: 12px;
             border: 1px solid #475569; border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
-            text-align: center; cursor: pointer; padding: 4px;
+            text-align: center; cursor: pointer; padding: 2px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         .nav-main-grid .nav-btn.active {
@@ -41,7 +36,7 @@
         .tab-pane-content { display: none !important; }
         .tab-pane-content.active { display: block !important; }
 
-        /* Formula Bar - Dark Mode */
+        /* Formula Bar */
         .formula-bar-box {
             display: flex; align-items: center; gap: 10px;
             background-color: #0f172a; border: 1px solid #334155;
@@ -53,7 +48,7 @@
             font-family: monospace; font-weight: bold; font-size: 15px;
         }
 
-        /* Dark Theme Excel Spreadsheet Grid */
+        /* Excel Spreadsheet Grid */
         .excel-table-container {
             background-color: #0f172a; color: #f8fafc;
             border: 1px solid #334155; border-radius: 8px; padding: 12px; overflow-x: auto;
@@ -67,25 +62,15 @@
             padding: 4px 6px; height: 32px; white-space: nowrap; color: #f1f5f9;
         }
 
-        /* Column Headers & Row Numbers */
-        .excel-col-header { 
-            background-color: #1e293b !important; color: #94a3b8 !important; 
-            font-weight: bold; border: 1px solid #334155 !important; font-size: 11px; 
-        }
-        .excel-row-header { 
-            background-color: #1e293b !important; color: #94a3b8 !important; 
-            font-weight: bold; border: 1px solid #334155 !important; width: 32px; font-size: 11px; 
-        }
+        .excel-col-header { background-color: #1e293b !important; color: #94a3b8 !important; font-weight: bold; border: 1px solid #334155 !important; font-size: 11px; }
+        .excel-row-header { background-color: #1e293b !important; color: #94a3b8 !important; font-weight: bold; border: 1px solid #334155 !important; width: 32px; font-size: 11px; }
 
-        /* Dark Header Blocks */
         .hdr-title { font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #f8fafc; }
         .hdr-box-title { background-color: #1e293b; font-weight: bold; font-size: 12px; color: #cbd5e1; }
         .hdr-box-val { background-color: #0f172a; font-weight: bold; font-size: 13px; color: #38bdf8; }
         
-        /* Sun Sunday Striped Columns */
         .sun-col-bg { background-color: #334155 !important; color: #94a3b8; }
 
-        /* Larger High-Contrast Inputs */
         .ex-input {
             width: 100%; height: 100%; background: transparent; border: none;
             text-align: center; font-size: 14px; font-weight: bold; color: #38bdf8; outline: none; padding: 0;
@@ -98,6 +83,10 @@
         .blue-text { color: #60a5fa !important; font-weight: bold; }
         .green-text { color: #4ade80 !important; font-weight: bold; }
         .yellow-text { color: #fbbf24 !important; font-weight: bold; }
+
+        .summary-table th { background-color: #334155; color: #fff; text-align: center; padding: 10px; font-size: 13px; }
+        .summary-table td { background-color: #1e293b; color: #f8fafc; text-align: center; padding: 8px; border: 1px solid #334155; font-size: 13px; }
+        .module-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -122,7 +111,7 @@
         <ul class="nav-main-grid">
             <li><button class="nav-btn active" data-tab="tab-dashboard">Dashboard</button></li>
             <li><button class="nav-btn" data-tab="tab-planning">Planning (Master Plan)</button></li>
-            <li><button class="nav-btn" data-tab="tab-component">รับ component<br>ส่งชุบ - รับชุบ</button></li>
+            <li><button class="nav-btn" data-tab="tab-plating-log">รับ component<br>ส่งชุบ - รับชุบ</button></li>
             <li><button class="nav-btn" data-tab="tab-stock-component">Stock Component</button></li>
             <li><button class="nav-btn" data-tab="tab-report">รายงานการผลิต</button></li>
             <li><button class="nav-btn" data-tab="tab-stock-fg">Stock F/G</button></li>
@@ -132,6 +121,7 @@
         </ul>
 
         <!-- TAB CONTENTS -->
+
         <!-- 1. Dashboard -->
         <div id="tab-dashboard" class="tab-pane-content active">
             <div class="row g-3 mb-3">
@@ -160,19 +150,44 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Dashboard Sub-Modules Summary Card matching flow -->
+            <div class="row g-3 mb-3">
+                <div class="col-md-4">
+                    <div class="module-box">
+                        <h5 class="text-warning fw-bold mb-3">📋 Master Plan & BL Stock</h5>
+                        <p class="text-light small">ข้อมูลคีย์จากลูกค้า, แผนผลิต, ยอดผลิต OK-NG, และ BL stock คงเหลือคำนวณอัตโนมัติหลังคีย์จัดส่ง</p>
+                        <button class="btn btn-sm btn-outline-warning fw-bold" onclick="switchTab('tab-planning')">เปิดตาราง Master Plan</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="module-box">
+                        <h5 class="text-info fw-bold mb-3">⚙️ Material Plan</h5>
+                        <p class="text-light small">คำนวณความต้องการชิ้นส่วน Component / แผนรับ - รับจริง เท่าไร ในแต่ละวัน</p>
+                        <button class="btn btn-sm btn-outline-info fw-bold" onclick="switchTab('tab-stock-component')">ดู Material Stock</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="module-box">
+                        <h5 class="text-success fw-bold mb-3">🏭 Plating Plan</h5>
+                        <p class="text-light small">แผนและการรับส่งจริง งานชุบ และยอดคงเหลือที่โรงชุบเท่าไร</p>
+                        <button class="btn btn-sm btn-outline-success fw-bold" onclick="switchTab('tab-plating-log')">ดู Log ส่งชุบ</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="card card-custom p-3">
                 <h6 class="text-light mb-2 fw-bold fs-6">📈 ติดตามยอดผลิตรายชั่วโมง (Hourly Output)</h6>
-                <canvas id="hourlyChart" height="100"></canvas>
+                <canvas id="hourlyChart" height="90"></canvas>
             </div>
         </div>
 
-        <!-- 2. Planning (Master Plan 1:1 Excel Form in Dark Mode with Large Font) -->
+        <!-- 2. Planning (Master Plan) -->
         <div id="tab-planning" class="tab-pane-content">
-            
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center gap-2">
-                    <span class="badge bg-danger fs-6">Master Plan (Dark Theme)</span>
-                    <span class="text-light fs-6">พิมพ์แก้ไขและคีย์สูตร = ได้ทุกช่องอิสระเหมือน Excel</span>
+                    <span class="badge bg-danger fs-6">Master Plan (Excel 1:1)</span>
+                    <span class="text-light fs-6">พิมพ์แก้ไขและคีย์สูตร = ได้ทุกช่องอิสระ</span>
                 </div>
                 <div class="d-flex gap-2">
                     <button class="btn btn-success fw-bold px-3" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
@@ -184,7 +199,7 @@
             <div class="formula-bar-box">
                 <span class="text-warning fw-bold fs-5"><i>fx</i></span>
                 <span class="text-light fw-bold fs-5" id="activeCellAddr" style="width: 70px;">-</span>
-                <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข ข้อความ หรือสูตร เช่น =SUM(...) หรือ =2500-807" oninput="onFormulaBarInput(this.value)">
+                <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข หรือสูตร เช่น =SUM(...) หรือ =2500-807" oninput="onFormulaBarInput(this.value)">
             </div>
 
             <!-- Excel Table Sheet Container -->
@@ -197,7 +212,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Row 1: Logo & Title -->
                         <tr>
                             <td class="excel-row-header">1</td>
                             <td colspan="4" style="background:#1e293b; vertical-align:middle; text-align:left;">
@@ -215,7 +229,6 @@
                             <td class="hdr-box-title">Check</td>
                             <td class="hdr-box-title">Issue</td>
                         </tr>
-                        <!-- Row 2: Metadata values -->
                         <tr>
                             <td class="excel-row-header">2</td>
                             <td colspan="4"></td>
@@ -228,8 +241,6 @@
                             <td colspan="4" style="text-align:left; font-size:10px; color:#cbd5e1;">Pro................. Delivery .................<br>PPC................. QA .................</td>
                             <td></td><td></td><td></td>
                         </tr>
-
-                        <!-- Row 3 & 4: Headers for Days -->
                         <tr style="font-weight:bold; background:#1e293b;">
                             <td class="excel-row-header">3</td>
                             <td rowspan="2" style="width:40px; font-size:13px;">Item</td>
@@ -246,7 +257,6 @@
                             <td>N+1</td><td>N+2</td><td>N+3</td>
                         </tr>
 
-                        <!-- Rows 5 to 16: Location Data Rows -->
                         <script>
                             const locations = [
                                 "05504 L3ME01", "05120 L3BE01", "05505 L3SP01", "05503 L2AF01",
@@ -280,7 +290,7 @@
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     const val = rowData[d - 1] || 0;
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input loc-input" data-day="${d}" data-addr="E${rowIndex}" value="${val > 0 ? val : ''}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                        <input type="text" class="ex-input loc-input" data-loc="${loc}" data-day="${d}" data-addr="E${rowIndex}" value="${val > 0 ? val : ''}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
                                     </td>`);
                                 }
 
@@ -295,7 +305,6 @@
                             });
                         </script>
 
-                        <!-- Row 17: Plan Delivery/Day -->
                         <tr style="background:#1e293b;">
                             <td class="excel-row-header">17</td>
                             <td colspan="3" style="font-weight:bold; font-size:13px;" class="text-success">Plan Delivery/Day</td>
@@ -310,8 +319,6 @@
                             </script>
                             <td colspan="4"></td>
                         </tr>
-
-                        <!-- Row 18: Lot No Production -->
                         <tr>
                             <td class="excel-row-header">18</td>
                             <td colspan="4" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-warning">Lot No Production ( ปี-เดือน-ล็อต)</td>
@@ -326,8 +333,6 @@
                             </script>
                             <td colspan="4"></td>
                         </tr>
-
-                        <!-- Row 19: แผนการผลิต/วัน -->
                         <tr>
                             <td class="excel-row-header">19</td>
                             <td colspan="4" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-info">แผนการผลิต/วัน</td>
@@ -336,14 +341,12 @@
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     let defaultPlan = (d === 4 || d === 8 || d === 11 || d === 14 || d === 18 || d === 23) ? 1200 : "";
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input blue-text" data-addr="E19" value="${defaultPlan}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                        <input type="text" class="ex-input blue-text plan-prod-cell" data-day="${d}" data-addr="E19" value="${defaultPlan}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
                                     </td>`);
                                 }
                             </script>
                             <td colspan="4"></td>
                         </tr>
-
-                        <!-- Row 20: Stock/Pcs. & ยอดการผลิต OK -->
                         <tr>
                             <td class="excel-row-header">20</td>
                             <td rowspan="3" style="font-weight:bold; font-size:13px;">Stock/Pcs.</td>
@@ -361,8 +364,6 @@
                             </script>
                             <td colspan="4"></td>
                         </tr>
-
-                        <!-- Row 21: ยอดการผลิต NG -->
                         <tr>
                             <td class="excel-row-header">21</td>
                             <td colspan="2" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-danger">ยอดการผลิต NG</td>
@@ -371,14 +372,12 @@
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     let defaultNg = (d === 28) ? "508" : "";
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input red-text" data-addr="E21" value="${defaultNg}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                        <input type="text" class="ex-input red-text act-ng-cell" data-day="${d}" data-addr="E21" value="${defaultNg}" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
                                     </td>`);
                                 }
                             </script>
                             <td colspan="4"></td>
                         </tr>
-
-                        <!-- Row 22: จำนวนงานคงเหลือ (Balance B/L) -->
                         <tr>
                             <td class="excel-row-header">22</td>
                             <td colspan="2" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-danger">จำนวนงานคงเหลือ</td>
@@ -395,17 +394,216 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
 
-        <!-- 3-9 Other Modules -->
-        <div id="tab-component" class="tab-pane-content"><div class="card card-custom p-4"><h5>📦 บันทึกรับเข้า Component และงานชุบ</h5></div></div>
-        <div id="tab-stock-component" class="tab-pane-content"><div class="card card-custom p-4"><h5>📦 ตารางสต็อกชิ้นส่วน Component</h5></div></div>
-        <div id="tab-report" class="tab-pane-content"><div class="card card-custom p-4"><h5>📊 รายงานผลการผลิต</h5></div></div>
-        <div id="tab-stock-fg" class="tab-pane-content"><div class="card card-custom p-4"><h5>🏭 คลังสินค้าสำเร็จรูป (Finished Goods Stock)</h5></div></div>
-        <div id="tab-delivery" class="tab-pane-content"><div class="card card-custom p-4"><h5>🚚 บันทึกการจัดส่งสินค้า</h5></div></div>
-        <div id="tab-capacity" class="tab-pane-content"><div class="card card-custom p-4"><h5>⚡ กำลังการผลิต (Capacity Management)</h5></div></div>
-        <div id="tab-pm" class="tab-pane-content"><div class="card card-custom p-4"><h5>🛠️ แผนบำรุงรักษาเครื่องจักรและ Jig</h5></div></div>
+        <!-- 3. รับ component (ส่งชุบ - รับชุบ) [Plating Log & Component Receiving] -->
+        <div id="tab-plating-log" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h4 class="text-white fw-bold mb-2">🔄 ระบบรับเข้า Component และงานชุบ (Plating & Component Log)</h4>
+                <p class="text-light small">บันทึก Log ส่งชุบ, Log รับชุบ และรับ Component พร้อมตรวจสอบยอดคงเหลือที่โรงชุบ</p>
+                <div class="row g-3 mt-3">
+                    <div class="col-md-6">
+                        <div class="module-box">
+                            <h5 class="text-success fw-bold">📤 Log ส่งชุบ (Plating Outbound)</h5>
+                            <p class="text-light small">บันทึกรายการส่งชิ้นส่วนชุบเคลือบผิว (MFZn2-HC)</p>
+                            <button class="btn btn-sm btn-success fw-bold" onclick="alert('บันทึก Log ส่งชุบสำเร็จ!')">+ เพิ่มรายการส่งชุบ</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="module-box">
+                            <h5 class="text-info fw-bold">📥 Log รับชุบ + รับ Component</h5>
+                            <p class="text-light small">บันทึกรับคืนจากโรงชุบและรับชิ้นส่วนจาก Supplier</p>
+                            <button class="btn btn-sm btn-info fw-bold" onclick="alert('บันทึก Log รับชุบสำเร็จ!')">+ เพิ่มรายการรับเข้า</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Stock Component [Material Plan & Component Stock] -->
+        <div id="tab-stock-component" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h4 class="text-white fw-bold mb-2">📦 Stock Component & Material Plan</h4>
+                <p class="text-light small">ทุกรายการเข้า Stock ทั้งงานชุบและ Component พร้อมคำนวณ Material Plan ความต้องการชิ้นส่วน</p>
+                <div class="table-responsive mt-3">
+                    <table class="table table-dark table-bordered summary-table">
+                        <thead>
+                            <tr>
+                                <th>Item Code</th>
+                                <th>Part Name / Description</th>
+                                <th>Type</th>
+                                <th>Safety Stock</th>
+                                <th>Stock คงเหลือจริง</th>
+                                <th>สถานะวัตถุดิบ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-warning fw-bold">17623-Z4H-9000</td>
+                                <td>COIL SPRING (FUEL CAP)</td>
+                                <td>Component</td>
+                                <td>1,000</td>
+                                <td class="text-success fw-bold">3,500 Pcs</td>
+                                <td><span class="badge bg-success">พอเพียง (Sufficient)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-warning fw-bold">PLT-ZN02</td>
+                                <td>SHEET METAL BODY (MFZn2-HC)</td>
+                                <td>Plating Part</td>
+                                <td>800</td>
+                                <td class="text-info fw-bold">2,100 Pcs</td>
+                                <td><span class="badge bg-success">พอเพียง (Sufficient)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. รายงานการผลิต [Production Reports] -->
+        <div id="tab-report" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h4 class="text-white fw-bold mb-2">📊 รายงานการผลิต (Production Reports & Log Books)</h4>
+                <div class="row g-3 mt-3">
+                    <div class="col-md-4">
+                        <div class="module-box">
+                            <h5 class="text-warning fw-bold">📄 Product Delivery Report</h5>
+                            <p class="text-light small">รายงานสรุปยอดส่งมอบสินค้าสำเร็จรูปประจำวัน</p>
+                            <button class="btn btn-sm btn-outline-warning" onclick="alert('กำลังดาวน์โหลด Product Delivery Report...')">ดาวน์โหลดรายงาน</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="module-box">
+                            <h5 class="text-info fw-bold">📑 ใบเตรียมชิ้นส่วน</h5>
+                            <p class="text-light small">ใบรายงานการเบิกและเตรียมชิ้นส่วนเข้าไลน์ประกอบ</p>
+                            <button class="btn btn-sm btn-outline-info" onclick="alert('กำลังเปิดใบเตรียมชิ้นส่วน...')">เปิดเอกสาร</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="module-box">
+                            <h5 class="text-success fw-bold">📖 Log Book นำชิ้นงานประกอบ</h5>
+                            <p class="text-light small">บันทึกการนำชิ้นงานเข้าไลน์ประกอบระบุ Lot No</p>
+                            <button class="btn btn-sm btn-outline-success" onclick="alert('เปิด Log Book ประกอบ...')">เปิด Log Book</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Stock F/G [Finished Goods Stock] -->
+        <div id="tab-stock-fg" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h4 class="text-white fw-bold mb-2">🏭 คลังสินค้าสำเร็จรูป (Stock F/G - Cap Comp)</h4>
+                <p class="text-light small">จัดการสต็อกสินค้าสำเร็จรูป Assembly Cap Comp พร้อมส่งมอบ</p>
+                <div class="table-responsive mt-3">
+                    <table class="table table-dark table-bordered summary-table">
+                        <thead>
+                            <tr>
+                                <th>Part No.</th>
+                                <th>Part Name</th>
+                                <th>Lot No.</th>
+                                <th>Location คลัง</th>
+                                <th>จำนวนในคลัง (Pcs)</th>
+                                <th>สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-warning fw-bold">17620-Z1T-8010</td>
+                                <td>CAP COMP FUEL FILLER</td>
+                                <td>261001</td>
+                                <td>WH-A01</td>
+                                <td class="text-success fw-bold">2,500 Pcs</td>
+                                <td><span class="badge bg-success">พร้อมส่ง</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Delivery [Shipping & Delivery] -->
+        <div id="tab-delivery" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h4 class="text-white fw-bold mb-2">🚚 บันทึกและจัดการการจัดส่งสินค้า (Delivery Management)</h4>
+                <p class="text-light small">บันทึกรายการจัดส่งสินค้าประจำวันให้ลูกค้า Thai Honda</p>
+                <button class="btn btn-success fw-bold mb-3" onclick="alert('บันทึกจัดส่งสำเร็จ!')">+ บันทึกรายการจัดส่งใหม่</button>
+                <div class="table-responsive">
+                    <table class="table table-dark table-bordered summary-table">
+                        <thead>
+                            <tr>
+                                <th>วันที่ส่ง</th>
+                                <th>Customer</th>
+                                <th>Part No.</th>
+                                <th>จำนวนส่ง (Pcs)</th>
+                                <th>Time</th>
+                                <th>สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01 NOV'26</td>
+                                <td>THAI HONDA</td>
+                                <td>17620-Z1T-8010</td>
+                                <td class="text-success fw-bold">807 Pcs</td>
+                                <td>11:00</td>
+                                <td><span class="badge bg-success">Delivered</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Capacity [Capacity Management] -->
+        <div id="tab-capacity" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h4 class="text-white fw-bold mb-2">⚡ กำลังการผลิต (Capacity: Ass'y / Part / Machine)</h4>
+                <div class="row g-3 mt-2">
+                    <div class="col-md-4">
+                        <div class="module-box text-center">
+                            <h5 class="text-primary fw-bold">Ass'y Line Capacity</h5>
+                            <h3 class="text-white fw-bold mt-3">1,500 Pcs/Day</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="module-box text-center">
+                            <h5 class="text-success fw-bold">Part Process Capacity</h5>
+                            <h3 class="text-white fw-bold mt-3">1,800 Pcs/Day</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="module-box text-center">
+                            <h5 class="text-warning fw-bold">Machine Capacity</h5>
+                            <h3 class="text-white fw-bold mt-3">95.5% OEE</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. PM Machine / Jig [Preventive Maintenance] -->
+        <div id="tab-pm" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h4 class="text-white fw-bold mb-2">🛠️ แผนบำรุงรักษาเครื่องจักรและ Jig (PM Machine & Jig)</h4>
+                <div class="row g-3 mt-2">
+                    <div class="col-md-6">
+                        <div class="module-box">
+                            <h5 class="text-warning fw-bold">🔧 Jig Maintenance Schedule</h5>
+                            <p class="text-light small">ตรวจสอบและซ่อมบำรุง Jig ประกอบประจำสัปดาห์/เดือน</p>
+                            <button class="btn btn-sm btn-outline-warning" onclick="alert('เปิดตาราง PM Jig')">ดูแผน PM Jig</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="module-box">
+                            <h5 class="text-danger fw-bold">⚙️ Machine Maintenance</h5>
+                            <p class="text-light small">แผน Overhaul และบำรุงรักษาเครื่องจักรในสายการผลิต</p>
+                            <button class="btn btn-sm btn-outline-danger" onclick="alert('เปิดตาราง PM Machine')">ดูแผน PM Machine</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -449,22 +647,21 @@
             }
         }
 
+        function switchTab(tabId) {
+            const buttons = document.querySelectorAll('.nav-btn');
+            const tabs = document.querySelectorAll('.tab-pane-content');
+            buttons.forEach(b => {
+                if (b.getAttribute('data-tab') === tabId) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+            tabs.forEach(t => {
+                if (t.id === tabId) t.classList.add('active');
+                else t.classList.remove('active');
+            });
+        }
+
         function recalculateMasterPlan() {
             let totalActualMonth = 0;
-
-            // 1. Calculate Plan Delivery/Day
-            for (let d = 1; d <= 31; d++) {
-                let sum = 0;
-                const locInputs = document.querySelectorAll(`.loc-input[data-day="${d}"]`);
-                locInputs.forEach(inp => {
-                    let v = evaluateCellFormula(inp.value);
-                    if (typeof v === 'number') sum += v;
-                });
-                const sumCell = document.getElementById(`deliv_sum_${d}`);
-                if (sumCell) sumCell.value = sum;
-            }
-
-            // 2. Calculate Balance B/L
             let startStockRaw = document.getElementById('startStockVal')?.value || "2500";
             let startStock = evaluateCellFormula(startStockRaw);
             if (typeof startStock !== 'number') startStock = 2500;
@@ -472,15 +669,24 @@
             let currentBL = startStock;
 
             for (let d = 1; d <= 31; d++) {
-                let deliv = evaluateCellFormula(document.getElementById(`deliv_sum_${d}`)?.value || "0");
+                let delivSum = 0;
+                locations.forEach(loc => {
+                    const inp = document.querySelector(`.loc-input[data-loc="${loc}"][data-day="${d}"]`);
+                    let val = evaluateCellFormula(inp?.value || "0");
+                    if (typeof val === 'number') delivSum += val;
+                });
+                const sumCell = document.getElementById(`deliv_sum_${d}`);
+                if (sumCell) sumCell.value = delivSum;
+
                 const prodInp = document.querySelector(`.act-prod-cell[data-day="${d}"]`);
-                let prod = evaluateCellFormula(prodInp?.value || "0");
+                let prodVal = evaluateCellFormula(prodInp?.value || "0");
 
-                if (typeof prod === 'number') totalActualMonth += prod;
-                if (typeof deliv !== 'number') deliv = 0;
-                if (typeof prod !== 'number') prod = 0;
+                if (typeof prodVal === 'number') totalActualMonth += prodVal;
+                if (typeof delivSum !== 'number') delivSum = 0;
+                if (typeof prodVal !== 'number') prodVal = 0;
 
-                currentBL = currentBL + prod - deliv;
+                // สูตร: Stock ต้นเดือน + ยอดผลิต - ยอดส่งประจำวัน
+                currentBL = currentBL + prodVal - delivSum;
 
                 const blCell = document.getElementById(`bl_day_${d}`);
                 if (blCell) {
@@ -489,13 +695,11 @@
                 }
             }
 
-            // Update Dashboard Stats
             const dashProdEl = document.getElementById('dashProdActual');
             if (dashProdEl) dashProdEl.innerHTML = `${totalActualMonth.toLocaleString()} <small class="fs-6 text-light">/ 9,723 Pcs</small>`;
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Tab Switcher
             const buttons = document.querySelectorAll('.nav-btn');
             const tabs = document.querySelectorAll('.tab-pane-content');
 
@@ -510,7 +714,6 @@
                 });
             });
 
-            // Clock
             function updateClock() {
                 const now = new Date();
                 const clockEl = document.getElementById('clock');
@@ -521,7 +724,6 @@
 
             recalculateMasterPlan();
 
-            // Hourly Chart
             const ctx = document.getElementById('hourlyChart');
             if (ctx) {
                 new Chart(ctx.getContext('2d'), {
@@ -540,4 +742,4 @@
         });
     </script>
 </body>
-</html>      
+</html>
