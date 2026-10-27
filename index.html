@@ -112,12 +112,12 @@
         <ul class="nav-main-grid">
             <li><button class="nav-btn active" data-tab="tab-dashboard">Dashboard</button></li>
             <li><button class="nav-btn" data-tab="tab-planning">Planning (3 แผนหลัก)</button></li>
-            <li><button class="nav-btn" data-tab="tab-summary-report">📊 สรุปรายละเอียดแยกตามไลน์</button></li>
             <li><button class="nav-btn" data-tab="tab-plating-log">รับ component<br>ส่งชุบ - รับชุบ</button></li>
             <li><button class="nav-btn" data-tab="tab-stock-component">Stock Component</button></li>
             <li><button class="nav-btn" data-tab="tab-report">รายงานการผลิต</button></li>
             <li><button class="nav-btn" data-tab="tab-stock-fg">Stock F/G</button></li>
             <li><button class="nav-btn" data-tab="tab-delivery">Delivery</button></li>
+            <li><button class="nav-btn" data-tab="tab-capacity">Capacity</button></li>
             <li><button class="nav-btn" data-tab="tab-pm">PM Machine /Jig</button></li>
         </ul>
 
@@ -162,16 +162,16 @@
                 </div>
                 <div class="col-md-4">
                     <div class="module-box">
-                        <h3 class="text-info fw-bold mb-3">📊 สรุปรายละเอียดแยกตามไลน์</h3>
-                        <p class="text-light fs-5">รายงานสรุปการจัดส่งประจำวันแยกตาม Location พร้อมเช็ค Stock คงเหลือ</p>
-                        <button class="btn btn-info fw-bold fs-5 px-4 py-2 mt-2 text-dark" onclick="switchTab('tab-summary-report')">ดูรายงานสรุป</button>
+                        <h3 class="text-success fw-bold mb-3">🏭 Plating & Component Log</h3>
+                        <p class="text-light fs-5">บันทึกรับเข้า Component และงานส่งชุบ-รับชุบจริง</p>
+                        <button class="btn btn-success fw-bold fs-5 px-4 py-2 mt-2" onclick="switchTab('tab-plating-log')">ดู Log ส่งชุบ</button>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="module-box">
-                        <h3 class="text-success fw-bold mb-3">🏭 Plating & Component Log</h3>
-                        <p class="text-light fs-5">บันทึกรับเข้า Component และงานส่งชุบ-รับชุบจริง</p>
-                        <button class="btn btn-success fw-bold fs-5 px-4 py-2 mt-2" onclick="switchTab('tab-plating-log')">ดู Log ส่งชุบ</button>
+                        <h3 class="text-info fw-bold mb-3">📦 Stock Component</h3>
+                        <p class="text-light fs-5">ตรวจสอบสต็อกชิ้นส่วนและวัตถุดิบทั้งหมดในระบบ</p>
+                        <button class="btn btn-info fw-bold fs-5 px-4 py-2 mt-2 text-dark" onclick="switchTab('tab-stock-component')">ดู Stock Component</button>
                     </div>
                 </div>
             </div>
@@ -467,43 +467,7 @@
             </div>
         </div>
 
-        <!-- 3. Summary Report Tab -->
-        <div id="tab-summary-report" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h3 class="text-white fw-bold mb-3">📊 รายงานสรุปรายละเอียดประจำวัน (แยกตามไลน์ / Location)</h3>
-                <p class="text-light fs-5">สูตรคำนวณ Stock คงเหลือ: <code class="text-warning">Stock คงเหลือต้นเดือน + ยอดผลิต OK - ยอดส่งประจำวัน</code></p>
-                
-                <h4 class="text-info fw-bold mt-4 mb-3">📌 สรุปยอดรวมภาพรวมประจำวัน</h4>
-                <div class="table-responsive mb-4">
-                    <table class="table table-dark table-bordered summary-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 140px;">วันที่ (Day)</th>
-                                <th>จัดส่งรวมทุกไลน์ (Delivery)</th>
-                                <th>แผนประกอบ (Assembly Plan)</th>
-                                <th>ยอดผลิต OK (Actual OK)</th>
-                                <th>ยอดของเสีย NG (Actual NG)</th>
-                                <th>BL Stock คงเหลือ (Balance)</th>
-                                <th>สถานะสต็อก</th>
-                            </tr>
-                        </thead>
-                        <tbody id="summaryDailyTbody"></tbody>
-                    </table>
-                </div>
-
-                <h4 class="text-success fw-bold mt-4 mb-3">🚚 รายละเอียดการจัดส่งแยกตามไลน์ (Location Delivery Breakdown)</h4>
-                <div class="table-responsive">
-                    <table class="table table-dark table-bordered summary-table" id="locBreakdownTable">
-                        <thead>
-                            <tr id="locBreakdownHeader"></tr>
-                        </thead>
-                        <tbody id="locBreakdownTbody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Other Modules (3 to 9) -->
+        <!-- Other Modules -->
         <div id="tab-plating-log" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <h3 class="text-white fw-bold mb-3">🔄 ระบบรับเข้า Component และงานชุบ (Plating & Component Log)</h3>
@@ -588,44 +552,24 @@
 
         function recalculateMasterPlan() {
             let totalActualMonth = 0;
-            let dailySummaryHtml = '';
-
             let startStockRaw = document.getElementById('startStockVal')?.value || "2500";
             let startStock = evaluateCellFormula(startStockRaw);
             if (typeof startStock !== 'number') startStock = 2500;
 
             let currentBL = startStock;
 
-            let locHeaderHtml = `<th>วันที่ (Day)</th>`;
-            locations.forEach(loc => { locHeaderHtml += `<th>${loc}</th>`; });
-            locHeaderHtml += `<th>รวมส่งประจำวัน</th>`;
-            document.getElementById('locBreakdownHeader').innerHTML = locHeaderHtml;
-
-            let locBreakdownHtml = '';
-
             for (let d = 1; d <= 31; d++) {
                 let delivSum = 0;
-                let dayLocValues = {};
-
                 locations.forEach(loc => {
                     const inp = document.querySelector(`.loc-input[data-loc="${loc}"][data-day="${d}"]`);
                     let val = evaluateCellFormula(inp?.value || "0");
-                    if (typeof val !== 'number') val = 0;
-                    dayLocValues[loc] = val;
-                    delivSum += val;
+                    if (typeof val === 'number') delivSum += val;
                 });
-
                 const sumCell = document.getElementById(`deliv_sum_${d}`);
                 if (sumCell) sumCell.value = delivSum;
 
-                const planInp = document.querySelector(`.plan-prod-cell[data-day="${d}"]`);
-                let planVal = evaluateCellFormula(planInp?.value || "0");
-
                 const prodInp = document.querySelector(`.act-prod-cell[data-day="${d}"]`);
                 let prodVal = evaluateCellFormula(prodInp?.value || "0");
-
-                const ngInp = document.querySelector(`.act-ng-cell[data-day="${d}"]`);
-                let ngVal = evaluateCellFormula(ngInp?.value || "0");
 
                 if (typeof prodVal === 'number') totalActualMonth += prodVal;
                 if (typeof delivSum !== 'number') delivSum = 0;
@@ -638,28 +582,7 @@
                     blCell.value = currentBL;
                     blCell.className = currentBL < 0 ? 'ex-input red-text bl-result-cell' : 'ex-input blue-text bl-result-cell';
                 }
-
-                let statusBadge = currentBL < 0 ? '<span class="badge bg-danger fs-5">สต็อกติดลบ</span>' : '<span class="badge bg-success fs-5">ปกติ</span>';
-                dailySummaryHtml += `<tr>
-                    <td class="fw-bold text-warning">${d} NOV'26</td>
-                    <td class="text-success fw-bold">${delivSum.toLocaleString()} Pcs</td>
-                    <td class="text-info fw-bold">${planVal > 0 ? planVal.toLocaleString() + ' Pcs' : '-'}</td>
-                    <td class="text-primary fw-bold">${prodVal > 0 ? prodVal.toLocaleString() + ' Pcs' : '-'}</td>
-                    <td class="text-danger fw-bold">${ngVal > 0 ? ngVal.toLocaleString() + ' Pcs' : '-'}</td>
-                    <td class="fw-bold ${currentBL < 0 ? 'text-danger' : 'text-info'}">${currentBL.toLocaleString()} Pcs</td>
-                    <td>${statusBadge}</td>
-                </tr>`;
-
-                locBreakdownHtml += `<tr><td class="fw-bold text-warning">${d} NOV'26</td>`;
-                locations.forEach(loc => {
-                    let v = dayLocValues[loc];
-                    locBreakdownHtml += `<td>${v > 0 ? v.toLocaleString() : '-'}</td>`;
-                });
-                locBreakdownHtml += `<td class="text-success fw-bold">${delivSum > 0 ? delivSum.toLocaleString() : '-'}</td></tr>`;
             }
-
-            document.getElementById('summaryDailyTbody').innerHTML = dailySummaryHtml;
-            document.getElementById('locBreakdownTbody').innerHTML = locBreakdownHtml;
 
             const dashProdEl = document.getElementById('dashProdActual');
             if (dashProdEl) dashProdEl.innerHTML = `${totalActualMonth.toLocaleString()} <small class="fs-4 text-light">/ 9,723 Pcs</small>`;
