@@ -111,7 +111,7 @@
         <!-- Navigation Bar (9 Modules) -->
         <ul class="nav-main-grid">
             <li><button class="nav-btn active" data-tab="tab-dashboard">Dashboard</button></li>
-            <li><button class="nav-btn" data-tab="tab-planning">Planning (Master/Material/Plating)</button></li>
+            <li><button class="nav-btn" data-tab="tab-planning">Planning (3 แผนหลัก)</button></li>
             <li><button class="nav-btn" data-tab="tab-summary-report">📊 สรุปรายละเอียดแยกตามไลน์</button></li>
             <li><button class="nav-btn" data-tab="tab-plating-log">รับ component<br>ส่งชุบ - รับชุบ</button></li>
             <li><button class="nav-btn" data-tab="tab-stock-component">Stock Component</button></li>
@@ -155,9 +155,9 @@
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <div class="module-box">
-                        <h3 class="text-warning fw-bold mb-3">📋 Master / Material / Plating Plan</h3>
-                        <p class="text-light fs-5">รวมแผนงานหลัก แผนวัตถุดิบ (Material Plan) และแผนงานชุบ (Plating Plan) ในหน้าเดียว</p>
-                        <button class="btn btn-warning fw-bold fs-5 px-4 py-2 mt-2" onclick="switchTab('tab-planning')">เปิดแผนงานทั้งหมด</button>
+                        <h3 class="text-warning fw-bold mb-3">📋 Planning (3 แผนหลัก)</h3>
+                        <p class="text-light fs-5">ควบคุม Master Plan, Material Plan และ Plating Plan ครบถ้วนในหน้าเดียว</p>
+                        <button class="btn btn-warning fw-bold fs-5 px-4 py-2 mt-2" onclick="switchTab('tab-planning')">เปิด 3 แผนงานหลัก</button>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -182,12 +182,12 @@
             </div>
         </div>
 
-        <!-- 2. Planning (Master Plan + Material Plan + Plating Plan) -->
+        <!-- 2. Planning (3 Plans: Master Plan, Material Plan, Plating Plan) -->
         <div id="tab-planning" class="tab-pane-content">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center gap-3">
-                    <span class="badge bg-danger fs-4 px-3 py-2">Master / Material / Plating Plan</span>
-                    <span class="text-light fs-5">ควบคุมแผนการผลิต วัตถุดิบ และงานชุบครบถ้วนในหน้าเดียว (ฟอนต์ใหญ่พิเศษ)</span>
+                    <span class="badge bg-danger fs-4 px-3 py-2">Planning Management (3 แผนหลัก)</span>
+                    <span class="text-light fs-5">1. Master Plan | 2. Material Plan | 3. Plating Plan (ฟอนต์ใหญ่พิเศษ)</span>
                 </div>
                 <div class="d-flex gap-3">
                     <button class="btn btn-success fw-bold px-4 py-2 fs-5" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
@@ -202,8 +202,10 @@
                 <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข หรือสูตร เช่น =SUM(...) หรือ =2500-807" oninput="onFormulaBarInput(this.value)">
             </div>
 
-            <!-- 2.1 MASTER PLAN TABLE -->
-            <h3 class="text-warning fw-bold mb-2">📋 1. Master Plan (Customer Demand & Assembly Production)</h3>
+            <!-- 1. MASTER PLAN -->
+            <div class="p-3 mb-2 bg-dark border border-secondary rounded">
+                <h3 class="text-warning fw-bold m-0">📋 1. Master Plan (Customer Demand & Assembly Production)</h3>
+            </div>
             <div class="excel-table-container">
                 <table class="excel-table" id="excelGrid">
                     <thead>
@@ -396,8 +398,10 @@
                 </table>
             </div>
 
-            <!-- 2.2 MATERIAL PLAN TABLE -->
-            <h3 class="text-info fw-bold mb-2 mt-4">⚙️ 2. Material Plan (Component Requirement & Receiving)</h3>
+            <!-- 2. MATERIAL PLAN -->
+            <div class="p-3 mb-2 bg-dark border border-secondary rounded mt-5">
+                <h3 class="text-info fw-bold m-0">⚙️ 2. Material Plan (Component Requirement & Receiving)</h3>
+            </div>
             <div class="excel-table-container">
                 <table class="excel-table">
                     <thead>
@@ -431,8 +435,10 @@
                 </table>
             </div>
 
-            <!-- 2.3 PLATING PLAN TABLE -->
-            <h3 class="text-success fw-bold mb-2 mt-4">🏭 3. Plating Plan (Plating Outbound, Inbound & Balance at Plating Factory)</h3>
+            <!-- 3. PLATING PLAN -->
+            <div class="p-3 mb-2 bg-dark border border-secondary rounded mt-5">
+                <h3 class="text-success fw-bold m-0">🏭 3. Plating Plan (Plating Outbound, Inbound & Balance at Plating Factory)</h3>
+            </div>
             <div class="excel-table-container">
                 <table class="excel-table">
                     <thead>
