@@ -36,7 +36,7 @@
         .tab-pane-content { display: none !important; }
         .tab-pane-content.active { display: block !important; }
 
-        /* Formula Bar - Extra Large */
+        /* Formula Bar */
         .formula-bar-box {
             display: flex; align-items: center; gap: 12px;
             background-color: #0f172a; border: 2px solid #475569;
@@ -48,11 +48,12 @@
             font-family: monospace; font-weight: 900; font-size: 20px;
         }
 
-        /* Excel Spreadsheet Grid - Giant Font & Bold */
+        /* Excel Spreadsheet Grid */
         .excel-table-container {
             background-color: #0f172a; color: #f8fafc;
             border: 2px solid #475569; border-radius: 10px; padding: 16px; overflow-x: auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            margin-bottom: 25px;
         }
         .excel-table {
             border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; font-size: 18px;
@@ -110,7 +111,7 @@
         <!-- Navigation Bar (9 Modules) -->
         <ul class="nav-main-grid">
             <li><button class="nav-btn active" data-tab="tab-dashboard">Dashboard</button></li>
-            <li><button class="nav-btn" data-tab="tab-planning">Planning (Master Plan)</button></li>
+            <li><button class="nav-btn" data-tab="tab-planning">Planning (Master/Material/Plating)</button></li>
             <li><button class="nav-btn" data-tab="tab-summary-report">📊 สรุปรายละเอียดแยกตามไลน์</button></li>
             <li><button class="nav-btn" data-tab="tab-plating-log">รับ component<br>ส่งชุบ - รับชุบ</button></li>
             <li><button class="nav-btn" data-tab="tab-stock-component">Stock Component</button></li>
@@ -154,9 +155,9 @@
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <div class="module-box">
-                        <h3 class="text-warning fw-bold mb-3">📋 Master Plan & BL Stock</h3>
-                        <p class="text-light fs-5">ข้อมูลคีย์จากลูกค้า, แผนผลิต, ยอดผลิต OK-NG, และ BL stock คงเหลือคำนวณอัตโนมัติ</p>
-                        <button class="btn btn-warning fw-bold fs-5 px-4 py-2 mt-2" onclick="switchTab('tab-planning')">เปิดตาราง Master Plan</button>
+                        <h3 class="text-warning fw-bold mb-3">📋 Master / Material / Plating Plan</h3>
+                        <p class="text-light fs-5">รวมแผนงานหลัก แผนวัตถุดิบ (Material Plan) และแผนงานชุบ (Plating Plan) ในหน้าเดียว</p>
+                        <button class="btn btn-warning fw-bold fs-5 px-4 py-2 mt-2" onclick="switchTab('tab-planning')">เปิดแผนงานทั้งหมด</button>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -168,8 +169,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="module-box">
-                        <h3 class="text-success fw-bold mb-3">🏭 Plating Plan</h3>
-                        <p class="text-light fs-5">แผนและการรับส่งจริง งานชุบ และยอดคงเหลือที่โรงชุบเท่าไร</p>
+                        <h3 class="text-success fw-bold mb-3">🏭 Plating & Component Log</h3>
+                        <p class="text-light fs-5">บันทึกรับเข้า Component และงานส่งชุบ-รับชุบจริง</p>
                         <button class="btn btn-success fw-bold fs-5 px-4 py-2 mt-2" onclick="switchTab('tab-plating-log')">ดู Log ส่งชุบ</button>
                     </div>
                 </div>
@@ -181,12 +182,12 @@
             </div>
         </div>
 
-        <!-- 2. Planning (Master Plan) -->
+        <!-- 2. Planning (Master Plan + Material Plan + Plating Plan) -->
         <div id="tab-planning" class="tab-pane-content">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center gap-3">
-                    <span class="badge bg-danger fs-4 px-3 py-2">Master Plan (Excel 1:1)</span>
-                    <span class="text-light fs-5">พิมพ์แก้ไขและคีย์สูตร = ได้ทุกช่องอิสระ (ข้อมูลตรึงถาวรไม่หาย)</span>
+                    <span class="badge bg-danger fs-4 px-3 py-2">Master / Material / Plating Plan</span>
+                    <span class="text-light fs-5">ควบคุมแผนการผลิต วัตถุดิบ และงานชุบครบถ้วนในหน้าเดียว (ฟอนต์ใหญ่พิเศษ)</span>
                 </div>
                 <div class="d-flex gap-3">
                     <button class="btn btn-success fw-bold px-4 py-2 fs-5" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
@@ -201,7 +202,8 @@
                 <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข หรือสูตร เช่น =SUM(...) หรือ =2500-807" oninput="onFormulaBarInput(this.value)">
             </div>
 
-            <!-- Excel Table Sheet Container -->
+            <!-- 2.1 MASTER PLAN TABLE -->
+            <h3 class="text-warning fw-bold mb-2">📋 1. Master Plan (Customer Demand & Assembly Production)</h3>
             <div class="excel-table-container">
                 <table class="excel-table" id="excelGrid">
                     <thead>
@@ -389,6 +391,70 @@
                                 }
                             </script>
                             <td colspan="4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 2.2 MATERIAL PLAN TABLE -->
+            <h3 class="text-info fw-bold mb-2 mt-4">⚙️ 2. Material Plan (Component Requirement & Receiving)</h3>
+            <div class="excel-table-container">
+                <table class="excel-table">
+                    <thead>
+                        <tr style="background:#1e293b; font-weight:bold;">
+                            <th style="width: 180px;">Part No. / Item</th>
+                            <th>รายการวัตถุดิบ / ชิ้นส่วน</th>
+                            <th>ความต้องการชิ้นส่วน (Req)</th>
+                            <th>แผนรับ (Plan Receive)</th>
+                            <th>รับจริง (Actual Receive)</th>
+                            <th>Stock คงเหลือ (Balance)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-warning fw-bold">17623-Z4H-9000</td>
+                            <td style="text-align:left; padding-left:12px;">COIL SPRING (FUEL CAP)</td>
+                            <td><input type="text" class="ex-input" value="9,723"></td>
+                            <td><input type="text" class="ex-input green-text" value="10,000"></td>
+                            <td><input type="text" class="ex-input blue-text" value="10,000"></td>
+                            <td class="text-success fw-bold">3,500 Pcs</td>
+                        </tr>
+                        <tr>
+                            <td class="text-warning fw-bold">PLT-ZN02</td>
+                            <td style="text-align:left; padding-left:12px;">SHEET METAL BODY (MFZn2-HC)</td>
+                            <td><input type="text" class="ex-input" value="9,723"></td>
+                            <td><input type="text" class="ex-input green-text" value="9,800"></td>
+                            <td><input type="text" class="ex-input blue-text" value="9,500"></td>
+                            <td class="text-success fw-bold">2,100 Pcs</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 2.3 PLATING PLAN TABLE -->
+            <h3 class="text-success fw-bold mb-2 mt-4">🏭 3. Plating Plan (Plating Outbound, Inbound & Balance at Plating Factory)</h3>
+            <div class="excel-table-container">
+                <table class="excel-table">
+                    <thead>
+                        <tr style="background:#1e293b; font-weight:bold;">
+                            <th style="width: 180px;">Part No.</th>
+                            <th>รายการงานชุบเคลือบผิว</th>
+                            <th>แผนส่งชุบ (Plan Out)</th>
+                            <th>ส่งชุบจริง (Actual Out)</th>
+                            <th>แผนรับคืน (Plan In)</th>
+                            <th>รับคืนจริง (Actual In)</th>
+                            <th>คงเหลือที่โรงชุบ (Balance at Plating)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-warning fw-bold">CAP-BODY-01</td>
+                            <td style="text-align:left; padding-left:12px;">ชุบซิงค์โครเมต (MFZn2-HC)</td>
+                            <td><input type="text" class="ex-input" value="5,000"></td>
+                            <td><input type="text" class="ex-input green-text" value="5,000"></td>
+                            <td><input type="text" class="ex-input" value="5,000"></td>
+                            <td><input type="text" class="ex-input blue-text" value="4,800"></td>
+                            <td class="text-warning fw-bold">200 Pcs</td>
                         </tr>
                     </tbody>
                 </table>
