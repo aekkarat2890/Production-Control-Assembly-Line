@@ -3,85 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Plan - Jozu Auto Part Co., Ltd.</title>
+    <title>Production Control Assembly Line - Jozu Auto Part Co., Ltd.</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { background-color: #080c14; color: #f1f5f9; font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; }
+        body { 
+            background-color: #080c14; 
+            color: #f1f5f9; 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            font-size: 14px; 
+        }
         .navbar-custom { background-color: #0f172a; border-bottom: 2px solid #dc2626; }
         .card-custom { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; }
         
         .nav-main-grid {
-            display: grid; grid-template-columns: repeat(9, 1fr); gap: 8px;
-            margin-bottom: 16px; padding: 0; list-style: none;
+            display: grid; grid-template-columns: repeat(9, 1fr); gap: 10px;
+            margin-bottom: 20px; padding: 0; list-style: none;
         }
         @media (max-width: 1400px) { .nav-main-grid { grid-template-columns: repeat(5, 1fr); } }
         @media (max-width: 768px) { .nav-main-grid { grid-template-columns: repeat(2, 1fr); } }
 
         .nav-main-grid .nav-btn {
-            width: 100%; height: 50px;
+            width: 100%; height: 56px;
             background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
-            color: #f8fafc; font-weight: 800; font-size: 12px;
+            color: #f8fafc; font-weight: 800; font-size: 13px;
             border: 1px solid #475569; border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
-            text-align: center; cursor: pointer; padding: 2px 4px;
+            text-align: center; cursor: pointer; padding: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         .nav-main-grid .nav-btn.active {
             background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%) !important;
             color: #ffffff !important; border: 1px solid #f87171 !important;
-            box-shadow: 0 0 14px rgba(239, 68, 68, 0.7);
+            box-shadow: 0 0 16px rgba(239, 68, 68, 0.7);
         }
 
         .tab-pane-content { display: none !important; }
         .tab-pane-content.active { display: block !important; }
 
-        /* Formula Bar */
+        /* Formula Bar - Dark Mode */
         .formula-bar-box {
-            display: flex; align-items: center; gap: 8px;
-            background-color: #1e293b; border: 1px solid #475569;
-            padding: 4px 10px; border-radius: 4px; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 10px;
+            background-color: #0f172a; border: 1px solid #334155;
+            padding: 8px 14px; border-radius: 6px; margin-bottom: 12px;
         }
         .formula-input-field {
-            flex-grow: 1; background-color: #0f172a; color: #38bdf8;
-            border: 1px solid #475569; border-radius: 3px; padding: 3px 8px;
-            font-family: monospace; font-weight: bold; font-size: 12px;
+            flex-grow: 1; background-color: #1e293b; color: #38bdf8;
+            border: 1px solid #475569; border-radius: 4px; padding: 6px 12px;
+            font-family: monospace; font-weight: bold; font-size: 15px;
         }
 
-        /* Excel 1:1 Spreadsheet Table Design */
+        /* Dark Theme Excel Spreadsheet Grid */
         .excel-table-container {
-            background-color: #ffffff; color: #000000;
-            border: 2px solid #000000; padding: 10px; overflow-x: auto;
+            background-color: #0f172a; color: #f8fafc;
+            border: 1px solid #334155; border-radius: 8px; padding: 12px; overflow-x: auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
         .excel-table {
-            border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; font-size: 10px;
+            border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; font-size: 13px;
         }
         .excel-table td, .excel-table th {
-            border: 1px solid #a6a6a6; text-align: center; vertical-align: middle; padding: 2px 3px; height: 22px; white-space: nowrap;
+            border: 1px solid #334155; text-align: center; vertical-align: middle; 
+            padding: 4px 6px; height: 32px; white-space: nowrap; color: #f1f5f9;
         }
 
-        /* Column Headers (A, B, C...) & Row Numbers */
-        .excel-col-header { background-color: #e6e6e6 !important; color: #333333 !important; font-weight: bold; border: 1px solid #b2b2b2 !important; font-size: 9px; }
-        .excel-row-header { background-color: #e6e6e6 !important; color: #333333 !important; font-weight: bold; border: 1px solid #b2b2b2 !important; width: 25px; font-size: 9px; }
+        /* Column Headers & Row Numbers */
+        .excel-col-header { 
+            background-color: #1e293b !important; color: #94a3b8 !important; 
+            font-weight: bold; border: 1px solid #334155 !important; font-size: 11px; 
+        }
+        .excel-row-header { 
+            background-color: #1e293b !important; color: #94a3b8 !important; 
+            font-weight: bold; border: 1px solid #334155 !important; width: 32px; font-size: 11px; 
+        }
 
-        /* Form Headings */
-        .hdr-title { font-size: 24px; font-weight: 900; letter-spacing: 2px; }
-        .hdr-box-title { background-color: #ffffff; font-weight: bold; }
-        .hdr-box-val { background-color: #ffffff; font-weight: bold; }
+        /* Dark Header Blocks */
+        .hdr-title { font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #f8fafc; }
+        .hdr-box-title { background-color: #1e293b; font-weight: bold; font-size: 12px; color: #cbd5e1; }
+        .hdr-box-val { background-color: #0f172a; font-weight: bold; font-size: 13px; color: #38bdf8; }
         
-        /* Sun Columns Striped Gray */
-        .sun-col-bg { background-color: #808080 !important; color: #ffffff; }
+        /* Sun Sunday Striped Columns */
+        .sun-col-bg { background-color: #334155 !important; color: #94a3b8; }
 
-        /* Editable Input Cell inside Excel Table */
+        /* Larger High-Contrast Inputs */
         .ex-input {
             width: 100%; height: 100%; background: transparent; border: none;
-            text-align: center; font-size: 10px; font-weight: bold; color: inherit; outline: none; padding: 0;
+            text-align: center; font-size: 14px; font-weight: bold; color: #38bdf8; outline: none; padding: 0;
         }
         .ex-input:focus {
-            background-color: #e0f2fe !important; color: #000000 !important;
-            box-shadow: inset 0 0 0 2px #2563eb;
+            background-color: #1e293b !important; color: #ffffff !important;
+            box-shadow: inset 0 0 0 2px #ef4444; z-index: 10;
         }
-        .red-text { color: #dc2626 !important; font-weight: bold; }
-        .blue-text { color: #1d4ed8 !important; font-weight: bold; }
+        .red-text { color: #f87171 !important; font-weight: bold; }
+        .blue-text { color: #60a5fa !important; font-weight: bold; }
+        .green-text { color: #4ade80 !important; font-weight: bold; }
+        .yellow-text { color: #fbbf24 !important; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -91,18 +107,18 @@
         <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
             <div>
                 <div class="d-flex align-items-center gap-2">
-                    <h4 class="m-0 text-white fw-bold">⚙️ Production-Control-Assembly-Line</h4>
-                    <span class="badge bg-danger px-2 py-1">THAI HONDA</span>
+                    <h3 class="m-0 text-white fw-bold">⚙️ Production-Control-Assembly-Line</h3>
+                    <span class="badge bg-danger px-2 py-1 fs-6">THAI HONDA</span>
                 </div>
-                <div class="small text-light" style="font-size: 11px;">Jozu Auto Part Co., Ltd. - Master Plan Visual Control System</div>
+                <div class="small text-light" style="font-size: 12px;">Jozu Auto Part Co., Ltd. - Master Plan Visual Control System</div>
             </div>
-            <div class="text-warning fw-bold fs-6" id="clock"></div>
+            <div class="text-warning fw-bold fs-5" id="clock"></div>
         </div>
     </nav>
 
     <div class="container-fluid px-3 py-3">
 
-        <!-- Navigation Bar -->
+        <!-- Navigation Bar (9 Modules) -->
         <ul class="nav-main-grid">
             <li><button class="nav-btn active" data-tab="tab-dashboard">Dashboard</button></li>
             <li><button class="nav-btn" data-tab="tab-planning">Planning (Master Plan)</button></li>
@@ -116,77 +132,77 @@
         </ul>
 
         <!-- TAB CONTENTS -->
+        <!-- 1. Dashboard -->
         <div id="tab-dashboard" class="tab-pane-content active">
             <div class="row g-3 mb-3">
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-primary border-4">
-                        <span class="text-info fw-bold">แผน vs ยอดผลิตจริง (Plan vs Actual)</span>
-                        <h3 class="text-white fw-bold mb-0 mt-1" id="dashProdActual">0 <small class="fs-6 text-light">/ 9,723 Pcs</small></h3>
+                        <span class="text-info fw-bold fs-6">แผน vs ยอดผลิตจริง (Plan vs Actual)</span>
+                        <h2 class="text-white fw-bold mb-0 mt-2" id="dashProdActual">0 <small class="fs-6 text-light">/ 9,723 Pcs</small></h2>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-success border-4">
-                        <span class="text-success fw-bold">ผ่านรอบแรก (FTY)</span>
-                        <h3 class="text-success fw-bold mb-0 mt-1">100.0%</h3>
+                        <span class="text-success fw-bold fs-6">ผ่านรอบแรก (FTY)</span>
+                        <h2 class="text-success fw-bold mb-0 mt-2">100.0%</h2>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-danger border-4">
-                        <span class="text-danger fw-bold">อัตราของเสียรวม (Defect PPM)</span>
-                        <h3 class="text-danger fw-bold mb-0 mt-1">0 PPM</h3>
+                        <span class="text-danger fw-bold fs-6">อัตราของเสียรวม (Defect PPM)</span>
+                        <h2 class="text-danger fw-bold mb-0 mt-2">0 PPM</h2>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-warning border-4">
-                        <span class="text-warning fw-bold">สถานะไลน์ผลิต</span>
-                        <h3 class="text-warning fw-bold mb-0 mt-1">RUNNING</h3>
+                        <span class="text-warning fw-bold fs-6">สถานะไลน์ผลิต</span>
+                        <h3 class="text-warning fw-bold mb-0 mt-2">RUNNING</h3>
                     </div>
                 </div>
             </div>
             <div class="card card-custom p-3">
-                <h6 class="text-light mb-2 fw-bold">📈 ติดตามยอดผลิตรายชั่วโมง (Hourly Output)</h6>
-                <canvas id="hourlyChart" height="90"></canvas>
+                <h6 class="text-light mb-2 fw-bold fs-6">📈 ติดตามยอดผลิตรายชั่วโมง (Hourly Output)</h6>
+                <canvas id="hourlyChart" height="100"></canvas>
             </div>
         </div>
 
-        <!-- Planning Tab (Excel 1:1 Replica) -->
+        <!-- 2. Planning (Master Plan 1:1 Excel Form in Dark Mode with Large Font) -->
         <div id="tab-planning" class="tab-pane-content">
             
-            <!-- Excel Controls & Formula Bar -->
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center gap-2">
-                    <span class="badge bg-success fs-6">Excel 1:1 Form Replica</span>
-                    <span class="text-light small">พิมพ์แก้ไขและใส่สูตร = ได้ทุกช่อง</span>
+                    <span class="badge bg-danger fs-6">Master Plan (Dark Theme)</span>
+                    <span class="text-light fs-6">พิมพ์แก้ไขและคีย์สูตร = ได้ทุกช่องอิสระเหมือน Excel</span>
                 </div>
                 <div class="d-flex gap-2">
-                    <button class="btn btn-sm btn-success fw-bold" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
-                    <button class="btn btn-sm btn-outline-light fw-bold" onclick="location.reload()">🔄 รีเซ็ตตาราง</button>
+                    <button class="btn btn-success fw-bold px-3" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
+                    <button class="btn btn-outline-light fw-bold px-3" onclick="location.reload()">🔄 รีเซ็ตตาราง</button>
                 </div>
             </div>
 
+            <!-- Formula Bar -->
             <div class="formula-bar-box">
-                <span class="text-warning fw-bold"><i>fx</i></span>
-                <span class="text-light fw-bold" id="activeCellAddr" style="width: 50px;">-</span>
-                <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข หรือสูตร เช่น =SUM(...) หรือ =2500-807" oninput="onFormulaBarInput(this.value)">
+                <span class="text-warning fw-bold fs-5"><i>fx</i></span>
+                <span class="text-light fw-bold fs-5" id="activeCellAddr" style="width: 70px;">-</span>
+                <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข ข้อความ หรือสูตร เช่น =SUM(...) หรือ =2500-807" oninput="onFormulaBarInput(this.value)">
             </div>
 
-            <!-- Excel 100% Visual Container -->
+            <!-- Excel Table Sheet Container -->
             <div class="excel-table-container">
                 <table class="excel-table" id="excelGrid">
                     <thead>
-                        <!-- Column Headers (A - AP) -->
                         <tr class="excel-col-header">
                             <th class="excel-row-header"></th>
                             <th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th><th>M</th><th>N</th><th>O</th><th>P</th><th>Q</th><th>R</th><th>S</th><th>T</th><th>U</th><th>V</th><th>W</th><th>X</th><th>Y</th><th>Z</th><th>AA</th><th>AB</th><th>AC</th><th>AD</th><th>AE</th><th>AF</th><th>AG</th><th>AH</th><th>AI</th><th>AJ</th><th>AK</th><th>AL</th><th>AM</th><th>AN</th><th>AO</th><th>AP</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Excel Header Row 1: Logo & Title -->
+                        <!-- Row 1: Logo & Title -->
                         <tr>
                             <td class="excel-row-header">1</td>
-                            <td colspan="4" style="background:#ffffff; vertical-align:middle; text-align:left;">
-                                <strong style="color:#008000; font-size:16px;">JOZU</strong><br>
-                                <span style="font-size:8px; font-weight:bold;">Jozu Auto Part Co.,Ltd.</span>
+                            <td colspan="4" style="background:#1e293b; vertical-align:middle; text-align:left;">
+                                <strong style="color:#22c55e; font-size:20px;">JOZU</strong><br>
+                                <span style="font-size:10px; font-weight:bold; color:#cbd5e1;">Jozu Auto Part Co.,Ltd.</span>
                             </td>
                             <td colspan="14" class="hdr-title" style="text-align:center;">Master Plan</td>
                             <td colspan="3" class="hdr-box-title">For Month</td>
@@ -199,7 +215,7 @@
                             <td class="hdr-box-title">Check</td>
                             <td class="hdr-box-title">Issue</td>
                         </tr>
-                        <!-- Excel Header Row 2: Header Values -->
+                        <!-- Row 2: Metadata values -->
                         <tr>
                             <td class="excel-row-header">2</td>
                             <td colspan="4"></td>
@@ -209,28 +225,28 @@
                             <td colspan="2" class="hdr-box-val">11.00</td>
                             <td colspan="2" class="hdr-box-val">1/1</td>
                             <td colspan="2" class="hdr-box-val">26-Oct-26</td>
-                            <td colspan="4" style="text-align:left; font-size:8px;">Pro................. Delivery .................<br>PPC................. QA .................</td>
+                            <td colspan="4" style="text-align:left; font-size:10px; color:#cbd5e1;">Pro................. Delivery .................<br>PPC................. QA .................</td>
                             <td></td><td></td><td></td>
                         </tr>
 
-                        <!-- Excel Table Header Days Row -->
-                        <tr style="font-weight:bold; background:#f2f2f2;">
+                        <!-- Row 3 & 4: Headers for Days -->
+                        <tr style="font-weight:bold; background:#1e293b;">
                             <td class="excel-row-header">3</td>
-                            <td rowspan="2" style="width:30px;">Item</td>
-                            <td rowspan="2" style="width:140px;">Part No./<br>Part Name</td>
-                            <td rowspan="2" style="width:70px;">จำนวนส่ง/เดือน</td>
-                            <td rowspan="2" style="width:110px;">HOME /LOCATION</td>
-                            <td colspan="31" style="background:#f2f2f2;">NOV'26</td>
-                            <td rowspan="2" style="width:45px;">STD.Pack</td>
-                            <td colspan="3">NEXT MONTH</td>
+                            <td rowspan="2" style="width:40px; font-size:13px;">Item</td>
+                            <td rowspan="2" style="width:170px; font-size:13px;">Part No./<br>Part Name</td>
+                            <td rowspan="2" style="width:90px; font-size:13px;">จำนวนส่ง/เดือน</td>
+                            <td rowspan="2" style="width:130px; font-size:13px;">HOME /LOCATION</td>
+                            <td colspan="31" class="text-warning fs-6" style="background:#1e293b;">NOV'26</td>
+                            <td rowspan="2" style="width:60px; font-size:13px;">STD.Pack</td>
+                            <td colspan="3" style="font-size:13px;">NEXT MONTH</td>
                         </tr>
-                        <tr style="font-weight:bold; background:#f2f2f2;">
+                        <tr style="font-weight:bold; background:#1e293b;">
                             <td class="excel-row-header">4</td>
                             <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td class="sun-col-bg">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td class="sun-col-bg">15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td class="sun-col-bg">22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td class="sun-col-bg">29</td><td>30</td><td>31</td>
                             <td>N+1</td><td>N+2</td><td>N+3</td>
                         </tr>
 
-                        <!-- Data Rows (Location 1 - 12) -->
+                        <!-- Rows 5 to 16: Location Data Rows -->
                         <script>
                             const locations = [
                                 "05504 L3ME01", "05120 L3BE01", "05505 L3SP01", "05503 L2AF01",
@@ -246,18 +262,18 @@
                             locations.forEach((loc, idx) => {
                                 document.write(`<tr><td class="excel-row-header">${rowIndex}</td>`);
                                 if (idx === 0) {
-                                    document.write(`<td rowspan="12" style="font-weight:bold;">1</td>`);
-                                    document.write(`<td rowspan="12" style="font-weight:bold; text-align:center;">17620-Z1T-8010 /<br>CAP COMP FUEL FILLER</td>`);
-                                    document.write(`<td rowspan="2" style="font-weight:bold;">Forecast</td><td rowspan="2" style="font-weight:bold;">9723</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; font-size:15px;" class="text-white">1</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; text-align:center; font-size:13px;" class="text-info">17620-Z1T-8010 /<br><span class="text-light">CAP COMP FUEL FILLER</span></td>`);
+                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:13px;">Forecast</td><td rowspan="2" style="font-weight:bold; font-size:14px;" class="text-warning">9723</td>`);
                                 } else if (idx === 2) {
-                                    document.write(`<td rowspan="2" style="font-weight:bold;">Pcs./Month</td><td rowspan="2" style="font-weight:bold;">9374</td>`);
+                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:13px;">Pcs./Month</td><td rowspan="2" style="font-weight:bold; font-size:14px;" class="text-warning">9374</td>`);
                                 } else if (idx === 4) {
-                                    document.write(`<td rowspan="2" style="font-weight:bold;">Delivery/day</td><td rowspan="2" style="font-weight:bold;">391</td>`);
+                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:13px;">Delivery/day</td><td rowspan="2" style="font-weight:bold; font-size:14px;" class="text-warning">391</td>`);
                                 } else if (idx === 6) {
-                                    document.write(`<td rowspan="2" style="font-weight:bold;">Safety 6 Day</td><td rowspan="2" style="font-weight:bold;">2344</td>`);
+                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:13px;">Safety 6 Day</td><td rowspan="2" style="font-weight:bold; font-size:14px;" class="text-warning">2344</td>`);
                                 }
 
-                                document.write(`<td style="text-align:left; font-weight:600; padding-left:4px;">${loc}</td>`);
+                                document.write(`<td style="text-align:left; font-weight:600; padding-left:8px; font-size:13px;">${loc}</td>`);
 
                                 const rowData = initForecast[loc] || Array(31).fill(0);
                                 for (let d = 1; d <= 31; d++) {
@@ -269,10 +285,10 @@
                                 }
 
                                 if (idx === 0) {
-                                    document.write(`<td rowspan="12" style="font-weight:bold;">50</td>`);
-                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg);">7,242</td>`);
-                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg);">7,325</td>`);
-                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg);">9,722</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; font-size:15px;" class="text-white">50</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg); font-size:13px;" class="text-warning">7,242</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg); font-size:13px;" class="text-warning">7,325</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg); font-size:13px;" class="text-warning">9,722</td>`);
                                 }
                                 document.write(`</tr>`);
                                 rowIndex++;
@@ -280,15 +296,15 @@
                         </script>
 
                         <!-- Row 17: Plan Delivery/Day -->
-                        <tr>
+                        <tr style="background:#1e293b;">
                             <td class="excel-row-header">17</td>
-                            <td colspan="3" style="font-weight:bold;">Plan Delivery/Day</td>
-                            <td style="font-weight:bold;">รวมชิ้นงานส่ง</td>
+                            <td colspan="3" style="font-weight:bold; font-size:13px;" class="text-success">Plan Delivery/Day</td>
+                            <td style="font-weight:bold; font-size:13px;" class="text-success">รวมชิ้นงานส่ง</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
-                                    document.write(`<td class="${isSun ? 'sun-col-bg' : ''}" style="font-weight:bold;">
-                                        <input type="text" class="ex-input deliv-sum-cell" id="deliv_sum_${d}" data-addr="E17" value="0" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                    document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
+                                        <input type="text" class="ex-input green-text deliv-sum-cell" id="deliv_sum_${d}" data-addr="E17" value="0" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
                                     </td>`);
                                 }
                             </script>
@@ -298,13 +314,13 @@
                         <!-- Row 18: Lot No Production -->
                         <tr>
                             <td class="excel-row-header">18</td>
-                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:6px;">Lot No Production ( ปี-เดือน-ล็อต)</td>
+                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-warning">Lot No Production ( ปี-เดือน-ล็อต)</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
                                     let defaultLot = (d === 4) ? "261001" : (d === 8) ? "261002" : (d === 11) ? "261003" : (d === 14) ? "261004" : (d === 18) ? "261005" : (d === 23) ? "261206" : "";
                                     document.write(`<td class="${isSun ? 'sun-col-bg' : ''}">
-                                        <input type="text" class="ex-input" data-addr="E18" value="${defaultLot}" onfocus="onCellFocus(this)">
+                                        <input type="text" class="ex-input yellow-text" data-addr="E18" value="${defaultLot}" onfocus="onCellFocus(this)">
                                     </td>`);
                                 }
                             </script>
@@ -314,7 +330,7 @@
                         <!-- Row 19: แผนการผลิต/วัน -->
                         <tr>
                             <td class="excel-row-header">19</td>
-                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:6px;">แผนการผลิต/วัน</td>
+                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-info">แผนการผลิต/วัน</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -330,11 +346,11 @@
                         <!-- Row 20: Stock/Pcs. & ยอดการผลิต OK -->
                         <tr>
                             <td class="excel-row-header">20</td>
-                            <td rowspan="3" style="font-weight:bold;">Stock/Pcs.</td>
+                            <td rowspan="3" style="font-weight:bold; font-size:13px;">Stock/Pcs.</td>
                             <td rowspan="3" style="font-weight:bold;">
-                                <input type="text" class="ex-input blue-text" id="startStockVal" value="2500" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
+                                <input type="text" class="ex-input green-text" id="startStockVal" value="2500" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
                             </td>
-                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:6px;">ยอดการผลิต OK</td>
+                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-info">ยอดการผลิต OK</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -349,7 +365,7 @@
                         <!-- Row 21: ยอดการผลิต NG -->
                         <tr>
                             <td class="excel-row-header">21</td>
-                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:6px;">ยอดการผลิต NG</td>
+                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-danger">ยอดการผลิต NG</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -362,10 +378,10 @@
                             <td colspan="4"></td>
                         </tr>
 
-                        <!-- Row 22: จำนวนงานคงเหลือ (Balance) -->
+                        <!-- Row 22: จำนวนงานคงเหลือ (Balance B/L) -->
                         <tr>
                             <td class="excel-row-header">22</td>
-                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:6px;">จำนวนงานคงเหลือ</td>
+                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-danger">จำนวนงานคงเหลือ</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -436,7 +452,7 @@
         function recalculateMasterPlan() {
             let totalActualMonth = 0;
 
-            // 1. คำนวณยอด Plan Delivery/Day
+            // 1. Calculate Plan Delivery/Day
             for (let d = 1; d <= 31; d++) {
                 let sum = 0;
                 const locInputs = document.querySelectorAll(`.loc-input[data-day="${d}"]`);
@@ -448,7 +464,7 @@
                 if (sumCell) sumCell.value = sum;
             }
 
-            // 2. คำนวณ Balance B/L
+            // 2. Calculate Balance B/L
             let startStockRaw = document.getElementById('startStockVal')?.value || "2500";
             let startStock = evaluateCellFormula(startStockRaw);
             if (typeof startStock !== 'number') startStock = 2500;
@@ -469,7 +485,7 @@
                 const blCell = document.getElementById(`bl_day_${d}`);
                 if (blCell) {
                     blCell.value = currentBL;
-                    blCell.className = currentBL < 0 ? 'ex-input red-text bl-result-cell' : 'ex-input bl-result-cell';
+                    blCell.className = currentBL < 0 ? 'ex-input red-text bl-result-cell' : 'ex-input blue-text bl-result-cell';
                 }
             }
 
@@ -479,7 +495,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Tab Toggle
+            // Tab Switcher
             const buttons = document.querySelectorAll('.nav-btn');
             const tabs = document.querySelectorAll('.tab-pane-content');
 
@@ -505,7 +521,7 @@
 
             recalculateMasterPlan();
 
-            // Chart
+            // Hourly Chart
             const ctx = document.getElementById('hourlyChart');
             if (ctx) {
                 new Chart(ctx.getContext('2d'), {
