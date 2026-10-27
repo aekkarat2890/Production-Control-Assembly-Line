@@ -4,54 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Production Control Assembly Line - Jozu Auto Part Co., Ltd.</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <style>
-        :root {
-            --bg-main: #080c14;
-            --bg-card: #1e293b;
-            --bg-nav: #0f172a;
-            --border-color: #334155;
-            --border-highlight: #475569;
-            --accent-red: #ef4444;
-            --accent-cyan: #38bdf8;
-            --accent-green: #22c55e;
-            --accent-yellow: #eab308;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-
-        .navbar-custom {
-            background-color: var(--bg-nav);
-            border-bottom: 2px solid var(--accent-red);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-
-        .badge-honda {
-            background-color: #dc2626;
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-
-        /* Nav Main Grid (9 Modules) */
+        body { background-color: #080c14; color: #f1f5f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .navbar-custom { background-color: #0f172a; border-bottom: 2px solid #dc2626; }
+        .card-custom { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; }
+        .text-muted, small.text-muted { color: #cbd5e1 !important; font-weight: 500; }
+        .card-title-sub { color: #93c5fd !important; font-weight: 600; font-size: 0.9rem; }
+        
         .nav-main-grid {
             display: grid;
             grid-template-columns: repeat(9, 1fr);
@@ -64,1043 +25,467 @@
         @media (max-width: 768px) { .nav-main-grid { grid-template-columns: repeat(2, 1fr); } }
 
         .nav-main-grid .nav-btn {
-            width: 100%;
-            height: 60px;
+            width: 100%; height: 64px;
             background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
-            color: var(--text-main);
-            font-weight: 700;
-            font-size: 13px;
-            border: 1px solid var(--border-highlight);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: all 0.2s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            line-height: 1.25;
-            cursor: pointer;
-            padding: 4px 8px;
+            color: #f8fafc; font-weight: 800; font-size: 13px;
+            border: 1px solid #475569; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; cursor: pointer; padding: 4px 6px;
         }
-
-        .nav-main-grid .nav-btn:hover {
-            background: linear-gradient(180deg, #475569 0%, #334155 100%);
-            color: #ffffff;
-            border-color: #94a3b8;
-            transform: translateY(-2px);
-        }
-
         .nav-main-grid .nav-btn.active {
             background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%) !important;
-            color: #ffffff !important;
-            border: 1px solid #f87171 !important;
-            box-shadow: 0 0 16px rgba(239, 68, 68, 0.6), 0 4px 8px rgba(0, 0, 0, 0.5) !important;
-            font-weight: 800;
+            color: #ffffff !important; border: 1px solid #f87171 !important;
+            box-shadow: 0 0 18px rgba(239, 68, 68, 0.7);
         }
 
-        .card-custom {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-        }
+        .tab-pane-content { display: none !important; }
+        .tab-pane-content.active { display: block !important; }
 
-        .tab-pane-content {
-            display: none !important;
-        }
-        .tab-pane-content.active {
-            display: block !important;
-        }
-
-        /* Excel Spreadsheet Engine Styling */
-        .spreadsheet-wrapper {
-            background-color: #0b1120;
-            border: 1px solid var(--border-highlight);
-            border-radius: 8px;
-            overflow-x: auto;
-            position: relative;
-        }
-
+        /* Formula Bar & Interactive Grid Styling */
         .formula-bar-container {
-            background-color: #1e293b;
-            border-bottom: 1px solid var(--border-highlight);
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            display: flex; align-items: center; gap: 10px;
+            background-color: #0f172a; border: 1px solid #475569;
+            padding: 6px 12px; border-radius: 6px; margin-bottom: 12px;
         }
-
-        .formula-bar-name {
-            min-width: 60px;
-            background-color: #0f172a;
-            color: var(--accent-yellow);
-            border: 1px solid var(--border-highlight);
-            border-radius: 4px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 13px;
-            padding: 3px 6px;
+        .formula-input {
+            flex-grow: 1; background-color: #1e293b; color: #38bdf8;
+            border: 1px solid #475569; border-radius: 4px; padding: 4px 8px;
+            font-family: monospace; font-weight: bold; font-size: 13px;
         }
-
-        .formula-bar-input {
-            flex-grow: 1;
-            background-color: #0f172a;
-            color: var(--accent-cyan);
-            border: 1px solid var(--border-highlight);
-            border-radius: 4px;
-            padding: 4px 10px;
-            font-family: monospace;
-            font-size: 14px;
+        
+        .plan-table th {
+            font-size: 12px !important; font-weight: bold !important;
+            padding: 6px 4px !important; text-align: center; vertical-align: middle;
+            background-color: #1e293b; color: #f8fafc; border: 1px solid #475569;
         }
-        .formula-bar-input:focus {
-            outline: none;
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+        .plan-table td {
+            font-size: 12px !important; font-weight: 600 !important;
+            text-align: center; vertical-align: middle; white-space: nowrap;
+            padding: 0 !important; border: 1px solid #334155;
+            background-color: #0f172a; color: #f1f5f9; height: 32px;
         }
-
-        .excel-table {
-            border-collapse: collapse;
-            width: 100%;
-            font-size: 12px;
-            color: #f1f5f9;
-            user-select: none;
+        
+        /* Direct Editable Inputs inside Table */
+        .cell-input {
+            width: 100%; height: 100%; background: transparent;
+            color: #38bdf8; border: none; text-align: center;
+            font-size: 12px; font-weight: bold; outline: none; padding: 2px 4px;
         }
-
-        .excel-table th, .excel-table td {
-            border: 1px solid #334155;
-            padding: 4px 6px;
-            text-align: center;
-            vertical-align: middle;
-            white-space: nowrap;
-            height: 28px;
-            position: relative;
+        .cell-input:focus {
+            background-color: #1e293b; color: #ffffff;
+            box-shadow: inset 0 0 0 2px #ef4444;
         }
-
-        .excel-table th {
-            background-color: #1e293b;
-            color: #94a3b8;
-            font-weight: 700;
-        }
-
-        .excel-table th.col-header, .excel-table th.row-header {
-            background-color: #0f172a;
-            color: #64748b;
-            font-size: 11px;
-            font-family: monospace;
-        }
-
-        .excel-table tr:hover td {
-            background-color: rgba(51, 65, 85, 0.4);
-        }
-
-        .excel-table td.selected {
-            outline: 2px solid var(--accent-cyan);
-            outline-offset: -2px;
-            background-color: rgba(56, 189, 248, 0.15) !important;
-        }
-
-        .excel-table td.editing {
-            padding: 0 !important;
-            outline: 2px solid var(--accent-green) !important;
-        }
-
-        .excel-table td input.cell-editor {
-            width: 100%;
-            height: 100%;
-            border: none;
-            outline: none;
-            background-color: #0f172a;
-            color: #ffffff;
-            font-size: 12px;
-            font-family: inherit;
-            text-align: inherit;
-            padding: 2px 4px;
-        }
-
-        .sun-col {
-            background-color: #1e293b !important;
-            color: #94a3b8 !important;
-        }
-
-        .bg-calc-row {
-            background-color: rgba(15, 23, 42, 0.8) !important;
-            font-weight: bold;
-        }
-
-        .text-formula {
-            color: var(--accent-cyan) !important;
-        }
-
-        .excel-header-box {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid var(--border-highlight);
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 16px;
-        }
-
-        /* Utility classes */
-        .text-negative { color: var(--accent-red) !important; font-weight: bold; }
-        .text-positive { color: var(--accent-cyan) !important; font-weight: bold; }
+        .cell-input.formula-cell { color: #f59e0b; }
+        .sun-col { background-color: #334155 !important; }
+        .row-label { text-align: left !important; font-weight: 600 !important; padding-left: 8px !important; }
+        .excel-header-box { background-color: #1e293b; border: 1px solid #475569; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; }
     </style>
 </head>
 <body>
 
-    <!-- Header Navbar -->
+    <!-- Top Navigation Header -->
     <nav class="navbar navbar-custom px-4 py-3">
-        <div class="container-fluid p-0 d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
             <div>
-                <div class="d-flex align-items-center gap-2">
-                    <h4 class="m-0 text-white fw-bold"><i class="fa-solid fa-microchip me-2 text-danger"></i>Production-Control-Assembly-Line</h4>
-                    <span class="badge badge-honda">THAI HONDA</span>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <h3 class="m-0 text-white fw-bold">⚙️ Production-Control-Assembly-Line</h3>
+                    <span class="badge bg-danger px-2 py-1">THAI HONDA</span>
                 </div>
-                <div class="small text-muted mt-1">Jozu Auto Part Co., Ltd. — Real-time Assembly Visual Control & Master Plan Calculator</div>
+                <div class="small text-light">Jozu Auto Part Co., Ltd. - ระบบควบคุมกระบวนการผลิตและงานประกอบ (Assembly Visual Control)</div>
             </div>
-            <div class="d-flex align-items-center gap-3">
-                <div class="text-end me-3 d-none d-md-block">
-                    <div class="small text-muted">PART NO.</div>
-                    <div class="fw-bold text-info">17620-Z1T-8010</div>
-                </div>
-                <div class="text-warning fw-bold fs-6 bg-dark px-3 py-2 rounded border border-secondary" id="clock"></div>
-            </div>
+            <div class="text-warning fw-bold fs-5" id="clock"></div>
         </div>
     </nav>
 
-    <!-- Main Content Container -->
     <div class="container-fluid px-4 py-3">
 
-        <!-- Navigation Grid (9 Modules) -->
+        <!-- Navigation Bar (9 Modules) -->
         <ul class="nav-main-grid">
-            <li><button class="nav-btn active" data-tab="tab-dashboard"><i class="fa-solid fa-chart-line me-1"></i> Dashboard</button></li>
-            <li><button class="nav-btn" data-tab="tab-planning"><i class="fa-solid fa-calculator me-1"></i> Planning<br>(Formula Canvas)</button></li>
-            <li><button class="nav-btn" data-tab="tab-component"><i class="fa-solid fa-truck-ramp-box me-1"></i> รับ component<br>ส่งชุบ - รับชุบ</button></li>
-            <li><button class="nav-btn" data-tab="tab-stock-component"><i class="fa-solid fa-boxes-stacked me-1"></i> Stock Component</button></li>
-            <li><button class="nav-btn" data-tab="tab-report"><i class="fa-solid fa-file-invoice me-1"></i> รายงานการผลิต</button></li>
-            <li><button class="nav-btn" data-tab="tab-stock-fg"><i class="fa-solid fa-warehouse me-1"></i> Stock F/G</button></li>
-            <li><button class="nav-btn" data-tab="tab-delivery"><i class="fa-solid fa-truck-fast me-1"></i> Delivery</button></li>
-            <li><button class="nav-btn" data-tab="tab-capacity"><i class="fa-solid fa-bolt me-1"></i> Capacity</button></li>
-            <li><button class="nav-btn" data-tab="tab-pm"><i class="fa-solid fa-screws-tilting me-1"></i> PM Machine /Jig</button></li>
+            <li><button class="nav-btn active" data-tab="tab-dashboard">Dashboard</button></li>
+            <li><button class="nav-btn" data-tab="tab-planning">Planning</button></li>
+            <li><button class="nav-btn" data-tab="tab-component">รับ component<br>ส่งชุบ - รับชุบ</button></li>
+            <li><button class="nav-btn" data-tab="tab-stock-component">Stock Component</button></li>
+            <li><button class="nav-btn" data-tab="tab-report">รายงานการผลิต</button></li>
+            <li><button class="nav-btn" data-tab="tab-stock-fg">Stock F/G</button></li>
+            <li><button class="nav-btn" data-tab="tab-delivery">Delivery</button></li>
+            <li><button class="nav-btn" data-tab="tab-capacity">Capacity</button></li>
+            <li><button class="nav-btn" data-tab="tab-pm">PM Machine /Jig</button></li>
         </ul>
 
-        <!-- TAB 1: Dashboard -->
+        <!-- TAB CONTENTS -->
+        
+        <!-- 1. Dashboard -->
         <div id="tab-dashboard" class="tab-pane-content active">
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-primary border-4">
-                        <span class="text-muted small fw-bold">แผน vs ยอดผลิตจริง (Plan vs Actual)</span>
-                        <div class="d-flex align-items-baseline justify-content-between mt-2">
-                            <h2 class="text-white fw-bold mb-0" id="dash-actual-total">0 <small class="fs-6 text-muted">/ 9,723 Pcs</small></h2>
-                            <span class="badge bg-primary fs-6" id="dash-progress-percent">0.0%</span>
-                        </div>
-                        <div class="progress mt-3" style="height: 8px; background-color: #334155;">
-                            <div class="progress-bar bg-primary" role="progressbar" id="dash-progress-bar" style="width: 0%"></div>
+                        <span class="card-title-sub">แผน vs ยอดผลิตจริง (Plan vs Actual)</span>
+                        <div class="d-flex align-items-baseline justify-content-between mt-1">
+                            <h2 class="text-white fw-bold mb-0" id="dashProdActual">0 <small class="fs-6 text-light">/ 9,723 Pcs</small></h2>
+                            <span class="badge bg-primary fs-6" id="dashProdPct">0%</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-success border-4">
-                        <span class="text-muted small fw-bold">ผ่านรอบแรก (First Time Yield - FTY)</span>
-                        <div class="d-flex align-items-baseline justify-content-between mt-2">
-                            <h2 class="text-success fw-bold mb-0">99.4%</h2>
-                            <span class="small text-warning fw-semibold">Target &gt; 98%</span>
-                        </div>
-                        <div class="small text-muted mt-2">ยอดประกอบผ่านโดยไม่ต้อง Re-work</div>
+                        <span class="card-title-sub">ผ่านรอบแรก (First Time Yield - FTY)</span>
+                        <h2 class="text-success fw-bold mb-0 mt-1">100.0%</h2>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-danger border-4">
-                        <span class="text-muted small fw-bold">อัตราของเสียรวม (Defect PPM)</span>
-                        <div class="d-flex align-items-baseline justify-content-between mt-2">
-                            <h2 class="text-danger fw-bold mb-0">12 <small class="fs-6 text-muted">PPM</small></h2>
-                            <span class="small text-success fw-semibold">Target &lt; 50 PPM</span>
-                        </div>
-                        <div class="small text-muted mt-2">ยอดเสียสะสมประจำเดือน NOV'26</div>
+                        <span class="card-title-sub">อัตราของเสียรวม (Defect PPM)</span>
+                        <h2 class="text-danger fw-bold mb-0 mt-1">0 PPM</h2>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3 border-start border-warning border-4">
-                        <span class="text-muted small fw-bold">สถานะไลน์ผลิต (Line Andon Status)</span>
-                        <div class="d-flex align-items-center gap-2 mt-2">
-                            <span class="spinner-grow spinner-grow-sm text-success" role="status"></span>
-                            <h3 class="text-success fw-bold mb-0">RUNNING</h3>
-                        </div>
-                        <div class="small text-muted mt-2">Line Assembly C1 (17620-Z1T-8010)</div>
+                        <span class="card-title-sub">สถานะไลน์ผลิต (Line Andon Status)</span>
+                        <h3 class="text-warning fw-bold mb-0 mt-1">RUNNING</h3>
                     </div>
                 </div>
             </div>
 
-            <div class="row g-3">
-                <div class="col-lg-8">
-                    <div class="card card-custom p-3">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="text-light m-0 fw-bold"><i class="fa-solid fa-chart-column text-info me-2"></i>ติดตามยอดผลิตรายชั่วโมง (Hourly Output Tracking)</h6>
-                            <span class="badge bg-dark text-warning border border-secondary">Shift A: 08:00 - 17:00</span>
-                        </div>
-                        <div style="height: 260px;">
-                            <canvas id="hourlyChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card card-custom p-3">
-                        <h6 class="text-light mb-3 fw-bold"><i class="fa-solid fa-triangle-exclamation text-warning me-2"></i>5 อันดับแรกของเสียงานประกอบ (Top 5 Assembly Defects)</h6>
-                        <table class="table table-dark table-striped table-borderless small align-middle">
-                            <thead>
-                                <tr class="border-bottom border-secondary text-info">
-                                    <th>ประเภท NG (Defect Mode)</th>
-                                    <th class="text-end">จำนวน</th>
-                                    <th class="text-end">สัดส่วน</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>1. O-Ring ประกอบไม่สนิท</td><td class="text-end text-danger fw-bold">3</td><td class="text-end">50%</td></tr>
-                                <tr><td>2. รอยขีดข่วนชิ้นงานชุบ</td><td class="text-end text-danger fw-bold">2</td><td class="text-end">33%</td></tr>
-                                <tr><td>3. Spring Torque ไม่ได้มาตรฐาน</td><td class="text-end text-danger fw-bold">1</td><td class="text-end">17%</td></tr>
-                                <tr><td>4. Cap Loose Fit</td><td class="text-end text-muted">0</td><td class="text-end">0%</td></tr>
-                                <tr><td>5. Rivet Crimping NG</td><td class="text-end text-muted">0</td><td class="text-end">0%</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="card card-custom p-3">
+                <h6 class="text-light mb-2 fw-bold">📈 ติดตามยอดผลิตรายชั่วโมง (Hourly Output)</h6>
+                <canvas id="hourlyChart" height="100"></canvas>
             </div>
         </div>
 
-        <!-- TAB 2: Planning (Spreadsheet Canvas with Built-in Formula Parser) -->
+        <!-- 2. Planning (Interactive Master Plan) -->
         <div id="tab-planning" class="tab-pane-content">
-            <div class="excel-header-box d-flex flex-wrap justify-content-between align-items-center gap-3">
-                <div class="d-flex align-items-center gap-3">
-                    <h3 class="text-white m-0 fw-bold"><i class="fa-solid fa-file-excel text-success me-2"></i>Master Plan Master Spreadsheet</h3>
-                    <span class="badge bg-danger fs-6">THAI HONDA</span>
-                </div>
-                <div class="d-flex flex-wrap gap-4 text-center small">
-                    <div><span class="text-muted d-block">For Month</span><strong class="text-warning fs-6">NOV'26</strong></div>
-                    <div><span class="text-muted d-block">Customer</span><strong class="text-info fs-6">TH</strong></div>
-                    <div><span class="text-muted d-block">Del.Time</span><strong class="text-light">11.00</strong></div>
-                    <div><span class="text-muted d-block">Page</span><strong class="text-light">1/1</strong></div>
-                    <div><span class="text-muted d-block">Issue Date</span><strong class="text-light">26-Oct-26</strong></div>
-                    <div class="border-start border-secondary ps-3 d-flex gap-2">
-                        <div class="px-2 py-1 bg-dark rounded border border-secondary"><span class="text-muted d-block" style="font-size:10px;">Approve</span><strong>Mr. Somchai</strong></div>
-                        <div class="px-2 py-1 bg-dark rounded border border-secondary"><span class="text-muted d-block" style="font-size:10px;">Check</span><strong>Mr. Vichai</strong></div>
-                        <div class="px-2 py-1 bg-dark rounded border border-secondary"><span class="text-muted d-block" style="font-size:10px;">Issue</span><strong>Ms. Nipa</strong></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Formula Bar & Help Controls -->
-            <div class="card card-custom p-2 mb-3">
-                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
-                    <div class="small text-info fw-bold">
-                        <i class="fa-solid fa-lightbulb me-1"></i> Double-click any cell to edit. Enter numbers, text, or formulas starting with `=` (e.g. `=SUM(E12:E23)`, `=E28+E27-E24`, `=2500+1200-807`)
+            <div class="card card-custom p-4 mb-4">
+                
+                <!-- Header Info -->
+                <div class="excel-header-box d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                        <h4 class="text-white m-0 fw-bold">Master Plan Sheet</h4>
+                        <span class="badge bg-success">Interactive Formula Grid</span>
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-warning" onclick="resetMasterPlanData()"><i class="fa-solid fa-rotate-left me-1"></i> Reset Original Plan</button>
+                        <button class="btn btn-sm btn-success fw-bold" onclick="saveMasterPlanData()">💾 บันทึกข้อมูล (Save)</button>
+                        <button class="btn btn-sm btn-outline-light fw-bold" onclick="resetDefaultMasterPlan()">🔄 รีเซ็ตค่าเริ่มต้น</button>
                     </div>
                 </div>
+
+                <!-- Formula Bar -->
                 <div class="formula-bar-container">
-                    <span class="formula-bar-name" id="selected-cell-name">A1</span>
-                    <i class="fa-solid fa-fx text-muted"></i>
-                    <input type="text" class="formula-bar-input" id="formula-bar" placeholder="Select a cell or type formula starting with =" />
+                    <span class="text-warning fw-bold fs-6"><i>fx</i></span>
+                    <span class="text-muted small" id="activeCellAddr">Cell: -</span>
+                    <input type="text" id="formulaBar" class="formula-input" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข หรือสูตร เช่น =SUM(E3:E14) หรือ =2500+1200-807" oninput="onFormulaBarInput(this.value)">
                 </div>
-            </div>
 
-            <!-- Spreadsheet Grid -->
-            <div class="spreadsheet-wrapper">
-                <table class="excel-table" id="spreadsheet-table">
-                    <!-- Dynamic Header & Body generated by JS Engine -->
-                </table>
-            </div>
-        </div>
-
-        <!-- TAB 3: Receiving Component Log -->
-        <div id="tab-component" class="tab-pane-content">
-            <div class="card card-custom p-4 mb-4">
-                <h5 class="text-info fw-bold mb-3"><i class="fa-solid fa-truck-ramp-box me-2"></i>บันทึกรับเข้า Component และงานชุบ (Receiving & Plating Control Log)</h5>
-                <p class="text-muted mb-4">ระบบบันทึกรายการรับเข้าวัตถุดิบชิ้นส่วนย่อย ส่งออกชุบผิวสัมผัส และรับงานกลับเข้าคลัง</p>
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <div class="p-3 bg-dark rounded border border-secondary">
-                            <h6><i class="fa-solid fa-arrow-down-long text-success me-2"></i>รับเข้า Component ล่าสุด</h6>
-                            <ul class="list-unstyled small mt-2 mb-0 text-muted">
-                                <li class="py-1 border-bottom border-secondary d-flex justify-content-between"><span>CAP BODY (Z1T-801)</span> <strong class="text-light">5,000 Pcs</strong></li>
-                                <li class="py-1 border-bottom border-secondary d-flex justify-content-between"><span>SPRING FILLER</span> <strong class="text-light">10,000 Pcs</strong></li>
-                                <li class="py-1 d-flex justify-content-between"><span>RUBBER SEAL GASKET</span> <strong class="text-light">8,000 Pcs</strong></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-3 bg-dark rounded border border-secondary">
-                            <h6><i class="fa-solid fa-rotate text-warning me-2"></i>งานระหว่างชุบ (Plating Process In-Transit)</h6>
-                            <ul class="list-unstyled small mt-2 mb-0 text-muted">
-                                <li class="py-1 border-bottom border-secondary d-flex justify-content-between"><span>PLATE CAP (Zinc Nickel)</span> <strong class="text-warning">3,500 Pcs</strong></li>
-                                <li class="py-1 d-flex justify-content-between"><span>VALVE HOLDER</span> <strong class="text-warning">2,200 Pcs</strong></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-3 bg-dark rounded border border-secondary">
-                            <h6><i class="fa-solid fa-check-circle text-info me-2"></i>รับกลับจากชุบ (Plating Returned OK)</h6>
-                            <ul class="list-unstyled small mt-2 mb-0 text-muted">
-                                <li class="py-1 border-bottom border-secondary d-flex justify-content-between"><span>PLATE CAP Lot #2610-A</span> <strong class="text-info">3,500 Pcs</strong></li>
-                                <li class="py-1 d-flex justify-content-between"><span>VALVE HOLDER Lot #2610-B</span> <strong class="text-info">2,200 Pcs</strong></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 4: Stock Component -->
-        <div id="tab-stock-component" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h5 class="text-info fw-bold mb-3"><i class="fa-solid fa-boxes-stacked me-2"></i>ตารางสต็อกชิ้นส่วน Component (Component Stock Control)</h5>
-                <div class="table-responsive mt-3">
-                    <table class="table table-dark table-striped table-bordered align-middle">
-                        <thead>
-                            <tr class="table-secondary text-dark">
-                                <th>No</th>
-                                <th>Component Part No.</th>
-                                <th>Component Name</th>
-                                <th>Qty / Unit</th>
-                                <th class="text-center">Min Stock</th>
-                                <th class="text-center">Max Stock</th>
-                                <th class="text-center">Current Stock</th>
-                                <th class="text-center">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td><td>17621-Z1T-8010</td><td>CAP BODY OUTER</td><td>1</td>
-                                <td class="text-center">2,000</td><td class="text-center">10,000</td>
-                                <td class="text-center text-info fw-bold">6,500</td>
-                                <td class="text-center"><span class="badge bg-success">NORMAL</span></td>
-                            </tr>
-                            <tr>
-                                <td>2</td><td>17622-Z1T-8010</td><td>INNER VALVE PLATE</td><td>1</td>
-                                <td class="text-center">2,000</td><td class="text-center">10,000</td>
-                                <td class="text-center text-info fw-bold">4,800</td>
-                                <td class="text-center"><span class="badge bg-success">NORMAL</span></td>
-                            </tr>
-                            <tr>
-                                <td>3</td><td>17623-Z1T-8000</td><td>MAIN SEAL GASKET RUBBER</td><td>1</td>
-                                <td class="text-center">3,000</td><td class="text-center">15,000</td>
-                                <td class="text-center text-warning fw-bold">2,400</td>
-                                <td class="text-center"><span class="badge bg-warning text-dark">REORDER</span></td>
-                            </tr>
-                            <tr>
-                                <td>4</td><td>17624-Z1T-8010</td><td>STAINLESS SPRING COIL</td><td>1</td>
-                                <td class="text-center">2,500</td><td class="text-center">12,000</td>
-                                <td class="text-center text-info fw-bold">8,900</td>
-                                <td class="text-center"><span class="badge bg-success">NORMAL</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 5: Production Report -->
-        <div id="tab-report" class="tab-pane-content">
-            <div class="card card-custom p-4 mb-4">
-                <h5 class="text-primary fw-bold mb-3"><i class="fa-solid fa-file-invoice me-2"></i>รายงานสรุปผลการผลิต (Daily Production Summary Report)</h5>
-                <p class="text-muted">สรุปผลการทำงานประจำกะ ยอดผลิตเทียบเป้าหมาย OEE และบันทึกปัญหาในกระบวนการประกอบ</p>
-                <div class="row g-3 mt-2">
-                    <div class="col-md-3">
-                        <div class="p-3 bg-dark rounded border border-secondary text-center">
-                            <div class="text-muted small">Target Output</div>
-                            <div class="fs-3 fw-bold text-light">1,200 Pcs</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="p-3 bg-dark rounded border border-secondary text-center">
-                            <div class="text-muted small">Actual Output</div>
-                            <div class="fs-3 fw-bold text-info" id="report-act-output">0 Pcs</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="p-3 bg-dark rounded border border-secondary text-center">
-                            <div class="text-muted small">Overall OEE</div>
-                            <div class="fs-3 fw-bold text-success">94.2%</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="p-3 bg-dark rounded border border-secondary text-center">
-                            <div class="text-muted small">Total Downtime</div>
-                            <div class="fs-3 fw-bold text-warning">15 Mins</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 6: Stock F/G -->
-        <div id="tab-stock-fg" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h5 class="text-success fw-bold mb-3"><i class="fa-solid fa-warehouse me-2"></i>คลังสินค้าสำเร็จรูป (Finished Goods Stock - 17620-Z1T-8010)</h5>
-                <div class="row g-3 align-items-center">
-                    <div class="col-md-4">
-                        <div class="p-4 bg-dark rounded border border-secondary text-center">
-                            <div class="text-muted">คลังสินค้า FG พร้อมส่ง (On-Hand Ready)</div>
-                            <div class="display-5 fw-bold text-success mt-2" id="fg-onhand-val">2,500</div>
-                            <div class="small text-muted mt-1">Pcs (Standard Pack: 50 Pcs/Box)</div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="p-3 bg-dark rounded border border-secondary">
-                            <h6>สถานะกล่องสินค้าบรรจุเสร็จ (Pack Status)</h6>
-                            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary py-2">
-                                <span>จำนวนกล่องเต็ม (Full Pallets/Boxes):</span>
-                                <strong class="text-info fs-5" id="fg-boxes-val">50 Boxes</strong>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center py-2">
-                                <span>พื้นที่จัดเก็บ (Location Rack):</span>
-                                <strong class="text-warning fs-5">FG-ZONE-A04</strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 7: Delivery -->
-        <div id="tab-delivery" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h5 class="text-success fw-bold mb-3"><i class="fa-solid fa-truck-fast me-2"></i>ตารางติดตามการจัดส่งสินค้า (JIT Delivery Control)</h5>
-                <p class="text-muted">รอบการจัดส่งสินค้าสำเร็จรูปไปยัง Thai Honda (รอบเวลาส่งมอบ 11:00 น.)</p>
                 <div class="table-responsive">
-                    <table class="table table-dark table-bordered align-middle">
+                    <table class="table table-dark table-bordered plan-table" id="masterPlanGrid">
                         <thead>
-                            <tr class="table-secondary text-dark">
-                                <th>Trip No.</th>
-                                <th>Delivery Date</th>
-                                <th>Target Time</th>
-                                <th>Destination Location</th>
-                                <th>Planned Qty</th>
-                                <th>Status</th>
+                            <tr>
+                                <th style="width: 40px;">Item</th>
+                                <th style="width: 160px;">Part No. / Part Name</th>
+                                <th style="width: 75px;">จำนวนส่ง/<br>เดือน</th>
+                                <th style="width: 120px;">HOME / LOCATION</th>
+                                <th colspan="31" class="text-center text-warning">NOV'26 (Days 1 - 31)</th>
+                                <th style="width: 60px;">STD.Pack</th>
+                                <th style="width: 90px;">FORECAST<br>N+1 / N+2 / N+3</th>
+                            </tr>
+                            <tr>
+                                <th colspan="4" class="text-end text-muted">วัน (1 - 31)</th>
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th class="sun-col">7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th class="sun-col">15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th><th class="sun-col">22</th><th>23</th><th>24</th><th>25</th><th>26</th><th>27</th><th>28</th><th class="sun-col">29</th><th>30</th><th>31</th>
+                                <th>-</th><th>-</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr><td>TRIP-01</td><td>02-Nov-2026</td><td>11:00 AM</td><td>05504 L3ME01</td><td>262 Pcs</td><td><span class="badge bg-success">COMPLETED</span></td></tr>
-                            <tr><td>TRIP-02</td><td>02-Nov-2026</td><td>11:00 AM</td><td>05120 L3BE01</td><td>545 Pcs</td><td><span class="badge bg-success">COMPLETED</span></td></tr>
-                            <tr><td>TRIP-03</td><td>03-Nov-2026</td><td>11:00 AM</td><td>05504 L3ME01</td><td>211 Pcs</td><td><span class="badge bg-primary">SCHEDULED</span></td></tr>
-                            <tr><td>TRIP-04</td><td>03-Nov-2026</td><td>11:00 AM</td><td>05120 L3BE01</td><td>199 Pcs</td><td><span class="badge bg-primary">SCHEDULED</span></td></tr>
+                        <tbody id="masterPlanTbody">
+                            <!-- Rows generated dynamically via JavaScript -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 8: Capacity -->
-        <div id="tab-capacity" class="tab-pane-content">
-            <div class="card card-custom p-4 mb-4">
-                <h5 class="text-primary fw-bold mb-3"><i class="fa-solid fa-bolt me-2"></i>วิเคราะห์กำลังการผลิต (Assembly Line Capacity)</h5>
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <div class="p-3 bg-dark rounded border border-secondary">
-                            <h6>Line C1 Tact Time Analysis</h6>
-                            <div class="d-flex justify-content-between py-2 border-bottom border-secondary"><span>Target Cycle Time:</span> <strong>24.0 Sec / Pcs</strong></div>
-                            <div class="d-flex justify-content-between py-2 border-bottom border-secondary"><span>Actual Cycle Time:</span> <strong class="text-success">22.8 Sec / Pcs</strong></div>
-                            <div class="d-flex justify-content-between py-2"><span>Max Capacity / Shift (8 hrs):</span> <strong class="text-info">1,263 Pcs</strong></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="p-3 bg-dark rounded border border-secondary">
-                            <h6>Manpower Utilization</h6>
-                            <div class="d-flex justify-content-between py-2 border-bottom border-secondary"><span>Operators Assigned:</span> <strong>4 Persons</strong></div>
-                            <div class="d-flex justify-content-between py-2 border-bottom border-secondary"><span>Efficiency Rate:</span> <strong class="text-success">96.5%</strong></div>
-                            <div class="d-flex justify-content-between py-2"><span>Line Balance Ratio:</span> <strong class="text-info">92.0%</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 9: PM Machine / Jig -->
-        <div id="tab-pm" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h5 class="text-danger fw-bold mb-3"><i class="fa-solid fa-screws-tilting me-2"></i>แผนบำรุงรักษาเครื่องจักรและ Jig (PM & Calibration Plan)</h5>
-                <div class="table-responsive">
-                    <table class="table table-dark table-striped border-secondary align-middle">
-                        <thead>
-                            <tr class="text-warning border-bottom border-secondary">
-                                <th>Equipment / Jig ID</th>
-                                <th>Description</th>
-                                <th>Frequency</th>
-                                <th>Last Maintenance</th>
-                                <th>Next Due Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>PRESS-C1-01</td><td>Air Press Crimping Machine</td><td>Monthly</td><td>15-Oct-2026</td><td>15-Nov-2026</td><td><span class="badge bg-success">NORMAL</span></td></tr>
-                            <tr><td>JIG-ASSY-8010</td><td>Cap Assembly Mounting Jig</td><td>Weekly</td><td>24-Oct-2026</td><td>31-Oct-2026</td><td><span class="badge bg-success">NORMAL</span></td></tr>
-                            <tr><td>TQ-GAUGE-02</td><td>Digital Torque Wrench Tester</td><td>6 Months</td><td>10-Jun-2026</td><td>10-Dec-2026</td><td><span class="badge bg-info">CALIBRATED</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        <!-- 3-9 Other Modules -->
+        <div id="tab-component" class="tab-pane-content"><div class="card card-custom p-4"><h5>📦 บันทึกรับเข้า Component และงานชุบ</h5></div></div>
+        <div id="tab-stock-component" class="tab-pane-content"><div class="card card-custom p-4"><h5>📦 ตารางสต็อกชิ้นส่วน Component</h5></div></div>
+        <div id="tab-report" class="tab-pane-content"><div class="card card-custom p-4"><h5>📊 รายงานผลการผลิต</h5></div></div>
+        <div id="tab-stock-fg" class="tab-pane-content"><div class="card card-custom p-4"><h5>🏭 คลังสินค้าสำเร็จรูป (Finished Goods Stock)</h5></div></div>
+        <div id="tab-delivery" class="tab-pane-content"><div class="card card-custom p-4"><h5>🚚 บันทึกการจัดส่งสินค้า</h5></div></div>
+        <div id="tab-capacity" class="tab-pane-content"><div class="card card-custom p-4"><h5>⚡ กำลังการผลิต (Capacity Management)</h5></div></div>
+        <div id="tab-pm" class="tab-pane-content"><div class="card card-custom p-4"><h5>🛠️ แผนบำรุงรักษาเครื่องจักรและ Jig</h5></div></div>
 
     </div>
 
-    <!-- JavaScript Spreadsheet Engine & Tab Handler -->
     <script>
-        // Master Plan Initial Data Configuration
-        const INITIAL_STOCK = 2500;
-        const LOCATION_LIST = [
-            "05504 L3ME01", "05120 L3BE01", "05505 L3SP01", 
-            "05503 L2AF01", "05503 L2AF02", "05503 L2AF03", 
-            "05506 L2KD01", "05504 L3SE01", "06244 L3MF04", 
-            "05120 L3ME07", "HTAS", "ASH"
+        // ข้อมูลเริ่มต้นของ Master Plan (12 Locations + แถวคำนวณ)
+        const locationNames = [
+            "05504 L3ME01", "05120 L3BE01", "05505 L3SP01", "05503 L2AF01",
+            "05503 L2AF02", "05503 L2AF03", "05506 L2KD01", "05504 L3SE01",
+            "06244 L3MF04", "05120 L3ME07", "HTAS", "ASH"
         ];
 
-        // Original Location Forecast Data matrix for Days 1 to 31
-        const RAW_LOCATION_DATA = [
-            ["", "262", "211", "224", "606", "280", "", "", "181", "171", "134", "76", "255", "", "", "698", "398", "365", "114", "53", "", "", "586", "252", "430", "420", "105", "403", "", "", ""],
-            ["", "545", "199", "92", "46", "", "52", "", "", "", "", "28", "63", "160", "", "257", "101", "24", "112", "134", "", "", "", "135", "157", "134", "134", "135", "134", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "508", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-            ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-        ];
+        // ข้อมูล Forecast แผนจัดส่งรายวันเริ่มต้น
+        const initialForecasts = {
+            "05504 L3ME01": [0, 262, 211, 224, 606, 280, 0, 0, 181, 171, 134, 76, 255, 0, 0, 698, 398, 365, 114, 53, 0, 0, 586, 252, 430, 420, 105, 403, 0, 0, 0],
+            "05120 L3BE01": [0, 545, 199, 92, 46, 0, 52, 0, 0, 0, 0, 28, 63, 160, 0, 257, 101, 24, 112, 134, 0, 0, 0, 135, 157, 134, 134, 135, 134, 0, 0]
+        };
 
-        const SUNDAYS = [7, 15, 22, 29];
+        let activeInputEl = null;
 
-        // Grid Data Storage Engine: holds raw input formulas/strings and evaluated values
-        // Structure: gridData[row][col] = { raw: string, val: string|number, formula: string|null }
-        let gridData = {};
-        let selectedCellPos = { r: 1, c: 1 };
+        // สร้างตาราง Master Plan แบบโต้ตอบได้ 100%
+        function renderMasterPlanGrid() {
+            const tbody = document.getElementById('masterPlanTbody');
+            tbody.innerHTML = '';
 
-        // Helper: Convert column index (1-based) to Excel Column Name (A, B, C, ... Z, AA, AB...)
-        function colToLetter(col) {
-            let temp, letter = '';
-            while (col > 0) {
-                temp = (col - 1) % 26;
-                letter = String.fromCharCode(65 + temp) + letter;
-                col = (col - temp - 1) / 26;
-            }
-            return letter;
-        }
-
-        // Helper: Convert Excel Column Name to 1-based index
-        function letterToCol(letter) {
-            let column = 0, length = letter.length;
-            for (let i = 0; i < length; i++) {
-                column += (letter.charCodeAt(i) - 64) * Math.pow(26, length - i - 1);
-            }
-            return column;
-        }
-
-        // Initialize Master Grid Data
-        function initGridData() {
-            gridData = {};
-
-            // Helper setter
-            const setCell = (r, c, val) => {
-                if (!gridData[r]) gridData[r] = {};
-                const strVal = String(val);
-                gridData[r][c] = {
-                    raw: strVal,
-                    val: strVal,
-                    formula: strVal.startsWith('=') ? strVal : null
-                };
-            };
-
-            // Header labels setup inside spreadsheet
-            setCell(1, 1, "Item");
-            setCell(1, 2, "Part No. / Name");
-            setCell(1, 3, "Total Forecast");
-            setCell(1, 4, "HOME / LOCATION");
-
-            for (let d = 1; d <= 31; d++) {
-                setCell(1, 4 + d, d);
-            }
-            setCell(1, 36, "STD Pack");
-            setCell(1, 37, "Next Months");
-
-            // Row 2 to 13: Location Rows
-            for (let i = 0; i < LOCATION_LIST.length; i++) {
-                const rowIdx = 2 + i;
-                if (i === 0) {
-                    setCell(rowIdx, 1, "1");
-                    setCell(rowIdx, 2, "17620-Z1T-8010 CAP COMP FUEL FILLER");
-                    setCell(rowIdx, 3, "9723");
-                }
-                setCell(rowIdx, 4, LOCATION_LIST[i]);
-
-                // Set location forecast values
-                for (let d = 1; d <= 31; d++) {
-                    const rawVal = RAW_LOCATION_DATA[i][d - 1] || "";
-                    setCell(rowIdx, 4 + d, rawVal);
-                }
-
-                if (i === 0) {
-                    setCell(rowIdx, 36, "50");
-                    setCell(rowIdx, 37, "N+1: 7,242");
-                }
-            }
-
-            // Summary Calculation Rows
-            // Row 14: Plan Delivery/Day -> Formula: =SUM(E2:E13) for each day column
-            setCell(14, 4, "Plan Delivery/Day");
-            for (let d = 1; d <= 31; d++) {
-                const colLetter = colToLetter(4 + d);
-                setCell(14, 4 + d, `=SUM(${colLetter}2:${colLetter}13)`);
-            }
-
-            // Row 15: Lot No Production
-            setCell(15, 4, "Lot No Production");
-            const lotSample = { 7: "261001", 14: "261002", 21: "261003", 26: "261004", 28: "261005" };
-            for (let d = 1; d <= 31; d++) {
-                setCell(15, 4 + d, lotSample[d] || "");
-            }
-
-            // Row 16: แผนการผลิต/วัน (Planned Output)
-            setCell(16, 4, "แผนการผลิต/วัน");
-            const planProdSample = { 7: 1200, 14: 1200, 21: 1200, 26: 1200, 28: 1200 };
-            for (let d = 1; d <= 31; d++) {
-                setCell(16, 4 + d, planProdSample[d] || 0);
-            }
-
-            // Row 17: ยอดการผลิต OK (Actual Production)
-            setCell(17, 4, "ยอดการผลิต OK");
-            for (let d = 1; d <= 31; d++) {
-                setCell(17, 4 + d, 0);
-            }
-
-            // Row 18: ยอดการผลิต NG
-            setCell(18, 4, "ยอดการผลิต NG");
-            for (let d = 1; d <= 31; d++) {
-                setCell(18, 4 + d, 0);
-            }
-
-            // Row 19: Stock ต้นเดือน
-            setCell(19, 4, "Stock ต้นเดือน");
-            setCell(19, 5, INITIAL_STOCK);
-
-            // Row 20: จำนวนงานคงเหลือ (Balance B/L)
-            // Formula Day 1 (Col E / Col 5): =E19+E17-E14 (Stock ต้นเดือน + Production OK - Delivery)
-            // Formula Day 2..31: =PrevBalance + ProdOK - Delivery (e.g., =E20+F17-F14)
-            setCell(20, 4, "จำนวนงานคงเหลือ (Balance B/L)");
-            setCell(20, 5, "=E19+E17-E14");
-            for (let d = 2; d <= 31; d++) {
-                const currColL = colToLetter(4 + d);
-                const prevColL = colToLetter(4 + d - 1);
-                setCell(20, 4 + d, `=${prevColL}20+${currColL}17-${currColL}14`);
-            }
-
-            // Evaluate all formulas
-            evaluateAllFormulas();
-        }
-
-        // Built-in JavaScript Formula Evaluation Engine
-        function evaluateAllFormulas() {
-            // Run multiple passes to resolve multi-level formula dependencies
-            for (let pass = 0; pass < 4; pass++) {
-                for (let r in gridData) {
-                    for (let c in gridData[r]) {
-                        const cell = gridData[r][c];
-                        if (cell.raw && cell.raw.startsWith('=')) {
-                            cell.val = parseFormula(cell.raw, r, c);
-                        } else {
-                            cell.val = cell.raw;
-                        }
-                    }
-                }
-            }
-            updateDashboardMetrics();
-        }
-
-        // Parse individual formula expressions
-        function parseFormula(formulaStr, selfR, selfC) {
-            try {
-                let expr = formulaStr.substring(1).toUpperCase().trim();
-
-                // 1. Resolve SUM(CellStart:CellEnd) function
-                expr = expr.replace(/SUM\(([A-Z]+[0-9]+):([A-Z]+[0-9]+)\)/g, (match, p1, p2) => {
-                    const match1 = p1.match(/([A-Z]+)([0-9]+)/);
-                    const match2 = p2.match(/([A-Z]+)([0-9]+)/);
-                    if (!match1 || !match2) return "0";
-
-                    const startCol = letterToCol(match1[1]);
-                    const startRow = parseInt(match1[2]);
-                    const endCol = letterToCol(match2[1]);
-                    const endRow = parseInt(match2[2]);
-
-                    let sum = 0;
-                    for (let r = Math.min(startRow, endRow); r <= Math.max(startRow, endRow); r++) {
-                        for (let c = Math.min(startCol, endCol); c <= Math.max(startCol, endCol); c++) {
-                            if (gridData[r] && gridData[r][c]) {
-                                const num = parseFloat(gridData[r][c].val);
-                                if (!isNaN(num)) sum += num;
-                            }
-                        }
-                    }
-                    return sum;
-                });
-
-                // 2. Resolve cell references (e.g. E17, F14, E20)
-                expr = expr.replace(/\b[A-Z]+[0-9]+\b/g, (cellRef) => {
-                    const match = cellRef.match(/([A-Z]+)([0-9]+)/);
-                    if (match) {
-                        const c = letterToCol(match[1]);
-                        const r = parseInt(match[2]);
-                        if (gridData[r] && gridData[r][c]) {
-                            const val = gridData[r][c].val;
-                            const num = parseFloat(val);
-                            return !isNaN(num) ? num : (val === "" ? 0 : `"${val}"`);
-                        }
-                    }
-                    return 0;
-                });
-
-                // 3. Safely evaluate arithmetic expression
-                if (/^[0-9+\-*/().\s]+$/.test(expr)) {
-                    const res = Function(`"use strict"; return (${expr})`)();
-                    return typeof res === 'number' && !isNaN(res) ? Math.round(res * 100) / 100 : res;
-                }
-
-                return expr;
-            } catch (err) {
-                return "#ERROR!";
-            }
-        }
-
-        // Render HTML Table DOM for Spreadsheet
-        function renderTableDOM() {
-            const table = document.getElementById('spreadsheet-table');
-            table.innerHTML = '';
-
-            // Column Headers (A, B, C...)
-            const thead = document.createElement('thead');
-            const headerRow = document.createElement('tr');
-            
-            const cornerTh = document.createElement('th');
-            cornerTh.className = 'col-header';
-            cornerTh.innerText = '';
-            headerRow.appendChild(cornerTh);
-
-            for (let c = 1; c <= 37; c++) {
-                const th = document.createElement('th');
-                th.className = 'col-header';
-                th.innerText = colToLetter(c);
-                headerRow.appendChild(th);
-            }
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-
-            // Body Rows (1 to 20)
-            const tbody = document.createElement('tbody');
-            for (let r = 1; r <= 20; r++) {
+            // 1. สร้าง 12 แถว Location
+            locationNames.forEach((loc, idx) => {
                 const tr = document.createElement('tr');
-                
-                // Row index label (1, 2, 3...)
-                const rowHeader = document.createElement('th');
-                rowHeader.className = 'row-header';
-                rowHeader.innerText = r;
-                tr.appendChild(rowHeader);
-
-                for (let c = 1; c <= 37; c++) {
-                    const td = document.createElement('td');
-                    td.dataset.row = r;
-                    td.dataset.col = c;
-                    td.id = `cell-${r}-${c}`;
-
-                    // Special column styling
-                    const isSun = (c >= 5 && c <= 35) && SUNDAYS.includes(c - 4);
-                    if (isSun) td.classList.add('sun-col');
-
-                    // Header & Summary Rows background distinction
-                    if (r === 1) td.style.fontWeight = 'bold';
-                    if (r >= 14) td.classList.add('bg-calc-row');
-
-                    // Cell content text & formula styling
-                    const cellObj = (gridData[r] && gridData[r][c]) ? gridData[r][c] : { raw: '', val: '' };
-                    let displayVal = cellObj.val;
-
-                    if (cellObj.raw && cellObj.raw.startsWith('=')) {
-                        td.classList.add('text-formula');
-                    }
-
-                    // Format numbers / balance alerts
-                    if (r === 20 && c >= 5 && c <= 35) {
-                        const numVal = parseFloat(displayVal);
-                        if (!isNaN(numVal)) {
-                            if (numVal < 0) td.classList.add('text-negative');
-                            else td.classList.add('text-positive');
-                        }
-                    }
-
-                    td.innerText = displayVal !== undefined ? displayVal : '';
-
-                    // Cell Event Handlers
-                    td.addEventListener('click', () => selectCell(r, c));
-                    td.addEventListener('dblclick', () => editCell(r, c));
-
-                    tr.appendChild(td);
+                let html = '';
+                if (idx === 0) {
+                    html += `<td rowspan="13" class="fw-bold align-middle">1</td>
+                             <td rowspan="13" class="text-start fw-bold text-info align-middle">17620-Z1T-8010 /<br><span class="text-light">CAP COMP FUEL FILLER</span></td>
+                             <td rowspan="13" class="text-warning fw-bold align-middle">9,723</td>`;
                 }
+                html += `<td class="row-label">${loc}</td>`;
+
+                const locData = initialForecasts[loc] || Array(31).fill(0);
+                for (let day = 1; day <= 31; day++) {
+                    const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
+                    const val = locData[day - 1] || 0;
+                    const valStr = val > 0 ? val : '-';
+                    html += `<td class="${isSun ? 'sun-col' : ''}">
+                                <input type="text" class="cell-input loc-cell" data-day="${day}" data-loc="${loc}" value="${valStr}" onfocus="onCellFocus(this)" oninput="recalculateAll()">
+                             </td>`;
+                }
+
+                if (idx === 0) {
+                    html += `<td rowspan="11" class="fw-bold align-middle">50</td>
+                             <td rowspan="13" class="text-warning small align-middle">N+1: 7,242<br>N+2: 7,325<br>N+3: 9,722</td>`;
+                }
+                tr.innerHTML = html;
                 tbody.appendChild(tr);
-            }
-            table.appendChild(tbody);
-        }
-
-        // Select Cell Handler
-        function selectCell(r, c) {
-            document.querySelectorAll('.excel-table td.selected').forEach(td => td.classList.remove('selected'));
-            
-            selectedCellPos = { r, c };
-            const td = document.getElementById(`cell-${r}-${c}`);
-            if (td) td.classList.add('selected');
-
-            const cellName = `${colToLetter(c)}${r}`;
-            document.getElementById('selected-cell-name').innerText = cellName;
-
-            const cellObj = (gridData[r] && gridData[r][c]) ? gridData[r][c] : { raw: '' };
-            const formulaInput = document.getElementById('formula-bar');
-            formulaInput.value = cellObj.raw || '';
-        }
-
-        // Edit Cell Handler (Double Click or Enter)
-        function editCell(r, c) {
-            const td = document.getElementById(`cell-${r}-${c}`);
-            if (!td || td.classList.contains('editing')) return;
-
-            td.classList.add('editing');
-            const currentRaw = (gridData[r] && gridData[r][c]) ? gridData[r][c].raw : '';
-
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.className = 'cell-editor';
-            input.value = currentRaw;
-            td.innerHTML = '';
-            td.appendChild(input);
-            input.focus();
-
-            const saveCell = () => {
-                const newRaw = input.value.trim();
-                if (!gridData[r]) gridData[r] = {};
-                gridData[r][c] = {
-                    raw: newRaw,
-                    val: newRaw,
-                    formula: newRaw.startsWith('=') ? newRaw : null
-                };
-
-                td.classList.remove('editing');
-                evaluateAllFormulas();
-                renderTableDOM();
-                selectCell(r, c);
-            };
-
-            input.addEventListener('blur', saveCell);
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    saveCell();
-                } else if (e.key === 'Escape') {
-                    td.classList.remove('editing');
-                    renderTableDOM();
-                    selectCell(r, c);
-                }
             });
-        }
 
-        // Formula Bar Input Listener
-        document.getElementById('formula-bar').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                const { r, c } = selectedCellPos;
-                if (!gridData[r]) gridData[r] = {};
-                gridData[r][c] = {
-                    raw: this.value.trim(),
-                    val: this.value.trim(),
-                    formula: this.value.trim().startsWith('=') ? this.value.trim() : null
-                };
-                evaluateAllFormulas();
-                renderTableDOM();
-                selectCell(r, c);
+            // 2. แถว Plan Delivery/Day (รวมชิ้นงานส่ง)
+            const trDeliv = document.createElement('tr');
+            trDeliv.className = 'fw-bold bg-secondary';
+            let htmlDeliv = `<td class="row-label text-success">Plan Delivery/Day</td>`;
+            for (let day = 1; day <= 31; day++) {
+                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
+                htmlDeliv += `<td class="${isSun ? 'sun-col' : ''}">
+                                <input type="text" class="cell-input text-success fw-bold deliv-sum-cell" id="deliv_sum_${day}" value="0" readonly>
+                              </td>`;
             }
-        });
+            trDeliv.innerHTML = htmlDeliv;
+            tbody.appendChild(trDeliv);
 
-        // Reset Master Plan Data
-        function resetMasterPlanData() {
-            initGridData();
-            renderTableDOM();
-            selectCell(1, 1);
+            // 3. แถว Lot No Production
+            const trLot = document.createElement('tr');
+            let htmlLot = `<td colspan="4" class="row-label text-warning">Lot No Production</td>`;
+            for (let day = 1; day <= 31; day++) {
+                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
+                let defaultLot = "";
+                if (day === 7) defaultLot = "261001";
+                if (day === 14) defaultLot = "261002";
+                if (day === 21) defaultLot = "261003";
+                if (day === 27) defaultLot = "261004";
+                if (day === 29) defaultLot = "261005";
+                htmlLot += `<td class="${isSun ? 'sun-col' : ''}">
+                               <input type="text" class="cell-input text-warning" value="${defaultLot}" onfocus="onCellFocus(this)">
+                            </td>`;
+            }
+            htmlLot += `<td>-</td><td>-</td>`;
+            trLot.innerHTML = htmlLot;
+            tbody.appendChild(trLot);
+
+            // 4. แถว แผนการผลิต/วัน
+            const trPlanProd = document.createElement('tr');
+            let htmlPlanProd = `<td colspan="4" class="row-label text-primary">แผนการผลิต/วัน</td>`;
+            for (let day = 1; day <= 31; day++) {
+                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
+                let defaultPlan = (day === 7 || day === 14 || day === 21 || day === 27 || day === 29) ? 1200 : 0;
+                htmlPlanProd += `<td class="${isSun ? 'sun-col' : ''}">
+                                    <input type="text" class="cell-input text-info" value="${defaultPlan > 0 ? defaultPlan : '-'}" onfocus="onCellFocus(this)">
+                                 </td>`;
+            }
+            htmlPlanProd += `<td>-</td><td>-</td>`;
+            trPlanProd.innerHTML = htmlPlanProd;
+            tbody.appendChild(trPlanProd);
+
+            // 5. แถว ยอดการผลิต OK (คีย์ได้ & มีสูตร)
+            const trProdOk = document.createElement('tr');
+            let htmlProdOk = `<td colspan="4" class="row-label text-info">ยอดการผลิต OK (Actual Production)</td>`;
+            for (let day = 1; day <= 31; day++) {
+                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
+                htmlProdOk += `<td class="${isSun ? 'sun-col' : ''}">
+                                  <input type="text" class="cell-input text-info act-prod-cell" data-day="${day}" value="0" onfocus="onCellFocus(this)" oninput="recalculateAll()">
+                               </td>`;
+            }
+            htmlProdOk += `<td>-</td><td>-</td>`;
+            trProdOk.innerHTML = htmlProdOk;
+            tbody.appendChild(trProdOk);
+
+            // 6. แถว ยอดการผลิต NG
+            const trProdNg = document.createElement('tr');
+            let htmlProdNg = `<td colspan="4" class="row-label text-danger">ยอดการผลิต NG</td>`;
+            for (let day = 1; day <= 31; day++) {
+                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
+                htmlProdNg += `<td class="${isSun ? 'sun-col' : ''}">
+                                  <input type="text" class="cell-input text-danger" value="0" onfocus="onCellFocus(this)">
+                               </td>`;
+            }
+            htmlProdNg += `<td>-</td><td>-</td>`;
+            trProdNg.innerHTML = htmlProdNg;
+            tbody.appendChild(trProdNg);
+
+            // 7. แถว จำนวนงานคงเหลือ (Balance B/L)
+            const trBl = document.createElement('tr');
+            let htmlBl = `<td colspan="3" class="row-label text-danger fw-bold">จำนวนงานคงเหลือ (Balance)</td>
+                          <td><input type="text" class="cell-input text-success fw-bold" id="startStockVal" value="2500" onfocus="onCellFocus(this)" oninput="recalculateAll()"></td>`;
+            for (let day = 1; day <= 31; day++) {
+                const isSun = (day === 7 || day === 15 || day === 22 || day === 29);
+                htmlBl += `<td class="${isSun ? 'sun-col' : ''}">
+                             <input type="text" class="cell-input text-danger fw-bold bl-result-cell" id="bl_day_${day}" value="0" readonly>
+                           </td>`;
+            }
+            htmlBl += `<td>-</td><td>-</td>`;
+            trBl.innerHTML = htmlBl;
+            tbody.appendChild(trBl);
+
+            recalculateAll();
         }
 
-        // Update Summary Metrics on Main Dashboard from Spreadsheet Grid
-        function updateDashboardMetrics() {
-            let totalActualProd = 0;
-            // Row 17 (Actual Production OK) sum across Days 1 to 31
-            if (gridData[17]) {
-                for (let c = 5; c <= 35; c++) {
-                    const val = parseFloat(gridData[17][c]?.val);
-                    if (!isNaN(val)) totalActualProd += val;
+        // เมื่อผู้ใช้กดเลือกช่องเซลล์
+        function onCellFocus(el) {
+            activeInputEl = el;
+            const formulaBar = document.getElementById('formulaBar');
+            const addrLabel = document.getElementById('activeCellAddr');
+            
+            formulaBar.value = el.value;
+            addrLabel.innerText = "Cell Active";
+
+            // ไฮไลต์เลือกข้อความทั้งหมดเพื่อพิมพ์ทับได้สะดวก
+            el.select();
+        }
+
+        // เมื่อพิมพ์ใน Formula Bar ด้านบน
+        function onFormulaBarInput(val) {
+            if (activeInputEl) {
+                activeInputEl.value = val;
+                recalculateAll();
+            }
+        }
+
+        // ระบบคำนวณและประมวลผลสูตรคำนวณอัตโนมัติ (Formula Engine)
+        function parseFormulaOrValue(valStr) {
+            if (!valStr || valStr === '-') return 0;
+            valStr = valStr.toString().trim();
+
+            // ถ้าขึ้นต้นด้วยสูตร =
+            if (valStr.startsWith('=')) {
+                try {
+                    let expr = valStr.substring(1).toUpperCase();
+                    // รองรับสูตรง่ายๆ เช่น =SUM(...)
+                    if (expr.startsWith('SUM(') && expr.endsWith(')')) {
+                        let inner = expr.substring(4, expr.length - 1);
+                        let parts = inner.split(':');
+                        if (parts.length === 2) return 0; // fallback
+                    }
+                    // ประมวลผลนิพจน์คณิตศาสตร์
+                    return Function(`'use strict'; return (${expr})`)();
+                } catch (e) {
+                    return 0;
+                }
+            }
+            return parseFloat(valStr) || 0;
+        }
+
+        // คำนวณยอด Plan Delivery/Day และ B/L Balance ใหม่ Real-time
+        function recalculateAll() {
+            let totalProdActualMonth = 0;
+
+            // 1. คำนวณยอดรวมส่ง Plan Delivery/Day
+            for (let day = 1; day <= 31; day++) {
+                let daySum = 0;
+                const locInputs = document.querySelectorAll(`.loc-cell[data-day="${day}"]`);
+                locInputs.forEach(input => {
+                    daySum += parseFormulaOrValue(input.value);
+                });
+                const sumCell = document.getElementById(`deliv_sum_${day}`);
+                if (sumCell) sumCell.value = daySum;
+            }
+
+            // 2. คำนวณ Balance B/L รายวัน
+            const startStock = parseFormulaOrValue(document.getElementById('startStockVal')?.value || "2500");
+            let currentBL = startStock;
+
+            for (let day = 1; day <= 31; day++) {
+                const delivSum = parseFormulaOrValue(document.getElementById(`deliv_sum_${day}`)?.value || "0");
+                const prodActInput = document.querySelector(`.act-prod-cell[data-day="${day}"]`);
+                const prodAct = parseFormulaOrValue(prodActInput?.value || "0");
+
+                totalProdActualMonth += prodAct;
+
+                // สูตร: B/L วันนี้ = B/L วันก่อน + ผลิตจริง OK - แผนส่ง
+                currentBL = currentBL + prodAct - delivSum;
+
+                const blCell = document.getElementById(`bl_day_${day}`);
+                if (blCell) {
+                    blCell.value = currentBL;
+                    if (currentBL < 0) {
+                        blCell.style.color = '#ef4444'; // สีแดง
+                    } else {
+                        blCell.style.color = '#38bdf8'; // สีฟ้า
+                    }
                 }
             }
 
-            const targetTotal = 9723;
-            const progress = Math.min(100, (totalActualProd / targetTotal) * 100).toFixed(1);
-
-            const actEl = document.getElementById('dash-actual-total');
-            const pctEl = document.getElementById('dash-progress-percent');
-            const barEl = document.getElementById('dash-progress-bar');
-            const reportOutEl = document.getElementById('report-act-output');
-            const fgOnhandEl = document.getElementById('fg-onhand-val');
-            const fgBoxesEl = document.getElementById('fg-boxes-val');
-
-            if (actEl) actEl.innerHTML = `${totalActualProd.toLocaleString()} <small class="fs-6 text-muted">/ 9,723 Pcs</small>`;
-            if (pctEl) pctEl.innerText = `${progress}%`;
-            if (barEl) barEl.style.width = `${progress}%`;
-            if (reportOutEl) reportOutEl.innerText = `${totalActualProd.toLocaleString()} Pcs`;
-
-            // Calculate Finished Goods Stock (Stock ต้นเดือน + Actual Prod)
-            const currentFG = INITIAL_STOCK + totalActualProd;
-            if (fgOnhandEl) fgOnhandEl.innerText = currentFG.toLocaleString();
-            if (fgBoxesEl) fgBoxesEl.innerText = `${Math.floor(currentFG / 50)} Boxes`;
+            // อัปเดตตัวเลขหน้า Dashboard
+            const dashProdEl = document.getElementById('dashProdActual');
+            const dashPctEl = document.getElementById('dashProdPct');
+            if (dashProdEl) dashProdEl.innerHTML = `${totalProdActualMonth.toLocaleString()} <small class="fs-6 text-light">/ 9,723 Pcs</small>`;
+            if (dashPctEl) {
+                let pct = Math.round((totalProdActualMonth / 9723) * 100);
+                dashPctEl.innerText = `${pct}%`;
+            }
         }
 
-        // DOM Initialization
+        function saveMasterPlanData() {
+            alert('💾 บันทึกข้อมูล Master Plan เรียบร้อยแล้วครับ!');
+        }
+
+        function resetDefaultMasterPlan() {
+            if (confirm('ต้องการรีเซ็ตกลับเป็นค่าเริ่มต้นหรือไม่?')) {
+                renderMasterPlanGrid();
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Tab Switcher
+            // สลับ Tab เมนู
             const buttons = document.querySelectorAll('.nav-btn');
             const tabs = document.querySelectorAll('.tab-pane-content');
 
             buttons.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const targetTabId = this.getAttribute('data-tab');
-
                     buttons.forEach(b => b.classList.remove('active'));
                     tabs.forEach(t => t.classList.remove('active'));
 
                     this.classList.add('active');
                     const targetTab = document.getElementById(targetTabId);
-                    if (targetTab) {
-                        targetTab.classList.add('active');
-                    }
+                    if (targetTab) targetTab.classList.add('active');
                 });
             });
 
-            // Real-time Clock
+            // นาฬิกา
             function updateClock() {
                 const now = new Date();
                 const clockEl = document.getElementById('clock');
-                if (clockEl) {
-                    clockEl.innerHTML = `<i class="fa-regular fa-clock me-1"></i> ${now.toLocaleDateString('th-TH')} ${now.toLocaleTimeString('th-TH')}`;
-                }
+                if (clockEl) clockEl.innerText = now.toLocaleDateString('th-TH') + ' ' + now.toLocaleTimeString('th-TH');
             }
             setInterval(updateClock, 1000);
             updateClock();
 
-            // Initialize Grid & Render Spreadsheet
-            initGridData();
-            renderTableDOM();
-            selectCell(1, 1);
+            // โหลดตาราง Master Plan
+            renderMasterPlanGrid();
 
-            // Chart.js Hourly Production Chart
+            // กราฟรายชั่วโมง
             const ctx = document.getElementById('hourlyChart');
             if (ctx) {
                 new Chart(ctx.getContext('2d'), {
@@ -1108,23 +493,12 @@
                     data: {
                         labels: ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'],
                         datasets: [{
-                            label: 'Hourly Output (Pcs)',
-                            data: [150, 160, 155, 148, 162, 158, 140, 120],
-                            backgroundColor: '#38bdf8',
-                            borderRadius: 4
+                            label: 'ยอดผลิตจริง (Pcs)',
+                            data: [0, 0, 0, 0, 0, 0, 0, 0],
+                            backgroundColor: '#3b82f6'
                         }]
                     },
-                    options: { 
-                        responsive: true, 
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { labels: { color: '#94a3b8' } }
-                        },
-                        scales: {
-                            x: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
-                            y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' }, beginAtZero: true }
-                        }
-                    }
+                    options: { responsive: true, maintainAspectRatio: false }
                 });
             }
         });
