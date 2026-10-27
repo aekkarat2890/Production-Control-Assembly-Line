@@ -71,7 +71,6 @@
         
         .sun-col-bg { background-color: #334155 !important; color: #f8fafc; }
 
-        /* ตัวหนังสือในช่องตารางใหญ่สะใจ 20px หนาพิเศษ */
         .ex-input {
             width: 100%; height: 100%; background: transparent; border: none;
             text-align: center; font-size: 20px; font-weight: 900; color: #38bdf8; outline: none; padding: 0;
@@ -112,12 +111,12 @@
         <ul class="nav-main-grid">
             <li><button class="nav-btn active" data-tab="tab-dashboard">Dashboard</button></li>
             <li><button class="nav-btn" data-tab="tab-planning">Planning (Master Plan)</button></li>
+            <li><button class="nav-btn" data-tab="tab-summary-report">📊 สรุปรายละเอียดแยกตามไลน์</button></li>
             <li><button class="nav-btn" data-tab="tab-plating-log">รับ component<br>ส่งชุบ - รับชุบ</button></li>
             <li><button class="nav-btn" data-tab="tab-stock-component">Stock Component</button></li>
             <li><button class="nav-btn" data-tab="tab-report">รายงานการผลิต</button></li>
             <li><button class="nav-btn" data-tab="tab-stock-fg">Stock F/G</button></li>
             <li><button class="nav-btn" data-tab="tab-delivery">Delivery</button></li>
-            <li><button class="nav-btn" data-tab="tab-capacity">Capacity</button></li>
             <li><button class="nav-btn" data-tab="tab-pm">PM Machine /Jig</button></li>
         </ul>
 
@@ -162,9 +161,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="module-box">
-                        <h3 class="text-info fw-bold mb-3">⚙️ Material Plan</h3>
-                        <p class="text-light fs-5">คำนวณความต้องการชิ้นส่วน Component / แผนรับ - รับจริง เท่าไร ในแต่ละวัน</p>
-                        <button class="btn btn-info fw-bold fs-5 px-4 py-2 mt-2 text-dark" onclick="switchTab('tab-stock-component')">ดู Material Stock</button>
+                        <h3 class="text-info fw-bold mb-3">📊 สรุปรายละเอียดแยกตามไลน์</h3>
+                        <p class="text-light fs-5">รายงานสรุปการจัดส่งประจำวันแยกตาม Location พร้อมเช็ค Stock คงเหลือ</p>
+                        <button class="btn btn-info fw-bold fs-5 px-4 py-2 mt-2 text-dark" onclick="switchTab('tab-summary-report')">ดูรายงานสรุป</button>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -187,7 +186,7 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center gap-3">
                     <span class="badge bg-danger fs-4 px-3 py-2">Master Plan (Excel 1:1)</span>
-                    <span class="text-light fs-5">พิมพ์แก้ไขและคีย์สูตร = ได้ทุกช่องอิสระ (ฟอนต์ใหญ่พิเศษโรงงาน)</span>
+                    <span class="text-light fs-5">พิมพ์แก้ไขและคีย์สูตร = ได้ทุกช่องอิสระ (ข้อมูลตรึงถาวรไม่หาย)</span>
                 </div>
                 <div class="d-flex gap-3">
                     <button class="btn btn-success fw-bold px-4 py-2 fs-5" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
