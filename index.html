@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { background-color: #080c14; color: #f1f5f9; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; }
+        body { background-color: #080c14; color: #f1f5f9; font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; }
         .navbar-custom { background-color: #0f172a; border-bottom: 2px solid #dc2626; }
         .card-custom { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; }
         
@@ -21,7 +21,7 @@
         .nav-main-grid .nav-btn {
             width: 100%; height: 56px;
             background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
-            color: #f8fafc; font-weight: 800; font-size: 12px;
+            color: #f8fafc; font-weight: 800; font-size: 13px;
             border: 1px solid #475569; border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
             text-align: center; cursor: pointer; padding: 2px;
@@ -40,52 +40,53 @@
         .formula-bar-box {
             display: flex; align-items: center; gap: 10px;
             background-color: #0f172a; border: 1px solid #334155;
-            padding: 8px 14px; border-radius: 6px; margin-bottom: 12px;
+            padding: 10px 16px; border-radius: 6px; margin-bottom: 12px;
         }
         .formula-input-field {
             flex-grow: 1; background-color: #1e293b; color: #38bdf8;
-            border: 1px solid #475569; border-radius: 4px; padding: 6px 12px;
-            font-family: monospace; font-weight: bold; font-size: 15px;
+            border: 1px solid #475569; border-radius: 4px; padding: 8px 14px;
+            font-family: monospace; font-weight: bold; font-size: 16px;
         }
 
-        /* Excel Spreadsheet Grid */
+        /* Excel Spreadsheet Grid - Large Font & High Contrast */
         .excel-table-container {
             background-color: #0f172a; color: #f8fafc;
             border: 1px solid #334155; border-radius: 8px; padding: 12px; overflow-x: auto;
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
         .excel-table {
-            border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; font-size: 13px;
+            border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; font-size: 15px;
         }
         .excel-table td, .excel-table th {
-            border: 1px solid #334155; text-align: center; vertical-align: middle; 
-            padding: 4px 6px; height: 32px; white-space: nowrap; color: #f1f5f9;
+            border: 1px solid #475569; text-align: center; vertical-align: middle; 
+            padding: 6px 8px; height: 38px; white-space: nowrap; color: #f1f5f9;
         }
 
-        .excel-col-header { background-color: #1e293b !important; color: #94a3b8 !important; font-weight: bold; border: 1px solid #334155 !important; font-size: 11px; }
-        .excel-row-header { background-color: #1e293b !important; color: #94a3b8 !important; font-weight: bold; border: 1px solid #334155 !important; width: 32px; font-size: 11px; }
+        .excel-col-header { background-color: #1e293b !important; color: #cbd5e1 !important; font-weight: bold; border: 1px solid #475569 !important; font-size: 13px; }
+        .excel-row-header { background-color: #1e293b !important; color: #cbd5e1 !important; font-weight: bold; border: 1px solid #475569 !important; width: 38px; font-size: 13px; }
 
-        .hdr-title { font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #f8fafc; }
-        .hdr-box-title { background-color: #1e293b; font-weight: bold; font-size: 12px; color: #cbd5e1; }
-        .hdr-box-val { background-color: #0f172a; font-weight: bold; font-size: 13px; color: #38bdf8; }
+        .hdr-title { font-size: 28px; font-weight: 900; letter-spacing: 2px; color: #f8fafc; }
+        .hdr-box-title { background-color: #1e293b; font-weight: bold; font-size: 13px; color: #cbd5e1; }
+        .hdr-box-val { background-color: #0f172a; font-weight: bold; font-size: 15px; color: #38bdf8; }
         
-        .sun-col-bg { background-color: #334155 !important; color: #94a3b8; }
+        .sun-col-bg { background-color: #334155 !important; color: #cbd5e1; }
 
+        /* ขยายขนาดฟอนต์ช่องกรอกข้อมูลให้ใหญ่และชัดเจนเป็นพิเศษ */
         .ex-input {
             width: 100%; height: 100%; background: transparent; border: none;
-            text-align: center; font-size: 14px; font-weight: bold; color: #38bdf8; outline: none; padding: 0;
+            text-align: center; font-size: 16px; font-weight: 800; color: #38bdf8; outline: none; padding: 0;
         }
         .ex-input:focus {
             background-color: #1e293b !important; color: #ffffff !important;
             box-shadow: inset 0 0 0 2px #ef4444; z-index: 10;
         }
-        .red-text { color: #f87171 !important; font-weight: bold; }
-        .blue-text { color: #60a5fa !important; font-weight: bold; }
-        .green-text { color: #4ade80 !important; font-weight: bold; }
-        .yellow-text { color: #fbbf24 !important; font-weight: bold; }
+        .red-text { color: #f87171 !important; font-weight: 900; }
+        .blue-text { color: #60a5fa !important; font-weight: 900; }
+        .green-text { color: #4ade80 !important; font-weight: 900; }
+        .yellow-text { color: #fbbf24 !important; font-weight: 900; }
 
-        .summary-table th { background-color: #334155; color: #fff; text-align: center; padding: 10px; font-size: 13px; }
-        .summary-table td { background-color: #1e293b; color: #f8fafc; text-align: center; padding: 8px; border: 1px solid #334155; font-size: 13px; }
+        .summary-table th { background-color: #334155; color: #fff; text-align: center; padding: 12px; font-size: 14px; }
+        .summary-table td { background-color: #1e293b; color: #f8fafc; text-align: center; padding: 10px; border: 1px solid #334155; font-size: 14px; }
         .module-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
     </style>
 </head>
@@ -99,7 +100,7 @@
                     <h3 class="m-0 text-white fw-bold">⚙️ Production-Control-Assembly-Line</h3>
                     <span class="badge bg-danger px-2 py-1 fs-6">THAI HONDA</span>
                 </div>
-                <div class="small text-light" style="font-size: 12px;">Jozu Auto Part Co., Ltd. - Master Plan Visual Control System</div>
+                <div class="small text-light" style="font-size: 13px;">Jozu Auto Part Co., Ltd. - Master Plan Visual Control System</div>
             </div>
             <div class="text-warning fw-bold fs-5" id="clock"></div>
         </div>
@@ -151,26 +152,25 @@
                 </div>
             </div>
 
-            <!-- Dashboard Sub-Modules Summary Card matching flow -->
             <div class="row g-3 mb-3">
                 <div class="col-md-4">
                     <div class="module-box">
                         <h5 class="text-warning fw-bold mb-3">📋 Master Plan & BL Stock</h5>
-                        <p class="text-light small">ข้อมูลคีย์จากลูกค้า, แผนผลิต, ยอดผลิต OK-NG, และ BL stock คงเหลือคำนวณอัตโนมัติหลังคีย์จัดส่ง</p>
+                        <p class="text-light">ข้อมูลคีย์จากลูกค้า, แผนผลิต, ยอดผลิต OK-NG, และ BL stock คงเหลือคำนวณอัตโนมัติ</p>
                         <button class="btn btn-sm btn-outline-warning fw-bold" onclick="switchTab('tab-planning')">เปิดตาราง Master Plan</button>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="module-box">
                         <h5 class="text-info fw-bold mb-3">⚙️ Material Plan</h5>
-                        <p class="text-light small">คำนวณความต้องการชิ้นส่วน Component / แผนรับ - รับจริง เท่าไร ในแต่ละวัน</p>
+                        <p class="text-light">คำนวณความต้องการชิ้นส่วน Component / แผนรับ - รับจริง เท่าไร ในแต่ละวัน</p>
                         <button class="btn btn-sm btn-outline-info fw-bold" onclick="switchTab('tab-stock-component')">ดู Material Stock</button>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="module-box">
                         <h5 class="text-success fw-bold mb-3">🏭 Plating Plan</h5>
-                        <p class="text-light small">แผนและการรับส่งจริง งานชุบ และยอดคงเหลือที่โรงชุบเท่าไร</p>
+                        <p class="text-light">แผนและการรับส่งจริง งานชุบ และยอดคงเหลือที่โรงชุบเท่าไร</p>
                         <button class="btn btn-sm btn-outline-success fw-bold" onclick="switchTab('tab-plating-log')">ดู Log ส่งชุบ</button>
                     </div>
                 </div>
@@ -186,18 +186,18 @@
         <div id="tab-planning" class="tab-pane-content">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center gap-2">
-                    <span class="badge bg-danger fs-6">Master Plan (Excel 1:1)</span>
-                    <span class="text-light fs-6">พิมพ์แก้ไขและคีย์สูตร = ได้ทุกช่องอิสระ</span>
+                    <span class="badge bg-danger fs-5">Master Plan (Excel 1:1)</span>
+                    <span class="text-light fs-6">พิมพ์แก้ไขและคีย์สูตร = ได้ทุกช่องอิสระ (ฟอนต์ใหญ่พิเศษ)</span>
                 </div>
                 <div class="d-flex gap-2">
-                    <button class="btn btn-success fw-bold px-3" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
-                    <button class="btn btn-outline-light fw-bold px-3" onclick="location.reload()">🔄 รีเซ็ตตาราง</button>
+                    <button class="btn btn-success fw-bold px-3 py-2" onclick="alert('💾 บันทึกข้อมูลสำเร็จ!')">💾 บันทึกข้อมูล</button>
+                    <button class="btn btn-outline-light fw-bold px-3 py-2" onclick="location.reload()">🔄 รีเซ็ตตาราง</button>
                 </div>
             </div>
 
             <!-- Formula Bar -->
             <div class="formula-bar-box">
-                <span class="text-warning fw-bold fs-5"><i>fx</i></span>
+                <span class="text-warning fw-bold fs-4"><i>fx</i></span>
                 <span class="text-light fw-bold fs-5" id="activeCellAddr" style="width: 70px;">-</span>
                 <input type="text" id="formulaBar" class="formula-input-field" placeholder="คลิกเลือกช่องตารางแล้วพิมพ์ตัวเลข หรือสูตร เช่น =SUM(...) หรือ =2500-807" oninput="onFormulaBarInput(this.value)">
             </div>
@@ -215,8 +215,8 @@
                         <tr>
                             <td class="excel-row-header">1</td>
                             <td colspan="4" style="background:#1e293b; vertical-align:middle; text-align:left;">
-                                <strong style="color:#22c55e; font-size:20px;">JOZU</strong><br>
-                                <span style="font-size:10px; font-weight:bold; color:#cbd5e1;">Jozu Auto Part Co.,Ltd.</span>
+                                <strong style="color:#22c55e; font-size:22px;">JOZU</strong><br>
+                                <span style="font-size:11px; font-weight:bold; color:#cbd5e1;">Jozu Auto Part Co.,Ltd.</span>
                             </td>
                             <td colspan="14" class="hdr-title" style="text-align:center;">Master Plan</td>
                             <td colspan="3" class="hdr-box-title">For Month</td>
@@ -238,18 +238,18 @@
                             <td colspan="2" class="hdr-box-val">11.00</td>
                             <td colspan="2" class="hdr-box-val">1/1</td>
                             <td colspan="2" class="hdr-box-val">26-Oct-26</td>
-                            <td colspan="4" style="text-align:left; font-size:10px; color:#cbd5e1;">Pro................. Delivery .................<br>PPC................. QA .................</td>
+                            <td colspan="4" style="text-align:left; font-size:11px; color:#cbd5e1;">Pro................. Delivery .................<br>PPC................. QA .................</td>
                             <td></td><td></td><td></td>
                         </tr>
                         <tr style="font-weight:bold; background:#1e293b;">
                             <td class="excel-row-header">3</td>
-                            <td rowspan="2" style="width:40px; font-size:13px;">Item</td>
-                            <td rowspan="2" style="width:170px; font-size:13px;">Part No./<br>Part Name</td>
-                            <td rowspan="2" style="width:90px; font-size:13px;">จำนวนส่ง/เดือน</td>
-                            <td rowspan="2" style="width:130px; font-size:13px;">HOME /LOCATION</td>
-                            <td colspan="31" class="text-warning fs-6" style="background:#1e293b;">NOV'26</td>
-                            <td rowspan="2" style="width:60px; font-size:13px;">STD.Pack</td>
-                            <td colspan="3" style="font-size:13px;">NEXT MONTH</td>
+                            <td rowspan="2" style="width:45px; font-size:14px;">Item</td>
+                            <td rowspan="2" style="width:190px; font-size:14px;">Part No./<br>Part Name</td>
+                            <td rowspan="2" style="width:100px; font-size:14px;">จำนวนส่ง/เดือน</td>
+                            <td rowspan="2" style="width:140px; font-size:14px;">HOME /LOCATION</td>
+                            <td colspan="31" class="text-warning fs-5" style="background:#1e293b;">NOV'26</td>
+                            <td rowspan="2" style="width:65px; font-size:14px;">STD.Pack</td>
+                            <td colspan="3" style="font-size:14px;">NEXT MONTH</td>
                         </tr>
                         <tr style="font-weight:bold; background:#1e293b;">
                             <td class="excel-row-header">4</td>
@@ -272,18 +272,18 @@
                             locations.forEach((loc, idx) => {
                                 document.write(`<tr><td class="excel-row-header">${rowIndex}</td>`);
                                 if (idx === 0) {
-                                    document.write(`<td rowspan="12" style="font-weight:bold; font-size:15px;" class="text-white">1</td>`);
-                                    document.write(`<td rowspan="12" style="font-weight:bold; text-align:center; font-size:13px;" class="text-info">17620-Z1T-8010 /<br><span class="text-light">CAP COMP FUEL FILLER</span></td>`);
-                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:13px;">Forecast</td><td rowspan="2" style="font-weight:bold; font-size:14px;" class="text-warning">9723</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; font-size:16px;" class="text-white">1</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; text-align:center; font-size:14px;" class="text-info">17620-Z1T-8010 /<br><span class="text-light">CAP COMP FUEL FILLER</span></td>`);
+                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:14px;">Forecast</td><td rowspan="2" style="font-weight:bold; font-size:15px;" class="text-warning">9723</td>`);
                                 } else if (idx === 2) {
-                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:13px;">Pcs./Month</td><td rowspan="2" style="font-weight:bold; font-size:14px;" class="text-warning">9374</td>`);
+                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:14px;">Pcs./Month</td><td rowspan="2" style="font-weight:bold; font-size:15px;" class="text-warning">9374</td>`);
                                 } else if (idx === 4) {
-                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:13px;">Delivery/day</td><td rowspan="2" style="font-weight:bold; font-size:14px;" class="text-warning">391</td>`);
+                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:14px;">Delivery/day</td><td rowspan="2" style="font-weight:bold; font-size:15px;" class="text-warning">391</td>`);
                                 } else if (idx === 6) {
-                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:13px;">Safety 6 Day</td><td rowspan="2" style="font-weight:bold; font-size:14px;" class="text-warning">2344</td>`);
+                                    document.write(`<td rowspan="2" style="font-weight:bold; font-size:14px;">Safety 6 Day</td><td rowspan="2" style="font-weight:bold; font-size:15px;" class="text-warning">2344</td>`);
                                 }
 
-                                document.write(`<td style="text-align:left; font-weight:600; padding-left:8px; font-size:13px;">${loc}</td>`);
+                                document.write(`<td style="text-align:left; font-weight:700; padding-left:10px; font-size:14px;">${loc}</td>`);
 
                                 const rowData = initForecast[loc] || Array(31).fill(0);
                                 for (let d = 1; d <= 31; d++) {
@@ -295,10 +295,10 @@
                                 }
 
                                 if (idx === 0) {
-                                    document.write(`<td rowspan="12" style="font-weight:bold; font-size:15px;" class="text-white">50</td>`);
-                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg); font-size:13px;" class="text-warning">7,242</td>`);
-                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg); font-size:13px;" class="text-warning">7,325</td>`);
-                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg); font-size:13px;" class="text-warning">9,722</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; font-size:16px;" class="text-white">50</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg); font-size:14px;" class="text-warning">7,242</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg); font-size:14px;" class="text-warning">7,325</td>`);
+                                    document.write(`<td rowspan="12" style="font-weight:bold; writing-mode: vertical-rl; transform: rotate(180deg); font-size:14px;" class="text-warning">9,722</td>`);
                                 }
                                 document.write(`</tr>`);
                                 rowIndex++;
@@ -307,8 +307,8 @@
 
                         <tr style="background:#1e293b;">
                             <td class="excel-row-header">17</td>
-                            <td colspan="3" style="font-weight:bold; font-size:13px;" class="text-success">Plan Delivery/Day</td>
-                            <td style="font-weight:bold; font-size:13px;" class="text-success">รวมชิ้นงานส่ง</td>
+                            <td colspan="3" style="font-weight:bold; font-size:14px;" class="text-success">Plan Delivery/Day</td>
+                            <td style="font-weight:bold; font-size:14px;" class="text-success">รวมชิ้นงานส่ง</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -321,7 +321,7 @@
                         </tr>
                         <tr>
                             <td class="excel-row-header">18</td>
-                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-warning">Lot No Production ( ปี-เดือน-ล็อต)</td>
+                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:10px; font-size:14px;" class="text-warning">Lot No Production ( ปี-เดือน-ล็อต)</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -335,7 +335,7 @@
                         </tr>
                         <tr>
                             <td class="excel-row-header">19</td>
-                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-info">แผนการผลิต/วัน</td>
+                            <td colspan="4" style="font-weight:bold; text-align:left; padding-left:10px; font-size:14px;" class="text-info">แผนการผลิต/วัน</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -349,11 +349,11 @@
                         </tr>
                         <tr>
                             <td class="excel-row-header">20</td>
-                            <td rowspan="3" style="font-weight:bold; font-size:13px;">Stock/Pcs.</td>
+                            <td rowspan="3" style="font-weight:bold; font-size:14px;">Stock/Pcs.</td>
                             <td rowspan="3" style="font-weight:bold;">
                                 <input type="text" class="ex-input green-text" id="startStockVal" value="2500" onfocus="onCellFocus(this)" oninput="recalculateMasterPlan()">
                             </td>
-                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-info">ยอดการผลิต OK</td>
+                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:10px; font-size:14px;" class="text-info">ยอดการผลิต OK</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -366,7 +366,7 @@
                         </tr>
                         <tr>
                             <td class="excel-row-header">21</td>
-                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-danger">ยอดการผลิต NG</td>
+                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:10px; font-size:14px;" class="text-danger">ยอดการผลิต NG</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -380,7 +380,7 @@
                         </tr>
                         <tr>
                             <td class="excel-row-header">22</td>
-                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:8px; font-size:13px;" class="text-danger">จำนวนงานคงเหลือ</td>
+                            <td colspan="2" style="font-weight:bold; text-align:left; padding-left:10px; font-size:14px;" class="text-danger">จำนวนงานคงเหลือ</td>
                             <script>
                                 for (let d = 1; d <= 31; d++) {
                                     const isSun = (d === 7 || d === 15 || d === 22 || d === 29);
@@ -396,214 +396,69 @@
             </div>
         </div>
 
-        <!-- 3. รับ component (ส่งชุบ - รับชุบ) [Plating Log & Component Receiving] -->
+        <!-- 3. Summary Report Tab -->
+        <div id="tab-summary-report" class="tab-pane-content">
+            <div class="card card-custom p-4">
+                <h4 class="text-white fw-bold mb-2">📊 รายงานสรุปรายละเอียดประจำวัน (แยกตามไลน์ / Location)</h4>
+                <p class="text-light">สูตรคำนวณ Stock คงเหลือ: <code class="text-warning">Stock คงเหลือต้นเดือน + ยอดผลิต OK - ยอดส่งประจำวัน</code></p>
+                
+                <h5 class="text-info fw-bold mt-4 mb-2">📌 สรุปยอดรวมภาพรวมประจำวัน</h5>
+                <div class="table-responsive mb-4">
+                    <table class="table table-dark table-bordered summary-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 120px;">วันที่ (Day)</th>
+                                <th>จัดส่งรวมทุกไลน์ (Delivery)</th>
+                                <th>แผนประกอบ (Assembly Plan)</th>
+                                <th>ยอดผลิต OK (Actual OK)</th>
+                                <th>ยอดของเสีย NG (Actual NG)</th>
+                                <th>BL Stock คงเหลือ (Balance)</th>
+                                <th>สถานะสต็อก</th>
+                            </tr>
+                        </thead>
+                        <tbody id="summaryDailyTbody"></tbody>
+                    </table>
+                </div>
+
+                <h5 class="text-success fw-bold mt-4 mb-2">🚚 รายละเอียดการจัดส่งแยกตามไลน์ (Location Delivery Breakdown)</h5>
+                <div class="table-responsive">
+                    <table class="table table-dark table-bordered summary-table" id="locBreakdownTable">
+                        <thead>
+                            <tr id="locBreakdownHeader"></tr>
+                        </thead>
+                        <tbody id="locBreakdownTbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Modules (3 to 9) -->
         <div id="tab-plating-log" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <h4 class="text-white fw-bold mb-2">🔄 ระบบรับเข้า Component และงานชุบ (Plating & Component Log)</h4>
-                <p class="text-light small">บันทึก Log ส่งชุบ, Log รับชุบ และรับ Component พร้อมตรวจสอบยอดคงเหลือที่โรงชุบ</p>
                 <div class="row g-3 mt-3">
                     <div class="col-md-6">
                         <div class="module-box">
                             <h5 class="text-success fw-bold">📤 Log ส่งชุบ (Plating Outbound)</h5>
-                            <p class="text-light small">บันทึกรายการส่งชิ้นส่วนชุบเคลือบผิว (MFZn2-HC)</p>
-                            <button class="btn btn-sm btn-success fw-bold" onclick="alert('บันทึก Log ส่งชุบสำเร็จ!')">+ เพิ่มรายการส่งชุบ</button>
+                            <button class="btn btn-sm btn-success fw-bold mt-2" onclick="alert('บันทึกสำเร็จ!')">+ เพิ่มรายการส่งชุบ</button>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="module-box">
                             <h5 class="text-info fw-bold">📥 Log รับชุบ + รับ Component</h5>
-                            <p class="text-light small">บันทึกรับคืนจากโรงชุบและรับชิ้นส่วนจาก Supplier</p>
-                            <button class="btn btn-sm btn-info fw-bold" onclick="alert('บันทึก Log รับชุบสำเร็จ!')">+ เพิ่มรายการรับเข้า</button>
+                            <button class="btn btn-sm btn-info fw-bold mt-2" onclick="alert('บันทึกสำเร็จ!')">+ เพิ่มรายการรับเข้า</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 4. Stock Component [Material Plan & Component Stock] -->
-        <div id="tab-stock-component" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h4 class="text-white fw-bold mb-2">📦 Stock Component & Material Plan</h4>
-                <p class="text-light small">ทุกรายการเข้า Stock ทั้งงานชุบและ Component พร้อมคำนวณ Material Plan ความต้องการชิ้นส่วน</p>
-                <div class="table-responsive mt-3">
-                    <table class="table table-dark table-bordered summary-table">
-                        <thead>
-                            <tr>
-                                <th>Item Code</th>
-                                <th>Part Name / Description</th>
-                                <th>Type</th>
-                                <th>Safety Stock</th>
-                                <th>Stock คงเหลือจริง</th>
-                                <th>สถานะวัตถุดิบ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-warning fw-bold">17623-Z4H-9000</td>
-                                <td>COIL SPRING (FUEL CAP)</td>
-                                <td>Component</td>
-                                <td>1,000</td>
-                                <td class="text-success fw-bold">3,500 Pcs</td>
-                                <td><span class="badge bg-success">พอเพียง (Sufficient)</span></td>
-                            </tr>
-                            <tr>
-                                <td class="text-warning fw-bold">PLT-ZN02</td>
-                                <td>SHEET METAL BODY (MFZn2-HC)</td>
-                                <td>Plating Part</td>
-                                <td>800</td>
-                                <td class="text-info fw-bold">2,100 Pcs</td>
-                                <td><span class="badge bg-success">พอเพียง (Sufficient)</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. รายงานการผลิต [Production Reports] -->
-        <div id="tab-report" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h4 class="text-white fw-bold mb-2">📊 รายงานการผลิต (Production Reports & Log Books)</h4>
-                <div class="row g-3 mt-3">
-                    <div class="col-md-4">
-                        <div class="module-box">
-                            <h5 class="text-warning fw-bold">📄 Product Delivery Report</h5>
-                            <p class="text-light small">รายงานสรุปยอดส่งมอบสินค้าสำเร็จรูปประจำวัน</p>
-                            <button class="btn btn-sm btn-outline-warning" onclick="alert('กำลังดาวน์โหลด Product Delivery Report...')">ดาวน์โหลดรายงาน</button>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="module-box">
-                            <h5 class="text-info fw-bold">📑 ใบเตรียมชิ้นส่วน</h5>
-                            <p class="text-light small">ใบรายงานการเบิกและเตรียมชิ้นส่วนเข้าไลน์ประกอบ</p>
-                            <button class="btn btn-sm btn-outline-info" onclick="alert('กำลังเปิดใบเตรียมชิ้นส่วน...')">เปิดเอกสาร</button>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="module-box">
-                            <h5 class="text-success fw-bold">📖 Log Book นำชิ้นงานประกอบ</h5>
-                            <p class="text-light small">บันทึกการนำชิ้นงานเข้าไลน์ประกอบระบุ Lot No</p>
-                            <button class="btn btn-sm btn-outline-success" onclick="alert('เปิด Log Book ประกอบ...')">เปิด Log Book</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 6. Stock F/G [Finished Goods Stock] -->
-        <div id="tab-stock-fg" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h4 class="text-white fw-bold mb-2">🏭 คลังสินค้าสำเร็จรูป (Stock F/G - Cap Comp)</h4>
-                <p class="text-light small">จัดการสต็อกสินค้าสำเร็จรูป Assembly Cap Comp พร้อมส่งมอบ</p>
-                <div class="table-responsive mt-3">
-                    <table class="table table-dark table-bordered summary-table">
-                        <thead>
-                            <tr>
-                                <th>Part No.</th>
-                                <th>Part Name</th>
-                                <th>Lot No.</th>
-                                <th>Location คลัง</th>
-                                <th>จำนวนในคลัง (Pcs)</th>
-                                <th>สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-warning fw-bold">17620-Z1T-8010</td>
-                                <td>CAP COMP FUEL FILLER</td>
-                                <td>261001</td>
-                                <td>WH-A01</td>
-                                <td class="text-success fw-bold">2,500 Pcs</td>
-                                <td><span class="badge bg-success">พร้อมส่ง</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- 7. Delivery [Shipping & Delivery] -->
-        <div id="tab-delivery" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h4 class="text-white fw-bold mb-2">🚚 บันทึกและจัดการการจัดส่งสินค้า (Delivery Management)</h4>
-                <p class="text-light small">บันทึกรายการจัดส่งสินค้าประจำวันให้ลูกค้า Thai Honda</p>
-                <button class="btn btn-success fw-bold mb-3" onclick="alert('บันทึกจัดส่งสำเร็จ!')">+ บันทึกรายการจัดส่งใหม่</button>
-                <div class="table-responsive">
-                    <table class="table table-dark table-bordered summary-table">
-                        <thead>
-                            <tr>
-                                <th>วันที่ส่ง</th>
-                                <th>Customer</th>
-                                <th>Part No.</th>
-                                <th>จำนวนส่ง (Pcs)</th>
-                                <th>Time</th>
-                                <th>สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>01 NOV'26</td>
-                                <td>THAI HONDA</td>
-                                <td>17620-Z1T-8010</td>
-                                <td class="text-success fw-bold">807 Pcs</td>
-                                <td>11:00</td>
-                                <td><span class="badge bg-success">Delivered</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- 8. Capacity [Capacity Management] -->
-        <div id="tab-capacity" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h4 class="text-white fw-bold mb-2">⚡ กำลังการผลิต (Capacity: Ass'y / Part / Machine)</h4>
-                <div class="row g-3 mt-2">
-                    <div class="col-md-4">
-                        <div class="module-box text-center">
-                            <h5 class="text-primary fw-bold">Ass'y Line Capacity</h5>
-                            <h3 class="text-white fw-bold mt-3">1,500 Pcs/Day</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="module-box text-center">
-                            <h5 class="text-success fw-bold">Part Process Capacity</h5>
-                            <h3 class="text-white fw-bold mt-3">1,800 Pcs/Day</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="module-box text-center">
-                            <h5 class="text-warning fw-bold">Machine Capacity</h5>
-                            <h3 class="text-white fw-bold mt-3">95.5% OEE</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 9. PM Machine / Jig [Preventive Maintenance] -->
-        <div id="tab-pm" class="tab-pane-content">
-            <div class="card card-custom p-4">
-                <h4 class="text-white fw-bold mb-2">🛠️ แผนบำรุงรักษาเครื่องจักรและ Jig (PM Machine & Jig)</h4>
-                <div class="row g-3 mt-2">
-                    <div class="col-md-6">
-                        <div class="module-box">
-                            <h5 class="text-warning fw-bold">🔧 Jig Maintenance Schedule</h5>
-                            <p class="text-light small">ตรวจสอบและซ่อมบำรุง Jig ประกอบประจำสัปดาห์/เดือน</p>
-                            <button class="btn btn-sm btn-outline-warning" onclick="alert('เปิดตาราง PM Jig')">ดูแผน PM Jig</button>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="module-box">
-                            <h5 class="text-danger fw-bold">⚙️ Machine Maintenance</h5>
-                            <p class="text-light small">แผน Overhaul และบำรุงรักษาเครื่องจักรในสายการผลิต</p>
-                            <button class="btn btn-sm btn-outline-danger" onclick="alert('เปิดตาราง PM Machine')">ดูแผน PM Machine</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="tab-stock-component" class="tab-pane-content"><div class="card card-custom p-4"><h4 class="text-white fw-bold">📦 Stock Component & Material Plan</h4></div></div>
+        <div id="tab-report" class="tab-pane-content"><div class="card card-custom p-4"><h4 class="text-white fw-bold">📊 รายงานการผลิต (Production Reports)</h4></div></div>
+        <div id="tab-stock-fg" class="tab-pane-content"><div class="card card-custom p-4"><h4 class="text-white fw-bold">🏭 คลังสินค้าสำเร็จรูป (Stock F/G)</h4></div></div>
+        <div id="tab-delivery" class="tab-pane-content"><div class="card card-custom p-4"><h4 class="text-white fw-bold">🚚 จัดส่งสินค้า (Delivery Management)</h4></div></div>
+        <div id="tab-capacity" class="tab-pane-content"><div class="card card-custom p-4"><h4 class="text-white fw-bold">⚡ กำลังการผลิต (Capacity)</h4></div></div>
+        <div id="tab-pm" class="tab-pane-content"><div class="card card-custom p-4"><h4 class="text-white fw-bold">🛠️ แผนบำรุงรักษาเครื่องจักรและ Jig (PM)</h4></div></div>
 
     </div>
 
@@ -662,30 +517,49 @@
 
         function recalculateMasterPlan() {
             let totalActualMonth = 0;
+            let dailySummaryHtml = '';
+
             let startStockRaw = document.getElementById('startStockVal')?.value || "2500";
             let startStock = evaluateCellFormula(startStockRaw);
             if (typeof startStock !== 'number') startStock = 2500;
 
             let currentBL = startStock;
 
+            let locHeaderHtml = `<th>วันที่ (Day)</th>`;
+            locations.forEach(loc => { locHeaderHtml += `<th>${loc}</th>`; });
+            locHeaderHtml += `<th>รวมส่งประจำวัน</th>`;
+            document.getElementById('locBreakdownHeader').innerHTML = locHeaderHtml;
+
+            let locBreakdownHtml = '';
+
             for (let d = 1; d <= 31; d++) {
                 let delivSum = 0;
+                let dayLocValues = {};
+
                 locations.forEach(loc => {
                     const inp = document.querySelector(`.loc-input[data-loc="${loc}"][data-day="${d}"]`);
                     let val = evaluateCellFormula(inp?.value || "0");
-                    if (typeof val === 'number') delivSum += val;
+                    if (typeof val !== 'number') val = 0;
+                    dayLocValues[loc] = val;
+                    delivSum += val;
                 });
+
                 const sumCell = document.getElementById(`deliv_sum_${d}`);
                 if (sumCell) sumCell.value = delivSum;
 
+                const planInp = document.querySelector(`.plan-prod-cell[data-day="${d}"]`);
+                let planVal = evaluateCellFormula(planInp?.value || "0");
+
                 const prodInp = document.querySelector(`.act-prod-cell[data-day="${d}"]`);
                 let prodVal = evaluateCellFormula(prodInp?.value || "0");
+
+                const ngInp = document.querySelector(`.act-ng-cell[data-day="${d}"]`);
+                let ngVal = evaluateCellFormula(ngInp?.value || "0");
 
                 if (typeof prodVal === 'number') totalActualMonth += prodVal;
                 if (typeof delivSum !== 'number') delivSum = 0;
                 if (typeof prodVal !== 'number') prodVal = 0;
 
-                // สูตร: Stock ต้นเดือน + ยอดผลิต - ยอดส่งประจำวัน
                 currentBL = currentBL + prodVal - delivSum;
 
                 const blCell = document.getElementById(`bl_day_${d}`);
@@ -693,7 +567,28 @@
                     blCell.value = currentBL;
                     blCell.className = currentBL < 0 ? 'ex-input red-text bl-result-cell' : 'ex-input blue-text bl-result-cell';
                 }
+
+                let statusBadge = currentBL < 0 ? '<span class="badge bg-danger fs-6">สต็อกติดลบ</span>' : '<span class="badge bg-success fs-6">ปกติ</span>';
+                dailySummaryHtml += `<tr>
+                    <td class="fw-bold text-warning">${d} NOV'26</td>
+                    <td class="text-success fw-bold">${delivSum.toLocaleString()} Pcs</td>
+                    <td class="text-info fw-bold">${planVal > 0 ? planVal.toLocaleString() + ' Pcs' : '-'}</td>
+                    <td class="text-primary fw-bold">${prodVal > 0 ? prodVal.toLocaleString() + ' Pcs' : '-'}</td>
+                    <td class="text-danger fw-bold">${ngVal > 0 ? ngVal.toLocaleString() + ' Pcs' : '-'}</td>
+                    <td class="fw-bold ${currentBL < 0 ? 'text-danger' : 'text-info'}">${currentBL.toLocaleString()} Pcs</td>
+                    <td>${statusBadge}</td>
+                </tr>`;
+
+                locBreakdownHtml += `<tr><td class="fw-bold text-warning">${d} NOV'26</td>`;
+                locations.forEach(loc => {
+                    let v = dayLocValues[loc];
+                    locBreakdownHtml += `<td>${v > 0 ? v.toLocaleString() : '-'}</td>`;
+                });
+                locBreakdownHtml += `<td class="text-success fw-bold">${delivSum > 0 ? delivSum.toLocaleString() : '-'}</td></tr>`;
             }
+
+            document.getElementById('summaryDailyTbody').innerHTML = dailySummaryHtml;
+            document.getElementById('locBreakdownTbody').innerHTML = locBreakdownHtml;
 
             const dashProdEl = document.getElementById('dashProdActual');
             if (dashProdEl) dashProdEl.innerHTML = `${totalActualMonth.toLocaleString()} <small class="fs-6 text-light">/ 9,723 Pcs</small>`;
