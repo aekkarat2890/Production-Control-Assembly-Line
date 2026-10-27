@@ -69,44 +69,47 @@
         .tab-pane-content.active { display: block !important; }
 
         .plan-table th {
-            font-size: 13px !important;
+            font-size: 12px !important;
             font-weight: bold !important;
-            padding: 8px 6px !important;
+            padding: 6px 4px !important;
             text-align: center;
             vertical-align: middle;
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #475569;
         }
         .plan-table td {
-            font-size: 13px !important;
+            font-size: 12px !important;
             font-weight: 600 !important;
             text-align: center;
             vertical-align: middle;
             white-space: nowrap;
-            padding: 6px 4px !important;
+            padding: 5px 3px !important;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: #f1f5f9;
         }
         
         .plan-input {
-            width: 46px;
-            background-color: #0f172a;
+            width: 42px;
+            background-color: #1e293b;
             color: #38bdf8;
             border: 1px solid #475569;
-            border-radius: 4px;
+            border-radius: 3px;
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             padding: 2px 0;
         }
         .plan-input:focus {
-            background-color: #1e293b;
+            background-color: #0f172a;
             color: #ffffff;
             border-color: #ef4444;
             outline: none;
         }
-        .bl-cell {
-            font-weight: bold;
-            color: #f87171;
-        }
-        .sun-col { background-color: #334155 !important; color: #cbd5e1; }
-        .row-label { text-align: left !important; font-weight: 700 !important; padding-left: 10px !important; font-size: 13px !important; }
+        .sun-col { background-color: #334155 !important; color: #94a3b8; }
+        .row-label { text-align: left !important; font-weight: 600 !important; padding-left: 6px !important; }
+        .excel-header-box { background-color: #1e293b; border: 1px solid #475569; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; }
     </style>
 </head>
 <body>
@@ -219,310 +222,147 @@
             </div>
         </div>
 
-        <!-- 2. Planning -->
+        <!-- 2. Planning (Master Plan ถอดแบบ Excel ต้นฉบับ) -->
         <div id="tab-planning" class="tab-pane-content">
             
-            <!-- 📄 แผ่นที่ 1: MASTER PLAN ทั้งเดือน -->
             <div class="card card-custom p-4 mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <h4 class="text-success fw-bold m-0">📄 แผ่นที่ 1: MASTER PLAN ทั้งเดือน (แผนส่งมอบ & แผนผลิต)</h4>
-                        <small class="text-light fs-6">สูตร B/L: ยอดคงเหลือวันก่อน + ยอดผลิตจริง - ยอดส่งจริง = ยอดคงเหลือ B/L</small>
+                <!-- Excel Top Header Bar -->
+                <div class="excel-header-box d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                        <h3 class="text-white m-0 fw-bold">Master Plan</h3>
+                        <span class="badge bg-danger">THAI HONDA</span>
                     </div>
-                    <span class="badge bg-success px-3 py-2 fs-6">MASTER PLAN FORM</span>
+                    <div class="d-flex flex-wrap gap-3 text-center small">
+                        <div><span class="text-muted d-block">For Month</span><strong class="text-warning">NOV'26</strong></div>
+                        <div><span class="text-muted d-block">Customer</span><strong class="text-info">TH</strong></div>
+                        <div><span class="text-muted d-block">Del.Time</span><strong>11.00</strong></div>
+                        <div><span class="text-muted d-block">Page</span><strong>1/1</strong></div>
+                        <div><span class="text-muted d-block">Issue</span><strong>26-Oct-26</strong></div>
+                    </div>
                 </div>
+
                 <div class="table-responsive">
                     <table class="table table-dark table-bordered plan-table" id="masterPlanTable">
                         <thead>
-                            <tr class="text-success text-center bg-secondary">
-                                <th rowspan="2">Item</th>
-                                <th rowspan="2">Part No. / Name</th>
-                                <th rowspan="2">จำนวนส่ง/<br>เดือน</th>
-                                <th rowspan="2">Stock<br>ต้นเดือน</th>
-                                <th rowspan="2">LOCATION</th>
-                                <th rowspan="2">Status/Date</th>
-                                <th colspan="31" class="text-white">NOV '26 (Days 1 - 31)</th>
-                                <th rowspan="2">FORECAST<br>N+1 / N+2 / N+3</th>
+                            <tr>
+                                <th style="width: 40px;">Item</th>
+                                <th style="width: 160px;">Part No. / Part Name</th>
+                                <th style="width: 80px;">จำนวนส่ง/<br>เดือน</th>
+                                <th style="width: 110px;">HOME / LOCATION</th>
+                                <th colspan="31" class="text-center text-warning">NOV'26 (Days 1 - 31)</th>
+                                <th style="width: 60px;">STD.Pack</th>
+                                <th style="width: 90px;">NEXT MONTH<br>N+1 / N+2 / N+3</th>
                             </tr>
-                            <tr class="text-center bg-dark text-warning">
+                            <tr>
+                                <th colspan="4" class="text-end text-muted">รายวัน (1 - 31)</th>
                                 <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th class="sun-col">7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th class="sun-col">15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th><th class="sun-col">22</th><th>23</th><th>24</th><th>25</th><th>26</th><th>27</th><th>28</th><th class="sun-col">29</th><th>30</th><th>31</th>
+                                <th>-</th>
+                                <th>-</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="item-master-group">
-                                <td rowspan="4" class="fw-bold">1</td>
-                                <td rowspan="4" class="text-start fw-bold text-info">17620-Z1T-8010<br><span class="text-light">CAP COMP FUEL FILLER</span></td>
-                                <td rowspan="4" class="text-warning fw-bold">9,723</td>
-                                <td rowspan="4" class="text-success fw-bold"><input type="number" class="plan-input bg-dark text-success fw-bold" id="startStockMaster" value="2500" style="width: 55px;" oninput="calcMasterBL()"></td>
-                                <td rowspan="4" class="text-start">05504 / 05120</td>
-                                <td class="row-label text-success">แผนส่ง</td>
-                                <td><input type="number" class="plan-input plan-val" value="0"></td>
-                                <td><input type="number" class="plan-input plan-val" value="807"></td>
-                                <td><input type="number" class="plan-input plan-val" value="410"></td>
-                                <td><input type="number" class="plan-input plan-val" value="316"></td>
-                                <td><input type="number" class="plan-input plan-val" value="652"></td>
-                                <td><input type="number" class="plan-input plan-val" value="280"></td>
-                                <td class="sun-col"><input type="number" class="plan-input plan-val" value="52"></td>
-                                <td><input type="number" class="plan-input plan-val" value="0"></td>
-                                <td><input type="number" class="plan-input plan-val" value="181"></td>
-                                <td><input type="number" class="plan-input plan-val" value="171"></td>
-                                <td><input type="number" class="plan-input plan-val" value="162"></td>
-                                <td><input type="number" class="plan-input plan-val" value="139"></td>
-                                <td><input type="number" class="plan-input plan-val" value="415"></td>
-                                <td><input type="number" class="plan-input plan-val" value="0"></td>
-                                <td class="sun-col"><input type="number" class="plan-input plan-val" value="0"></td>
-                                <td><input type="number" class="plan-input plan-val" value="955"></td>
-                                <td><input type="number" class="plan-input plan-val" value="499"></td>
-                                <td><input type="number" class="plan-input plan-val" value="389"></td>
-                                <td><input type="number" class="plan-input plan-val" value="226"></td>
-                                <td><input type="number" class="plan-input plan-val" value="187"></td>
-                                <td><input type="number" class="plan-input plan-val" value="0"></td>
-                                <td class="sun-col"><input type="number" class="plan-input plan-val" value="0"></td>
-                                <td><input type="number" class="plan-input plan-val" value="721"></td>
-                                <td><input type="number" class="plan-input plan-val" value="409"></td>
-                                <td><input type="number" class="plan-input plan-val" value="564"></td>
-                                <td><input type="number" class="plan-input plan-val" value="554"></td>
-                                <td><input type="number" class="plan-input plan-val" value="748"></td>
-                                <td><input type="number" class="plan-input plan-val" value="537"></td>
-                                <td class="sun-col"><input type="number" class="plan-input plan-val" value="0"></td>
-                                <td><input type="number" class="plan-input plan-val" value="0"></td>
-                                <td><input type="number" class="plan-input plan-val" value="0"></td>
-                                <td rowspan="4" class="text-center text-warning">N+1: 7,242<br>N+2: 7,325<br>N+3: 9,722</td>
+                            <!-- Forecast Rows by Location -->
+                            <tr>
+                                <td rowspan="12" class="fw-bold text-center">1</td>
+                                <td rowspan="12" class="text-start fw-bold text-info">
+                                    17620-Z1T-8010 /<br><span class="text-light">CAP COMP FUEL FILLER</span>
+                                </td>
+                                <td rowspan="12" class="text-warning fw-bold text-center">9,723</td>
+                                <td class="row-label">05504 L3ME01</td>
+                                <td>-</td><td>262</td><td>211</td><td>224</td><td>606</td><td>280</td><td class="sun-col">-</td><td>-</td><td>181</td><td>171</td><td>134</td><td>76</td><td>255</td><td>-</td><td class="sun-col">-</td><td>698</td><td>398</td><td>365</td><td>114</td><td>53</td><td>-</td><td class="sun-col">-</td><td>586</td><td>252</td><td>430</td><td>420</td><td>105</td><td>403</td><td class="sun-col">-</td><td>-</td><td>-</td>
+                                <td rowspan="10" class="text-center fw-bold">50</td>
+                                <td rowspan="12" class="text-center text-warning small">N+1: 7,242<br>N+2: 7,325<br>N+3: 9,722</td>
                             </tr>
-                            <tr class="row-act-ship">
-                                <td class="row-label text-info">ส่งจริง (Act)</td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td class="sun-col"><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td class="sun-col"><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td class="sun-col"><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td class="sun-col"><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input ship-val" value="0" oninput="calcMasterBL()"></td>
+                            <tr>
+                                <td class="row-label">05120 L3BE01</td>
+                                <td>-</td><td>545</td><td>199</td><td>92</td><td>46</td><td>-</td><td class="sun-col">52</td><td>-</td><td>-</td><td>-</td><td>-</td><td>28</td><td>63</td><td>160</td><td class="sun-col">-</td><td>257</td><td>101</td><td>24</td><td>112</td><td>134</td><td>-</td><td class="sun-col">-</td><td>-</td><td>135</td><td>157</td><td>134</td><td>134</td><td>135</td><td class="sun-col">134</td><td>-</td><td>-</td>
                             </tr>
+                            <tr><td class="row-label">05505 L3SP01</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
+                            <tr><td class="row-label">05503 L2AF01</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
+                            <tr><td class="row-label">05503 L2AF02</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
+                            <tr><td class="row-label">05503 L2AF03</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
+                            <tr><td class="row-label">05506 L2KD01</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
+                            <tr><td class="row-label">05504 L3SE01</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
+                            <tr><td class="row-label">06244 L3MF04</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
+                            <tr><td class="row-label">05120 L3ME07</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">508</td><td>-</td><td>-</td></tr>
+                            
+                            <!-- Plan Delivery/Day (รวมชิ้นงานส่ง) -->
+                            <tr class="fw-bold text-success bg-secondary">
+                                <td class="row-label text-success">Plan Delivery/Day</td>
+                                <td>0</td><td>807</td><td>410</td><td>316</td><td>652</td><td>280</td><td class="sun-col">52</td><td>0</td><td>181</td><td>171</td><td>162</td><td>139</td><td>415</td><td>0</td><td class="sun-col">0</td><td>955</td><td>499</td><td>389</td><td>226</td><td>187</td><td>0</td><td class="sun-col">0</td><td>721</td><td>409</td><td>564</td><td>554</td><td>748</td><td>537</td><td class="sun-col">508</td><td>0</td><td>0</td>
+                            </tr>
+
+                            <!-- Lot No Production -->
+                            <tr>
+                                <td class="row-label text-warning">Lot No Production</td>
+                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">261001</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>261002</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>261003</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>261004</td><td>-</td><td class="sun-col">-</td><td>261005</td><td>-</td>
+                                <td class="text-center">-</td>
+                            </tr>
+
+                            <!-- แผนการผลิต/วัน -->
+                            <tr>
+                                <td colspan="4" class="row-label text-primary">แผนการผลิต/วัน</td>
+                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">1200</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1200</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1200</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1200</td><td>-</td><td class="sun-col">-</td><td>1200</td><td>-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                            </tr>
+
+                            <!-- ยอดการผลิต OK (แก้ไขได้) -->
                             <tr class="row-act-prod">
-                                <td class="row-label text-primary">ผลิตจริง (Act)</td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td class="sun-col"><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td class="sun-col"><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td class="sun-col"><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td class="sun-col"><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
-                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterBL()"></td>
+                                <td colspan="4" class="row-label text-info">ยอดการผลิต OK (Actual Production)</td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td class="sun-col"><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td class="sun-col"><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td class="sun-col"><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td class="sun-col"><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
                             </tr>
+
+                            <!-- ยอดการผลิต NG -->
+                            <tr>
+                                <td colspan="4" class="row-label text-danger">ยอดการผลิต NG</td>
+                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                            </tr>
+
+                            <!-- จำนวนงานคงเหลือ (Balance B/L) -->
                             <tr class="row-bl-result">
-                                <td class="row-label text-danger">B/L คงเหลือ</td>
-                                <td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="sun-col bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="sun-col bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="sun-col bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td><td class="sun-col bl-cell">2500</td><td class="bl-cell">2500</td><td class="bl-cell">2500</td>
+                                <td colspan="3" class="row-label text-danger fw-bold">จำนวนงานคงเหลือ (Balance)</td>
+                                <td class="text-center text-success fw-bold">
+                                    <input type="number" class="plan-input bg-dark text-success fw-bold" id="startStockMaster" value="2500" style="width: 55px;" oninput="calcMasterExcelBL()">
+                                </td>
+                                <td class="bl-cell">2500</td><td class="bl-cell">1693</td><td class="bl-cell">1283</td><td class="bl-cell">967</td><td class="bl-cell">315</td><td class="bl-cell">35</td><td class="sun-col bl-cell">-17</td><td class="bl-cell">-17</td><td class="bl-cell">-198</td><td class="bl-cell">-369</td><td class="bl-cell">-531</td><td class="bl-cell">-670</td><td class="bl-cell">-1085</td><td class="bl-cell">-1085</td><td class="sun-col bl-cell">-1085</td><td class="bl-cell">-2040</td><td class="bl-cell">-2539</td><td class="bl-cell">-2928</td><td class="bl-cell">-3154</td><td class="bl-cell">-3341</td><td class="bl-cell">-3341</td><td class="sun-col bl-cell">-3341</td><td class="bl-cell">-4062</td><td class="bl-cell">-4471</td><td class="bl-cell">-5035</td><td class="bl-cell">-5589</td><td class="bl-cell">-6337</td><td class="bl-cell">-6874</td><td class="sun-col bl-cell">-6874</td><td class="bl-cell">-6874</td><td class="bl-cell">-6874</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 📄 แผ่นที่ 2: MATERIAL PLAN ทั้งเดือน (3 รายการ Component) -->
-            <div class="card card-custom p-4 mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <h4 class="text-info fw-bold m-0">📄 แผ่นที่ 2: MATERIAL PLAN ทั้งเดือน (แผนการรับ Component 3 รายการ)</h4>
-                        <small class="text-light fs-6">สูตร B/L: ยอดคงเหลือวันก่อน + ยอดรับจริง (Act) = ยอดคงเหลือสะสม</small>
-                    </div>
-                    <span class="badge bg-info text-dark px-3 py-2 fs-6">MATERIAL PLAN FORM</span>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-dark table-bordered plan-table">
-                        <thead>
-                            <tr class="text-info text-center bg-secondary">
-                                <th rowspan="2">Item</th>
-                                <th rowspan="2">SIZE/P.NO</th>
-                                <th rowspan="2">SPEC/P.N (Name)</th>
-                                <th rowspan="2">Stock<br>ต้นเดือน</th>
-                                <th rowspan="2">Status</th>
-                                <th colspan="31" class="text-white">NOV '26 (Days 1 - 31)</th>
-                                <th rowspan="2">Pcs/Unit</th>
-                                <th rowspan="2">ORDER</th>
-                                <th rowspan="2">FORECAST<br>N+1 / N+2 / N+3</th>
-                            </tr>
-                            <tr class="text-center bg-dark text-warning">
-                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th class="sun-col">7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th class="sun-col">15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th><th class="sun-col">22</th><th>23</th><th>24</th><th>25</th><th>26</th><th>27</th><th>28</th><th class="sun-col">29</th><th>30</th><th>31</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- 1. SEPARATOR, FUEL (Sup.B) -->
-                            <tr>
-                                <td rowspan="3" class="fw-bold">1</td>
-                                <td rowspan="3" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-22</td>
-                                <td rowspan="3" class="text-start">SEPARATOR, FUEL (Sup.B)<br><small class="text-light">(Technic)</small></td>
-                                <td rowspan="3" class="text-success fw-bold">5,000</td>
-                                <td class="row-label text-info">Pl (แผน)</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="3" class="fw-bold">1</td><td rowspan="3">0</td><td rowspan="3" class="text-center text-light">0/0/0</td>
-                            </tr>
-                            <tr><td class="row-label text-success">Act (รับจริง)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-warning">B/L คงเหลือ</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td class="sun-col">5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td class="sun-col">5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td class="sun-col">5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td>5000</td><td class="sun-col">5000</td><td>5000</td><td>5000</td></tr>
-
-                            <!-- 2. PACKING, FUEL FILLER -->
-                            <tr>
-                                <td rowspan="3" class="fw-bold">2</td>
-                                <td rowspan="3" class="text-start fw-bold text-info">J0701-17631-Z1T-8002</td>
-                                <td rowspan="3" class="text-start">PACKING, FUEL FILLER<br><small class="text-light">(Technic)</small></td>
-                                <td rowspan="3" class="text-success fw-bold">1,800</td>
-                                <td class="row-label text-info">Pl (แผน)</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="3" class="fw-bold">1</td><td rowspan="3">0</td><td rowspan="3" class="text-center text-light">0/0/0</td>
-                            </tr>
-                            <tr><td class="row-label text-success">Act (รับจริง)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-warning">B/L คงเหลือ</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td class="sun-col">1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td class="sun-col">1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td class="sun-col">1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td>1800</td><td class="sun-col">1800</td><td>1800</td><td>1800</td></tr>
-
-                            <!-- 3. RIVET 3x4 -->
-                            <tr>
-                                <td rowspan="3" class="fw-bold">3</td>
-                                <td rowspan="3" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-24</td>
-                                <td rowspan="3" class="text-start">RIVET 3x4<br><small class="text-light">(YKK)</small></td>
-                                <td rowspan="3" class="text-success fw-bold">12,000</td>
-                                <td class="row-label text-info">Pl (แผน)</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="3" class="fw-bold text-warning">2</td><td rowspan="3">0</td><td rowspan="3" class="text-center text-light">0/0/0</td>
-                            </tr>
-                            <tr><td class="row-label text-success">Act (รับจริง)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-warning">B/L คงเหลือ</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td class="sun-col">12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td class="sun-col">12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td class="sun-col">12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td>12000</td><td class="sun-col">12000</td><td>12000</td><td>12000</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 📄 แผ่นที่ 3: PLATING PLAN ทั้งเดือน (4 รายการชุบ) -->
-            <div class="card card-custom p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <h4 class="text-warning fw-bold m-0">📄 แผ่นที่ 3: PLATING PLAN ทั้งเดือน (แผนรับ - ส่งชุบ 4 รายการ)</h4>
-                        <small class="text-light fs-6">สูตร B/L ค้างชุบ: B/L วันก่อน + ส่งชุบจริง - รับชุบจริง = ยอดค้างชุบสะสม</small>
-                    </div>
-                    <span class="badge bg-warning text-dark px-3 py-2 fs-6">PLATING PLAN FORM</span>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-dark table-bordered plan-table">
-                        <thead>
-                            <tr class="text-warning text-center bg-secondary">
-                                <th rowspan="2">Item</th>
-                                <th rowspan="2">Part No.</th>
-                                <th rowspan="2">Part Name / โรงชุบ</th>
-                                <th rowspan="2">Stock<br>ต้นเดือน</th>
-                                <th rowspan="2">Status</th>
-                                <th colspan="31" class="text-white">NOV '26 (Days 1 - 31)</th>
-                                <th rowspan="2">QT'Y / Box</th>
-                                <th rowspan="2">FORECAST<br>N+1 / N+2 / N+3</th>
-                            </tr>
-                            <tr class="text-center bg-dark text-warning">
-                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th class="sun-col">7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th class="sun-col">15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th><th class="sun-col">22</th><th>23</th><th>24</th><th>25</th><th>26</th><th>27</th><th>28</th><th class="sun-col">29</th><th>30</th><th>31</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Item 1: CAP, OUTER (TEP, BC) -->
-                            <tr>
-                                <td rowspan="5" class="fw-bold">1</td>
-                                <td rowspan="5" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-20</td>
-                                <td rowspan="5" class="text-start">CAP, OUTER<br><small class="text-warning">ชุบ: MFCr2-C (TEP, BC)</small></td>
-                                <td rowspan="5" class="text-warning fw-bold">3,500</td>
-                                <td class="row-label text-warning">แผนส่ง</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="5">50</td><td rowspan="5" class="text-center text-light">0/0/0</td>
-                            </tr>
-                            <tr><td class="row-label text-warning">ส่งจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-info">แผนรับ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-success">รับจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-danger">B/L ค้างชุบ</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td></tr>
-
-                            <!-- Item 2: CAP, INNER (TPI, APK) -->
-                            <tr>
-                                <td rowspan="5" class="fw-bold">2</td>
-                                <td rowspan="5" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-21</td>
-                                <td rowspan="5" class="text-start">CAP, INNER<br><small class="text-warning">ชุบ: MFZn2-B (TPI, APK)</small></td>
-                                <td rowspan="5" class="text-warning fw-bold">4,200</td>
-                                <td class="row-label text-warning">แผนส่ง</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="5">50</td><td rowspan="5" class="text-center text-light">0/0/0</td>
-                            </tr>
-                            <tr><td class="row-label text-warning">ส่งจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-info">แผนรับ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-success">รับจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-danger">B/L ค้างชุบ</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td></tr>
-
-                            <!-- Item 3: SPRING, PLATE (TI, ADT) -->
-                            <tr>
-                                <td rowspan="5" class="fw-bold">3</td>
-                                <td rowspan="5" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-23</td>
-                                <td rowspan="5" class="text-start">SPRING, PLATE<br><small class="text-warning">ชุบแข็ง/รมดำ (TI, ADT)</small></td>
-                                <td rowspan="5" class="text-warning fw-bold">6,100</td>
-                                <td class="row-label text-warning">แผนส่ง</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="5">100</td><td rowspan="5" class="text-center text-light">0/0/0</td>
-                            </tr>
-                            <tr><td class="row-label text-warning">ส่งจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-info">แผนรับ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-success">รับจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-danger">B/L ค้างชุบ</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td></tr>
-
-                            <!-- Item 4: SEPARATOR, FUEL SUP (TPI, APK) -->
-                            <tr>
-                                <td rowspan="5" class="fw-bold">4</td>
-                                <td rowspan="5" class="text-start fw-bold text-info">J0701-17620-Z1T-8000-25</td>
-                                <td rowspan="5" class="text-start">SEPARATOR, FUEL SUP<br><small class="text-warning">ชุบ: MFZn2-B (TPI, APK)</small></td>
-                                <td rowspan="5" class="text-warning fw-bold">3,800</td>
-                                <td class="row-label text-warning">แผนส่ง</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="5">50</td><td rowspan="5" class="text-center text-light">0/0/0</td>
-                            </tr>
-                            <tr><td class="row-label text-warning">ส่งจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-info">แผนรับ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-success">รับจริง</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
-                            <tr><td class="row-label text-danger">B/L ค้างชุบ</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sun-col">0</td><td>0</td><td>0</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -589,26 +429,33 @@
     </div>
 
     <script>
-        function calcMasterBL() {
+        // แผนส่งรวมในแต่ละวัน (Plan Delivery/Day ตามต้นฉบับ Excel)
+        const planDeliveries = [
+            0, 807, 410, 316, 652, 280, 52, 0, 181, 171, 
+            162, 139, 415, 0, 0, 955, 499, 389, 226, 187, 
+            0, 0, 721, 409, 564, 554, 748, 537, 508, 0, 0
+        ];
+
+        function calcMasterExcelBL() {
             const startStock = parseFloat(document.getElementById('startStockMaster').value) || 0;
-            const shipInputs = document.querySelectorAll('.row-act-ship .ship-val');
             const prodInputs = document.querySelectorAll('.row-act-prod .prod-val');
             const blCells = document.querySelectorAll('.row-bl-result .bl-cell');
 
             let currentBL = startStock;
 
             for (let i = 0; i < 31; i++) {
-                const ship = parseFloat(shipInputs[i].value) || 0;
                 const prod = parseFloat(prodInputs[i].value) || 0;
+                const delivery = planDeliveries[i];
 
-                currentBL = currentBL + prod - ship;
+                // สูตร B/L = B/L วันก่อน + ผลิตจริง OK - แผนส่งมอบ (Plan Delivery)
+                currentBL = currentBL + prod - delivery;
 
                 if (blCells[i]) {
                     blCells[i].innerText = currentBL;
                     if (currentBL < 0) {
-                        blCells[i].style.color = '#ef4444';
+                        blCells[i].style.color = '#ef4444'; // สีแดงเมื่อติดลบ
                     } else {
-                        blCells[i].style.color = '#38bdf8';
+                        blCells[i].style.color = '#38bdf8'; // สีฟ้าปกติ
                     }
                 }
             }
@@ -643,7 +490,7 @@
             setInterval(updateClock, 1000);
             updateClock();
 
-            calcMasterBL();
+            calcMasterExcelBL();
 
             const ctx = document.getElementById('hourlyChart');
             if (ctx) {
