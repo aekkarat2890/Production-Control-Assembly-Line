@@ -91,7 +91,7 @@
         }
         
         .plan-input {
-            width: 42px;
+            width: 40px;
             background-color: #1e293b;
             color: #38bdf8;
             border: 1px solid #475569;
@@ -222,11 +222,10 @@
             </div>
         </div>
 
-        <!-- 2. Planning (Master Plan ถอดแบบ Excel ต้นฉบับ) -->
+        <!-- 2. Planning (Master Plan ครบถ้วนทุก Location คีย์ข้อมูลได้จริง) -->
         <div id="tab-planning" class="tab-pane-content">
             
             <div class="card card-custom p-4 mb-4">
-                <!-- Excel Top Header Bar -->
                 <div class="excel-header-box d-flex flex-wrap justify-content-between align-items-center">
                     <div class="d-flex align-items-center gap-3">
                         <h3 class="text-white m-0 fw-bold">Master Plan</h3>
@@ -247,11 +246,11 @@
                             <tr>
                                 <th style="width: 40px;">Item</th>
                                 <th style="width: 160px;">Part No. / Part Name</th>
-                                <th style="width: 80px;">จำนวนส่ง/<br>เดือน</th>
-                                <th style="width: 110px;">HOME / LOCATION</th>
+                                <th style="width: 75px;">จำนวนส่ง/<br>เดือน</th>
+                                <th style="width: 115px;">HOME / LOCATION</th>
                                 <th colspan="31" class="text-center text-warning">NOV'26 (Days 1 - 31)</th>
-                                <th style="width: 60px;">STD.Pack</th>
-                                <th style="width: 90px;">NEXT MONTH<br>N+1 / N+2 / N+3</th>
+                                <th style="width: 55px;">STD.Pack</th>
+                                <th style="width: 85px;">NEXT MONTH<br>N+1 / N+2 / N+3</th>
                             </tr>
                             <tr>
                                 <th colspan="4" class="text-end text-muted">รายวัน (1 - 31)</th>
@@ -261,22 +260,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Forecast Rows by Location -->
+                            <!-- Item 1: Part 17620-Z1T-8010 (ครบทุก Location ตาม Excel) -->
                             <tr>
-                                <td rowspan="12" class="fw-bold text-center">1</td>
-                                <td rowspan="12" class="text-start fw-bold text-info">
+                                <td rowspan="13" class="fw-bold text-center align-middle">1</td>
+                                <td rowspan="13" class="text-start fw-bold text-info align-middle">
                                     17620-Z1T-8010 /<br><span class="text-light">CAP COMP FUEL FILLER</span>
                                 </td>
-                                <td rowspan="12" class="text-warning fw-bold text-center">9,723</td>
+                                <td rowspan="13" class="text-warning fw-bold text-center align-middle">9,723</td>
                                 <td class="row-label">05504 L3ME01</td>
                                 <td>-</td><td>262</td><td>211</td><td>224</td><td>606</td><td>280</td><td class="sun-col">-</td><td>-</td><td>181</td><td>171</td><td>134</td><td>76</td><td>255</td><td>-</td><td class="sun-col">-</td><td>698</td><td>398</td><td>365</td><td>114</td><td>53</td><td>-</td><td class="sun-col">-</td><td>586</td><td>252</td><td>430</td><td>420</td><td>105</td><td>403</td><td class="sun-col">-</td><td>-</td><td>-</td>
-                                <td rowspan="10" class="text-center fw-bold">50</td>
-                                <td rowspan="12" class="text-center text-warning small">N+1: 7,242<br>N+2: 7,325<br>N+3: 9,722</td>
+                                <td rowspan="11" class="text-center fw-bold align-middle">50</td>
+                                <td rowspan="13" class="text-center text-warning small align-middle">N+1: 7,242<br>N+2: 7,325<br>N+3: 9,722</td>
                             </tr>
-                            <tr>
-                                <td class="row-label">05120 L3BE01</td>
-                                <td>-</td><td>545</td><td>199</td><td>92</td><td>46</td><td>-</td><td class="sun-col">52</td><td>-</td><td>-</td><td>-</td><td>-</td><td>28</td><td>63</td><td>160</td><td class="sun-col">-</td><td>257</td><td>101</td><td>24</td><td>112</td><td>134</td><td>-</td><td class="sun-col">-</td><td>-</td><td>135</td><td>157</td><td>134</td><td>134</td><td>135</td><td class="sun-col">134</td><td>-</td><td>-</td>
-                            </tr>
+                            <tr><td class="row-label">05120 L3BE01</td><td>-</td><td>545</td><td>199</td><td>92</td><td>46</td><td>-</td><td class="sun-col">52</td><td>-</td><td>-</td><td>-</td><td>-</td><td>28</td><td>63</td><td>160</td><td class="sun-col">-</td><td>257</td><td>101</td><td>24</td><td>112</td><td>134</td><td>-</td><td class="sun-col">-</td><td>-</td><td>135</td><td>157</td><td>134</td><td>134</td><td>135</td><td class="sun-col">134</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label">05505 L3SP01</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label">05503 L2AF01</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label">05503 L2AF02</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
@@ -285,6 +281,8 @@
                             <tr><td class="row-label">05504 L3SE01</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label">06244 L3MF04</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             <tr><td class="row-label">05120 L3ME07</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">508</td><td>-</td><td>-</td></tr>
+                            <tr><td class="row-label">HTAS</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
+                            <tr><td class="row-label">ASH</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td></tr>
                             
                             <!-- Plan Delivery/Day (รวมชิ้นงานส่ง) -->
                             <tr class="fw-bold text-success bg-secondary">
@@ -292,22 +290,83 @@
                                 <td>0</td><td>807</td><td>410</td><td>316</td><td>652</td><td>280</td><td class="sun-col">52</td><td>0</td><td>181</td><td>171</td><td>162</td><td>139</td><td>415</td><td>0</td><td class="sun-col">0</td><td>955</td><td>499</td><td>389</td><td>226</td><td>187</td><td>0</td><td class="sun-col">0</td><td>721</td><td>409</td><td>564</td><td>554</td><td>748</td><td>537</td><td class="sun-col">508</td><td>0</td><td>0</td>
                             </tr>
 
-                            <!-- Lot No Production -->
-                            <tr>
-                                <td class="row-label text-warning">Lot No Production</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">261001</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>261002</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>261003</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>261004</td><td>-</td><td class="sun-col">-</td><td>261005</td><td>-</td>
+                            <!-- Lot No Production (แก้ไขได้) -->
+                            <tr class="row-lot-row">
+                                <td colspan="4" class="row-label text-warning">Lot No Production</td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td class="sun-col"><input type="text" class="plan-input lot-val" value="261001" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="261002" style="width: 45px;"></td>
+                                <td class="sun-col"><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="261003" style="width: 45px;"></td>
+                                <td class="sun-col"><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="261004" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td class="sun-col"><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="261005" style="width: 45px;"></td>
+                                <td><input type="text" class="plan-input lot-val" value="" style="width: 45px;"></td>
+                                <td class="text-center">-</td>
                                 <td class="text-center">-</td>
                             </tr>
 
-                            <!-- แผนการผลิต/วัน -->
-                            <tr>
+                            <!-- แผนการผลิต/วัน (แก้ไขได้) -->
+                            <tr class="row-plan-prod">
                                 <td colspan="4" class="row-label text-primary">แผนการผลิต/วัน</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">1200</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1200</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1200</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1200</td><td>-</td><td class="sun-col">-</td><td>1200</td><td>-</td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td class="sun-col"><input type="number" class="plan-input planprod-val" value="1200"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="1200"></td>
+                                <td class="sun-col"><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="1200"></td>
+                                <td class="sun-col"><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="1200"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td class="sun-col"><input type="number" class="plan-input planprod-val" value="0"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="1200"></td>
+                                <td><input type="number" class="plan-input planprod-val" value="0"></td>
                                 <td class="text-center">-</td>
                                 <td class="text-center">-</td>
                             </tr>
 
-                            <!-- ยอดการผลิต OK (แก้ไขได้) -->
+                            <!-- ยอดการผลิต OK (แก้ไขได้ & คำนวณ B/L อัตโนมัติ) -->
                             <tr class="row-act-prod">
                                 <td colspan="4" class="row-label text-info">ยอดการผลิต OK (Actual Production)</td>
                                 <td><input type="number" class="plan-input prod-val" value="0" oninput="calcMasterExcelBL()"></td>
@@ -345,10 +404,40 @@
                                 <td class="text-center">-</td>
                             </tr>
 
-                            <!-- ยอดการผลิต NG -->
-                            <tr>
+                            <!-- ยอดการผลิต NG (แก้ไขได้) -->
+                            <tr class="row-act-ng">
                                 <td colspan="4" class="row-label text-danger">ยอดการผลิต NG</td>
-                                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td class="sun-col">-</td><td>-</td><td>-</td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td class="sun-col"><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td class="sun-col"><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td class="sun-col"><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td class="sun-col"><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
+                                <td><input type="number" class="plan-input ng-val" value="0"></td>
                                 <td class="text-center">-</td>
                                 <td class="text-center">-</td>
                             </tr>
@@ -382,7 +471,7 @@
         <div id="tab-stock-component" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <h5 class="text-info fw-bold mb-3">📦 ตารางสต็อกชิ้นส่วน Component (Component Stock)</h5>
-                <p class="text-muted">ตารางแสดงยอดคงเหลือจริง Min/Max Stock ของ BOM ทั้ง 7 รายการ</p>
+                <p class="text-muted">ตารางแสดงยอดคงเหลือจริง Min/Max Stock ของ BOM ทั้ง 7 รายการ[cite: 4]</p>
             </div>
         </div>
 
@@ -398,7 +487,7 @@
         <div id="tab-stock-fg" class="tab-pane-content">
             <div class="card card-custom p-4">
                 <h5 class="text-success fw-bold mb-3">🏭 คลังสินค้าสำเร็จรูป (Finished Goods Stock)</h5>
-                <p class="text-muted">โมดูลแสดงยอดสต็อก FG พร้อมส่งมอบให้ลูกค้า (Part: 17620-Z1T-8010)</p>
+                <p class="text-muted">โมดูลแสดงยอดสต็อก FG พร้อมส่งมอบให้ลูกค้า (Part: 17620-Z1T-8010)[cite: 4]</p>
             </div>
         </div>
 
@@ -429,7 +518,6 @@
     </div>
 
     <script>
-        // แผนส่งรวมในแต่ละวัน (Plan Delivery/Day ตามต้นฉบับ Excel)
         const planDeliveries = [
             0, 807, 410, 316, 652, 280, 52, 0, 181, 171, 
             162, 139, 415, 0, 0, 955, 499, 389, 226, 187, 
@@ -447,15 +535,14 @@
                 const prod = parseFloat(prodInputs[i].value) || 0;
                 const delivery = planDeliveries[i];
 
-                // สูตร B/L = B/L วันก่อน + ผลิตจริง OK - แผนส่งมอบ (Plan Delivery)
                 currentBL = currentBL + prod - delivery;
 
                 if (blCells[i]) {
                     blCells[i].innerText = currentBL;
                     if (currentBL < 0) {
-                        blCells[i].style.color = '#ef4444'; // สีแดงเมื่อติดลบ
+                        blCells[i].style.color = '#ef4444';
                     } else {
-                        blCells[i].style.color = '#38bdf8'; // สีฟ้าปกติ
+                        blCells[i].style.color = '#38bdf8';
                     }
                 }
             }
